@@ -23,6 +23,7 @@ func Router(conn *sql.DB) *chi.Mux {
 		DB: database.New(conn),
 	}
 
+	router.Post("/login", api.LogIn)
 	router.Post("/users", api.CreateUser)
 
 	return router

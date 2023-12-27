@@ -14,7 +14,6 @@ func DatabaseUserToUser(dbUser database.User) models.User{
 		Surname:  		 dbUser.Surname,
 		Username: 		 dbUser.Username,
 		Email: 			 dbUser.Email,
-		Password: 		 dbUser.Password,
 		ProfileImgUrl:   dbUser.ProfileImgUrl,
 		ProfileBgImgUrl: dbUser.ProfileBgImgUrl,
 	}

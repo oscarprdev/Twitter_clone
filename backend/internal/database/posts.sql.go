@@ -78,6 +78,42 @@ func (q *Queries) GetAllPosts(ctx context.Context) ([]Post, error) {
 	return items, nil
 }
 
+const getPostsByFollwingUsers = `-- name: GetPostsByFollwingUsers :many
+SELECT posts.id, posts.created_at, posts.updated_at, posts.user_id, posts.post
+FROM posts
+LEFT JOIN followers ON posts.user_id = followers.follow_to
+WHERE followers.user_id = $1 OR posts.user_id = $1
+`
+
+func (q *Queries) GetPostsByFollwingUsers(ctx context.Context, userID uuid.UUID) ([]Post, error) {
+	rows, err := q.db.QueryContext(ctx, getPostsByFollwingUsers, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Post
+	for rows.Next() {
+		var i Post
+		if err := rows.Scan(
+			&i.ID,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.UserID,
+			&i.Post,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const getPostsByUser = `-- name: GetPostsByUser :many
 SELECT id, created_at, updated_at, user_id, post FROM posts WHERE user_id = $1
 `
