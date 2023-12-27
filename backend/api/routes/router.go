@@ -23,6 +23,7 @@ func Router(conn *sql.DB) *chi.Mux {
 
 	handleUserRoutes(api, router)
 	handlePostsRoutes(api, router)
+	handleLikesRoutes(api, router)
 
 	return router
 }
