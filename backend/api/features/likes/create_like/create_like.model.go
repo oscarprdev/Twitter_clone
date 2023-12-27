@@ -6,7 +6,7 @@ import (
 
 type CreateLikePayload struct {
 	UserId string `json:"userId"`
-	LikeTo string `json:"likeTo"`
+	PostId string `json:"postId"`
 }
 
 type CreateLikeResponse struct {

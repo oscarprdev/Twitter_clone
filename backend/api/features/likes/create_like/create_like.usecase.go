@@ -33,9 +33,9 @@ func (api *ApiConfig) CreateLike(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	likeTo, err := uuid.Parse(params.LikeTo)
+	postId, err := uuid.Parse(params.PostId)
 	if err != nil {
-		responses.RespondWithError(w, 400, fmt.Sprintf("Error parsing LikeTo: %v", err))
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error parsing PostId: %v", err))
 		return
 	}
 
@@ -44,7 +44,7 @@ func (api *ApiConfig) CreateLike(w http.ResponseWriter, r *http.Request) {
 		CreatedAt: time.Now().UTC(),
 		UpdatedAt: time.Now().UTC(),
 		UserID: userId,
-		LikeTo: likeTo,
+		PostID: postId,
 	})
 
 	responses.RespondWithJSON(w, 201, CreateLikeResponse{
