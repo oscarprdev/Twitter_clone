@@ -2,7 +2,9 @@ package routes
 
 import (
 	"database/sql"
-	"twitter_clone/handlers"
+	"twitter_clone/api"
+	createuser "twitter_clone/api/features/users/create_user"
+	loginuser "twitter_clone/api/features/users/login_user"
 	"twitter_clone/internal/database"
 
 	"github.com/go-chi/chi"
@@ -19,12 +21,17 @@ func Router(conn *sql.DB) *chi.Mux {
 	}))
 
 	// Api handlers
-	api := handlers.ApiConfig{
+	api := &api.ApiConfig{
 		DB: database.New(conn),
 	}
 
-	router.Post("/login", api.LogIn)
-	router.Post("/users", api.CreateUser)
+	// Create user usecase
+	createUserUsecase := createuser.CreateUserProvider(api)
+	router.Post("/users", createUserUsecase.CreateUser)
+
+	// Login usecase
+	loginUserUsecase := loginuser.LoginUserProvider(api)
+	router.Post("/login", loginUserUsecase.LogIn)
 
 	return router
 }

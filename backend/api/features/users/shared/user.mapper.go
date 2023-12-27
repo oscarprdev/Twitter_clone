@@ -1,12 +1,11 @@
-package mappers
+package usershared
 
 import (
 	"twitter_clone/internal/database"
-	"twitter_clone/models"
 )
 
-func DatabaseUserToUser(dbUser database.User) models.User{
-	return models.User{
+func DatabaseUserToUser(dbUser database.User) User{
+	return User{
 		Id:				 dbUser.ID,
 		CreatedAt:		 dbUser.CreatedAt,
 		UpdatedAt:		 dbUser.UpdatedAt,

@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 	"net/http"
+	"twitter_clone/api/routes"
 	"twitter_clone/constants"
 	"twitter_clone/db"
-	"twitter_clone/routes"
 )
 
 func main() {
