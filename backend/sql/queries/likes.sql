@@ -1,20 +1,20 @@
--- name: GetUserLikes :one
-SELECT like_to, COUNT(*) AS likes_count
+-- name: GetPostLikes :one
+SELECT post_id, COUNT(*) AS likes_count
 FROM likes
-WHERE like_to = $1
-GROUP BY like_to;
+WHERE post_id = $1
+GROUP BY post_id;
 
 -- name: GetUsersFromLikes :many
 SELECT users.username, users.id AS user_like
 FROM likes
 JOIN users ON likes.user_id = users.id
-WHERE likes.like_to = $1;
+WHERE likes.post_id = $1;
 
 -- name: CreateLike :one
-INSERT INTO likes (id, created_at, updated_at, user_id, like_to) 
+INSERT INTO likes (id, created_at, updated_at, user_id, post_id) 
 VALUES ($1, $2, $3, $4, $5)
 RETURNING *;
 
 -- name: DeleteLike :one
-DELETE FROM likes WHERE user_id = $1
+DELETE FROM likes WHERE post_id = $1
 RETURNING *;

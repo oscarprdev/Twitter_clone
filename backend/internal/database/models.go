@@ -23,7 +23,7 @@ type Like struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	UserID    uuid.UUID
-	LikeTo    uuid.UUID
+	PostID    uuid.UUID
 }
 
 type Post struct {

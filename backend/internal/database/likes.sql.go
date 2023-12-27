@@ -13,9 +13,9 @@ import (
 )
 
 const createLike = `-- name: CreateLike :one
-INSERT INTO likes (id, created_at, updated_at, user_id, like_to) 
+INSERT INTO likes (id, created_at, updated_at, user_id, post_id) 
 VALUES ($1, $2, $3, $4, $5)
-RETURNING id, created_at, updated_at, user_id, like_to
+RETURNING id, created_at, updated_at, user_id, post_id
 `
 
 type CreateLikeParams struct {
@@ -23,7 +23,7 @@ type CreateLikeParams struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	UserID    uuid.UUID
-	LikeTo    uuid.UUID
+	PostID    uuid.UUID
 }
 
 func (q *Queries) CreateLike(ctx context.Context, arg CreateLikeParams) (Like, error) {
@@ -32,7 +32,7 @@ func (q *Queries) CreateLike(ctx context.Context, arg CreateLikeParams) (Like, e
 		arg.CreatedAt,
 		arg.UpdatedAt,
 		arg.UserID,
-		arg.LikeTo,
+		arg.PostID,
 	)
 	var i Like
 	err := row.Scan(
@@ -40,45 +40,45 @@ func (q *Queries) CreateLike(ctx context.Context, arg CreateLikeParams) (Like, e
 		&i.CreatedAt,
 		&i.UpdatedAt,
 		&i.UserID,
-		&i.LikeTo,
+		&i.PostID,
 	)
 	return i, err
 }
 
 const deleteLike = `-- name: DeleteLike :one
-DELETE FROM likes WHERE user_id = $1
-RETURNING id, created_at, updated_at, user_id, like_to
+DELETE FROM likes WHERE post_id = $1
+RETURNING id, created_at, updated_at, user_id, post_id
 `
 
-func (q *Queries) DeleteLike(ctx context.Context, userID uuid.UUID) (Like, error) {
-	row := q.db.QueryRowContext(ctx, deleteLike, userID)
+func (q *Queries) DeleteLike(ctx context.Context, postID uuid.UUID) (Like, error) {
+	row := q.db.QueryRowContext(ctx, deleteLike, postID)
 	var i Like
 	err := row.Scan(
 		&i.ID,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 		&i.UserID,
-		&i.LikeTo,
+		&i.PostID,
 	)
 	return i, err
 }
 
-const getUserLikes = `-- name: GetUserLikes :one
-SELECT like_to, COUNT(*) AS likes_count
+const getPostLikes = `-- name: GetPostLikes :one
+SELECT post_id, COUNT(*) AS likes_count
 FROM likes
-WHERE like_to = $1
-GROUP BY like_to
+WHERE post_id = $1
+GROUP BY post_id
 `
 
-type GetUserLikesRow struct {
-	LikeTo     uuid.UUID
+type GetPostLikesRow struct {
+	PostID     uuid.UUID
 	LikesCount int64
 }
 
-func (q *Queries) GetUserLikes(ctx context.Context, likeTo uuid.UUID) (GetUserLikesRow, error) {
-	row := q.db.QueryRowContext(ctx, getUserLikes, likeTo)
-	var i GetUserLikesRow
-	err := row.Scan(&i.LikeTo, &i.LikesCount)
+func (q *Queries) GetPostLikes(ctx context.Context, postID uuid.UUID) (GetPostLikesRow, error) {
+	row := q.db.QueryRowContext(ctx, getPostLikes, postID)
+	var i GetPostLikesRow
+	err := row.Scan(&i.PostID, &i.LikesCount)
 	return i, err
 }
 
@@ -86,7 +86,7 @@ const getUsersFromLikes = `-- name: GetUsersFromLikes :many
 SELECT users.username, users.id AS user_like
 FROM likes
 JOIN users ON likes.user_id = users.id
-WHERE likes.like_to = $1
+WHERE likes.post_id = $1
 `
 
 type GetUsersFromLikesRow struct {
@@ -94,8 +94,8 @@ type GetUsersFromLikesRow struct {
 	UserLike uuid.UUID
 }
 
-func (q *Queries) GetUsersFromLikes(ctx context.Context, likeTo uuid.UUID) ([]GetUsersFromLikesRow, error) {
-	rows, err := q.db.QueryContext(ctx, getUsersFromLikes, likeTo)
+func (q *Queries) GetUsersFromLikes(ctx context.Context, postID uuid.UUID) ([]GetUsersFromLikesRow, error) {
+	rows, err := q.db.QueryContext(ctx, getUsersFromLikes, postID)
 	if err != nil {
 		return nil, err
 	}

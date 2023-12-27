@@ -11,5 +11,5 @@ type Like struct {
 	CreatedAt       time.Time `json:"created_at"`
 	UpdatedAt       time.Time `json:"updated_at"`
 	UserId          uuid.UUID `json:"userId"`
-	LikeTo          uuid.UUID `json:"likeTo"`
+	PostID          uuid.UUID `json:"postId"`
 }
