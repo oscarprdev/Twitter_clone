@@ -11,6 +11,7 @@ import (
 	"twitter_clone/responses"
 
 	"github.com/google/uuid"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func (api *ApiConfig) CreateUser(w http.ResponseWriter, r *http.Request) {
@@ -23,6 +24,13 @@ func (api *ApiConfig) CreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// 	Hash password
+	hash, err := bcrypt.GenerateFromPassword([]byte(params.Password), 10)
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error hashing password: %v", err))
+		return
+	}
+
 	user, err := api.DB.CreateUser(r.Context(), database.CreateUserParams{
 		ID: uuid.New(),
 		CreatedAt: time.Now().UTC(),
@@ -30,7 +38,7 @@ func (api *ApiConfig) CreateUser(w http.ResponseWriter, r *http.Request) {
 		Name: params.Name,
 		Username: params.Username,
 		Email: params.Email,
-		Password: params.Password,
+		Password: string(hash),
 		ProfileImgUrl: params.ProfileImgUrl,
 		ProfileBgImgUrl: params.ProfileBgImgUrl,
 	})
