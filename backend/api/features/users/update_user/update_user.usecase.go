@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 	"twitter_clone/api"
 	usershared "twitter_clone/api/features/users/shared"
 	"twitter_clone/api/responses"
@@ -61,6 +62,7 @@ func (api *ApiConfig) UpdateUser(w http.ResponseWriter, r *http.Request) {
 		ProfileImgUrl: params.ProfileImgUrl,
 		ProfileBgImgUrl: params.ProfileBgImgUrl,
 		ID: userId,
+		UpdatedAt: time.Now().UTC(),
 	})
 
 	if err != nil {

@@ -13,9 +13,10 @@ SET
     surname = $2,
     password = $3,
     profile_img_url = $4,
-    profile_bg_img_url = $5
+    profile_bg_img_url = $5,
+    updated_at = $6
 WHERE
-    id = $6
+    id = $7
 RETURNING *;
 
 -- name: DeleteUser :one

@@ -194,9 +194,10 @@ SET
     surname = $2,
     password = $3,
     profile_img_url = $4,
-    profile_bg_img_url = $5
+    profile_bg_img_url = $5,
+    updated_at = $6
 WHERE
-    id = $6
+    id = $7
 RETURNING id, created_at, updated_at, username, email, name, surname, password, profile_img_url, profile_bg_img_url
 `
 
@@ -206,6 +207,7 @@ type UpdateUserParams struct {
 	Password        string
 	ProfileImgUrl   string
 	ProfileBgImgUrl string
+	UpdatedAt       time.Time
 	ID              uuid.UUID
 }
 
@@ -216,6 +218,7 @@ func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, e
 		arg.Password,
 		arg.ProfileImgUrl,
 		arg.ProfileBgImgUrl,
+		arg.UpdatedAt,
 		arg.ID,
 	)
 	var i User
