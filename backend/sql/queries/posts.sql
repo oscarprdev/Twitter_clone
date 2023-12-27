@@ -1,7 +1,7 @@
 -- name: GetAllPosts :many
 SELECT * FROM posts;
 
--- name: GetPostsByFollwingUsers :many
+-- name: GetPostsByFollowers :many
 SELECT posts.*
 FROM posts
 LEFT JOIN followers ON posts.user_id = followers.follow_to

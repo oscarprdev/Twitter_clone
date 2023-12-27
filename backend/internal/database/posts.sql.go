@@ -78,15 +78,15 @@ func (q *Queries) GetAllPosts(ctx context.Context) ([]Post, error) {
 	return items, nil
 }
 
-const getPostsByFollwingUsers = `-- name: GetPostsByFollwingUsers :many
+const getPostsByFollowers = `-- name: GetPostsByFollowers :many
 SELECT posts.id, posts.created_at, posts.updated_at, posts.user_id, posts.post
 FROM posts
 LEFT JOIN followers ON posts.user_id = followers.follow_to
 WHERE followers.user_id = $1 OR posts.user_id = $1
 `
 
-func (q *Queries) GetPostsByFollwingUsers(ctx context.Context, userID uuid.UUID) ([]Post, error) {
-	rows, err := q.db.QueryContext(ctx, getPostsByFollwingUsers, userID)
+func (q *Queries) GetPostsByFollowers(ctx context.Context, userID uuid.UUID) ([]Post, error) {
+	rows, err := q.db.QueryContext(ctx, getPostsByFollowers, userID)
 	if err != nil {
 		return nil, err
 	}
