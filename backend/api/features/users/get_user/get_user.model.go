@@ -1,7 +1,7 @@
-package getuserbyid
+package getuser
 
 import usershared "twitter_clone/api/features/users/shared"
 
-type GetUserByIdResponse struct {
+type GetUserResponse struct {
 	User usershared.User  `json:"user"`
 }

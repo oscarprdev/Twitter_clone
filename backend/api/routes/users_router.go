@@ -3,7 +3,7 @@ package routes
 import (
 	"twitter_clone/api"
 	createuser "twitter_clone/api/features/users/create_user"
-	getuserbyid "twitter_clone/api/features/users/get_user_by_id"
+	getuser "twitter_clone/api/features/users/get_user"
 	getusers "twitter_clone/api/features/users/get_users"
 	loginuser "twitter_clone/api/features/users/login_user"
 
@@ -14,10 +14,14 @@ func handleUserRoutes(api *api.ApiConfig, router *chi.Mux) {
 	getUsersUsecase := getusers.GetUsersProvider(api)
 	createUserUsecase := createuser.CreateUserProvider(api)
 	loginUserUsecase := loginuser.LoginUserProvider(api)
-	getUserByIdUsecase := getuserbyid.GetUserByIdProvider(api)
+	getUserUsecase := getuser.GetUserProvider(api)
 
 	router.Get("/users", getUsersUsecase.GetUsers)
-	router.Get("/users/{id}", getUserByIdUsecase.GetUserById)
+
+	router.Get("/users/{id}", getUserUsecase.GetUserById)
+	router.Get("/users/{email}", getUserUsecase.GetUserByEmail)
+	router.Get("/users/{username}", getUserUsecase.GetUserByUsername)
+
 	router.Post("/users", createUserUsecase.CreateUser)
 	router.Post("/users/login", loginUserUsecase.LogIn)
 }

@@ -1,8 +1,8 @@
-package getuserbyid
+package getuser
 
 import "twitter_clone/api"
 
-func GetUserByIdProvider(api *api.ApiConfig) *ApiConfig {
+func GetUserProvider(api *api.ApiConfig) *ApiConfig {
     return &ApiConfig{
         ApiConfig: api,
     }
