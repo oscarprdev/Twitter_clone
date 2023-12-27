@@ -4,13 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
-	"time"
 	"twitter_clone/api"
 	usershared "twitter_clone/api/features/users/shared"
 	"twitter_clone/api/responses"
 
-	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -41,19 +38,14 @@ func (api *ApiConfig) LogIn(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Create JWT
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"sub": user.ID,
-		"exp": time.Now().Add(time.Hour * 24).Unix(),
-	})
-
-	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
+	token, err := usershared.GenerateUserJWT(user.ID)
 	if err != nil {
-		responses.RespondWithError(w, 400, fmt.Sprintf("JWT creation has failed: %v", err))
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error generating JWT: %v", err))
 		return
 	}
 
 	responses.RespondWithJSON(w, 201, LoginResponse{
 		UserLogged: usershared.DatabaseUserToUser(user),
-		JWT: tokenString,
+		JWT: token,
 	})
 }

@@ -6,22 +6,28 @@ import (
 	getuser "twitter_clone/api/features/users/get_user"
 	getusers "twitter_clone/api/features/users/get_users"
 	loginuser "twitter_clone/api/features/users/login_user"
+	updateuser "twitter_clone/api/features/users/update_user"
 
 	"github.com/go-chi/chi"
 )
 
 func handleUserRoutes(api *api.ApiConfig, router *chi.Mux) {
+	
 	getUsersUsecase := getusers.GetUsersProvider(api)
 	createUserUsecase := createuser.CreateUserProvider(api)
-	loginUserUsecase := loginuser.LoginUserProvider(api)
 	getUserUsecase := getuser.GetUserProvider(api)
+	updateUserUsecase := updateuser.UpdateUserProvider(api)
+	loginUserUsecase := loginuser.LoginUserProvider(api)
 
 	router.Get("/users", getUsersUsecase.GetUsers)
+	router.Post("/users", createUserUsecase.CreateUser)
 
 	router.Get("/users/{id}", getUserUsecase.GetUserById)
-	router.Get("/users/{email}", getUserUsecase.GetUserByEmail)
-	router.Get("/users/{username}", getUserUsecase.GetUserByUsername)
+	router.Put("/users/{id}", updateUserUsecase.UpdateUser)
 
-	router.Post("/users", createUserUsecase.CreateUser)
+	router.Get("/users/email/{email}", getUserUsecase.GetUserByEmail)
+	
+	router.Get("/users/username/{username}", getUserUsecase.GetUserByUsername)
+
 	router.Post("/users/login", loginUserUsecase.LogIn)
 }
