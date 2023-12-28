@@ -31,3 +31,9 @@ SELECT * FROM users WHERE email = $1;
 
 -- name: GetUserByUsername :one
 SELECT * FROM users WHERE username = $1;
+
+-- name: GetUsersFromLikes :many
+SELECT users.*
+FROM likes
+JOIN users ON likes.user_id = users.id
+WHERE likes.post_id = $1;

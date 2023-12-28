@@ -97,38 +97,3 @@ func (q *Queries) GetLikesByPost(ctx context.Context, id uuid.UUID) (GetLikesByP
 	)
 	return i, err
 }
-
-const getUsersFromLikes = `-- name: GetUsersFromLikes :many
-SELECT users.username, users.id AS user_like
-FROM likes
-JOIN users ON likes.user_id = users.id
-WHERE likes.post_id = $1
-`
-
-type GetUsersFromLikesRow struct {
-	Username string
-	UserLike uuid.UUID
-}
-
-func (q *Queries) GetUsersFromLikes(ctx context.Context, postID uuid.UUID) ([]GetUsersFromLikesRow, error) {
-	rows, err := q.db.QueryContext(ctx, getUsersFromLikes, postID)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []GetUsersFromLikesRow
-	for rows.Next() {
-		var i GetUsersFromLikesRow
-		if err := rows.Scan(&i.Username, &i.UserLike); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
-}

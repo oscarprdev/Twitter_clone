@@ -187,6 +187,47 @@ func (q *Queries) GetUsers(ctx context.Context) ([]User, error) {
 	return items, nil
 }
 
+const getUsersFromLikes = `-- name: GetUsersFromLikes :many
+SELECT users.id, users.created_at, users.updated_at, users.username, users.email, users.name, users.surname, users.password, users.profile_img_url, users.profile_bg_img_url
+FROM likes
+JOIN users ON likes.user_id = users.id
+WHERE likes.post_id = $1
+`
+
+func (q *Queries) GetUsersFromLikes(ctx context.Context, postID uuid.UUID) ([]User, error) {
+	rows, err := q.db.QueryContext(ctx, getUsersFromLikes, postID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []User
+	for rows.Next() {
+		var i User
+		if err := rows.Scan(
+			&i.ID,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.Username,
+			&i.Email,
+			&i.Name,
+			&i.Surname,
+			&i.Password,
+			&i.ProfileImgUrl,
+			&i.ProfileBgImgUrl,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const updateUser = `-- name: UpdateUser :one
 UPDATE users
 SET
