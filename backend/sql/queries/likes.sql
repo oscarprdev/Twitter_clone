@@ -1,8 +1,17 @@
--- name: GetPostLikes :one
-SELECT post_id, COUNT(*) AS likes_count
-FROM likes
-WHERE post_id = $1
-GROUP BY post_id;
+-- name: GetLikesByPost :one
+SELECT
+    posts.id AS post_id,
+    posts.post,  
+    posts.user_id,
+    COALESCE(COUNT(likes.id), 0)::INT AS likes_count
+FROM
+    posts
+LEFT JOIN
+    likes ON posts.id = likes.post_id
+WHERE
+    posts.id = $1
+GROUP BY
+    posts.id, posts.post, posts.user_id;
 
 -- name: GetUsersFromLikes :many
 SELECT users.username, users.id AS user_like

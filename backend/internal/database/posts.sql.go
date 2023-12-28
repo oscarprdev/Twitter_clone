@@ -78,6 +78,23 @@ func (q *Queries) GetAllPosts(ctx context.Context) ([]Post, error) {
 	return items, nil
 }
 
+const getPostByPostId = `-- name: GetPostByPostId :one
+SELECT id, created_at, updated_at, user_id, post FROM posts WHERE id = $1
+`
+
+func (q *Queries) GetPostByPostId(ctx context.Context, id uuid.UUID) (Post, error) {
+	row := q.db.QueryRowContext(ctx, getPostByPostId, id)
+	var i Post
+	err := row.Scan(
+		&i.ID,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+		&i.UserID,
+		&i.Post,
+	)
+	return i, err
+}
+
 const getPostsByFollowers = `-- name: GetPostsByFollowers :many
 SELECT posts.id, posts.created_at, posts.updated_at, posts.user_id, posts.post
 FROM posts

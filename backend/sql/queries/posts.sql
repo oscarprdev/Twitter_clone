@@ -1,6 +1,9 @@
 -- name: GetAllPosts :many
 SELECT * FROM posts;
 
+-- name: GetPostByPostId :one
+SELECT * FROM posts WHERE id = $1;
+
 -- name: GetPostsByFollowers :many
 SELECT posts.*
 FROM posts

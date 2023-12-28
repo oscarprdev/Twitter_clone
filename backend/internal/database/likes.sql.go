@@ -63,22 +63,38 @@ func (q *Queries) DeleteLike(ctx context.Context, postID uuid.UUID) (Like, error
 	return i, err
 }
 
-const getPostLikes = `-- name: GetPostLikes :one
-SELECT post_id, COUNT(*) AS likes_count
-FROM likes
-WHERE post_id = $1
-GROUP BY post_id
+const getLikesByPost = `-- name: GetLikesByPost :one
+SELECT
+    posts.id AS post_id,
+    posts.post,  
+    posts.user_id,
+    COALESCE(COUNT(likes.id), 0)::INT AS likes_count
+FROM
+    posts
+LEFT JOIN
+    likes ON posts.id = likes.post_id
+WHERE
+    posts.id = $1
+GROUP BY
+    posts.id, posts.post, posts.user_id
 `
 
-type GetPostLikesRow struct {
+type GetLikesByPostRow struct {
 	PostID     uuid.UUID
-	LikesCount int64
+	Post       string
+	UserID     uuid.UUID
+	LikesCount int32
 }
 
-func (q *Queries) GetPostLikes(ctx context.Context, postID uuid.UUID) (GetPostLikesRow, error) {
-	row := q.db.QueryRowContext(ctx, getPostLikes, postID)
-	var i GetPostLikesRow
-	err := row.Scan(&i.PostID, &i.LikesCount)
+func (q *Queries) GetLikesByPost(ctx context.Context, id uuid.UUID) (GetLikesByPostRow, error) {
+	row := q.db.QueryRowContext(ctx, getLikesByPost, id)
+	var i GetLikesByPostRow
+	err := row.Scan(
+		&i.PostID,
+		&i.Post,
+		&i.UserID,
+		&i.LikesCount,
+	)
 	return i, err
 }
 
