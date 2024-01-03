@@ -3,6 +3,7 @@ import { strCapitalize } from '../../utils/strCapitalize';
 import { usePostsDispatch } from '../../store/posts/hooks/usePostsDispatch';
 import { addPostUsecase } from '../../features/posts/graph';
 import { addPost } from '../../store/posts/slices/posts-slice';
+import { ADD_POST_TYPES } from '../../store/posts/reducers/add-post/add-post.reducer.types';
 
 interface PostState {
 	content: string;
@@ -23,10 +24,12 @@ const AddPost = () => {
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
+		dispatch(addPost({ type: ADD_POST_TYPES.LOADING }));
+
 		const response = await addPostUsecase.addPost({ userId: 'c6471755-03fc-4a38-badd-43ba864bd98e', post: post.content });
 
 		if (response.state === 'success') {
-			dispatch(addPost(response.post));
+			dispatch(addPost({ post: response.post, type: ADD_POST_TYPES.ADD_POST }));
 		}
 	};
 

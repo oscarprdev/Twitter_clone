@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Post } from '../../../types/posts';
-import { addPostReducer } from '../reducers/add-post.reducer';
-import { getPostsReducer } from '../reducers/get-posts.reducer';
+import { addPostReducer } from '../reducers/add-post/add-post.reducer';
+import { getPostsReducer } from '../reducers/get-post/get-posts.reducer';
 
 export interface PostSliceState {
 	posts: Post[];
+	isLoading: boolean;
 }
 
 const initialState: PostSliceState = {
 	posts: [],
+	isLoading: false,
 };
 
 export const PostSlice = createSlice({
