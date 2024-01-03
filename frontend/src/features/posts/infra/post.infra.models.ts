@@ -7,6 +7,10 @@ export interface AddPostResponse {
 	post: DbPost;
 }
 
+export interface GetPostsResponse {
+	posts: DbPost[];
+}
+
 export interface DbPost {
 	id: string;
 	created_at: string;

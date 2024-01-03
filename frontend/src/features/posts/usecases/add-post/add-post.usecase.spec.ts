@@ -30,11 +30,11 @@ describe('Add post usecase', () => {
 	let getUserSpy: SpyInstance;
 
 	beforeEach(() => {
-		const port = new TestAddPostHttpAdapter();
-		usecase = new DefaultAddPostUsecase(port);
+		const ports = new TestAddPostHttpAdapter();
+		usecase = new DefaultAddPostUsecase(ports);
 
-		addPostSpy = vi.spyOn(port, 'addPost');
-		getUserSpy = vi.spyOn(port, 'getUser');
+		addPostSpy = vi.spyOn(ports, 'addPost');
+		getUserSpy = vi.spyOn(ports, 'getUser');
 	});
 
 	it('Should return success response', async () => {

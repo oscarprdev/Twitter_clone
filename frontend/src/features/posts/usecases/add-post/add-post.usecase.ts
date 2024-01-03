@@ -6,11 +6,11 @@ export interface AddPostUsecase {
 }
 
 export class DefaultAddPostUsecase implements AddPostUsecase {
-	constructor(private readonly port: AddPostPorts) {}
+	constructor(private readonly ports: AddPostPorts) {}
 
 	async addPost({ post, userId }: AddPostUsecaseInput): Promise<AddPostUsecaseResponse> {
 		try {
-			const [postResponse, user] = await Promise.all([await this.port.addPost({ post, userId }), await this.port.getUser({ userId })]);
+			const [postResponse, user] = await Promise.all([await this.ports.addPost({ post, userId }), await this.ports.getUser({ userId })]);
 
 			return {
 				post: {

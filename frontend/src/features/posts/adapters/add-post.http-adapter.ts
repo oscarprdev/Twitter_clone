@@ -1,8 +1,8 @@
-import { DefaultPostInfra } from '../infra/post.infra';
+import { PostInfra } from '../infra/post.infra';
 import { AddPostPorts } from '../usecases/add-post/add-post.ports';
 
 export class AddPostHttpAdapter implements AddPostPorts {
-	constructor(private readonly httpClient: DefaultPostInfra) {}
+	constructor(private readonly httpClient: PostInfra) {}
 
 	async addPost({ post, userId }: AddPostPorts.AddPostInput): Promise<AddPostPorts.AddPostOutput> {
 		const response = await this.httpClient.addPost({ post, userId });
