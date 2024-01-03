@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	host, dbUrl := constants.Env()
+	port, dbUrl := constants.Env()
 
 	dbConnection := db.Connection(dbUrl)
 
@@ -17,8 +17,8 @@ func main() {
 
 	srv := &http.Server{
 		Handler: router,
-		Addr: host,
+		Addr: ":" + port,
 	}
-	log.Printf("Host starting on: %v", host)
+	log.Printf("Host starting on: %v", port)
 	srv.ListenAndServe()
 }
