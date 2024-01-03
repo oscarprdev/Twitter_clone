@@ -5,14 +5,14 @@ export interface AddPostUsecaseInput {
 	userId: string;
 }
 
-export type AddPostUsecaseResponse = SuccessGenerateInfoOuptut | ErrorGenerateInfoOutput;
+export type AddPostUsecaseResponse = SuccessAddPostOuptut | ErrorAddPostOutput;
 
-export interface SuccessGenerateInfoOuptut {
+export interface SuccessAddPostOuptut {
 	post: Post;
 	state: 'success';
 }
 
-export interface ErrorGenerateInfoOutput {
+export interface ErrorAddPostOutput {
 	error: string;
 	state: 'error';
 }
