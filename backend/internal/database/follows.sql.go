@@ -46,12 +46,17 @@ func (q *Queries) CreateFollower(ctx context.Context, arg CreateFollowerParams) 
 }
 
 const deleteFollower = `-- name: DeleteFollower :one
-DELETE FROM followers WHERE user_id = $1
+DELETE FROM followers WHERE user_id = $1 AND follow_to = $2
 RETURNING id, created_at, updated_at, user_id, follow_to
 `
 
-func (q *Queries) DeleteFollower(ctx context.Context, userID uuid.UUID) (Follower, error) {
-	row := q.db.QueryRowContext(ctx, deleteFollower, userID)
+type DeleteFollowerParams struct {
+	UserID   uuid.UUID
+	FollowTo uuid.UUID
+}
+
+func (q *Queries) DeleteFollower(ctx context.Context, arg DeleteFollowerParams) (Follower, error) {
+	row := q.db.QueryRowContext(ctx, deleteFollower, arg.UserID, arg.FollowTo)
 	var i Follower
 	err := row.Scan(
 		&i.ID,

@@ -13,5 +13,5 @@ VALUES ($1, $2, $3, $4, $5)
 RETURNING *;
 
 -- name: DeleteFollower :one
-DELETE FROM followers WHERE user_id = $1
+DELETE FROM followers WHERE user_id = $1 AND follow_to = $2
 RETURNING *;
