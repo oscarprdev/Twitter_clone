@@ -1,9 +1,9 @@
 import { beforeEach, describe, it, expect, SpyInstance, vi } from 'vitest';
 import { AddPostUsecase, DefaultAddPostUsecase } from './add-post.usecase';
-import { AddPostPort } from './add-post.port';
+import { AddPostPorts } from './add-post.ports';
 
-class TestAddPostHttpAdapter implements AddPostPort {
-	async addPost({ post, userId }: AddPostPort.AddPostInput): Promise<AddPostPort.AddPostOutput> {
+class TestAddPostHttpAdapter implements AddPostPorts {
+	async addPost({ post, userId }: AddPostPorts.AddPostInput): Promise<AddPostPorts.AddPostOutput> {
 		return {
 			updatedAt: '',
 			userId,
@@ -12,7 +12,7 @@ class TestAddPostHttpAdapter implements AddPostPort {
 	}
 
 	// eslint-disable-next-line no-empty-pattern
-	async getUser({}: AddPostPort.GetUserInput): Promise<AddPostPort.GetUserOutput> {
+	async getUser({}: AddPostPorts.GetUserInput): Promise<AddPostPorts.GetUserOutput> {
 		return {
 			updatedAt: '',
 			name: 'test-name',

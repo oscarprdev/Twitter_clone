@@ -1,9 +1,9 @@
-export interface AddPostPort {
-	addPost(input: AddPostPort.AddPostInput): Promise<AddPostPort.AddPostOutput>;
-	getUser(input: AddPostPort.GetUserInput): Promise<AddPostPort.GetUserOutput>;
+export interface AddPostPorts {
+	addPost(input: AddPostPorts.AddPostInput): Promise<AddPostPorts.AddPostOutput>;
+	getUser(input: AddPostPorts.GetUserInput): Promise<AddPostPorts.GetUserOutput>;
 }
 
-export namespace AddPostPort {
+export namespace AddPostPorts {
 	export interface AddPostInput {
 		post: string;
 		userId: string;

@@ -1,4 +1,4 @@
-import { AddPostPort } from './add-post.port';
+import { AddPostPorts } from './add-post.ports';
 import { AddPostUsecaseInput, AddPostUsecaseResponse } from './add-post.types';
 
 export interface AddPostUsecase {
@@ -6,7 +6,7 @@ export interface AddPostUsecase {
 }
 
 export class DefaultAddPostUsecase implements AddPostUsecase {
-	constructor(private readonly port: AddPostPort) {}
+	constructor(private readonly port: AddPostPorts) {}
 
 	async addPost({ post, userId }: AddPostUsecaseInput): Promise<AddPostUsecaseResponse> {
 		try {

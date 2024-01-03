@@ -1,10 +1,10 @@
 import { DefaultPostInfra } from '../infra/post.infra';
-import { AddPostPort } from '../usecases/add-post/add-post.port';
+import { AddPostPorts } from '../usecases/add-post/add-post.ports';
 
-export class AddPostHttpAdapter implements AddPostPort {
+export class AddPostHttpAdapter implements AddPostPorts {
 	constructor(private readonly httpClient: DefaultPostInfra) {}
 
-	async addPost({ post, userId }: AddPostPort.AddPostInput): Promise<AddPostPort.AddPostOutput> {
+	async addPost({ post, userId }: AddPostPorts.AddPostInput): Promise<AddPostPorts.AddPostOutput> {
 		const response = await this.httpClient.addPost({ post, userId });
 
 		return {
@@ -14,7 +14,7 @@ export class AddPostHttpAdapter implements AddPostPort {
 		};
 	}
 
-	async getUser({ userId }: AddPostPort.GetUserInput): Promise<AddPostPort.GetUserOutput> {
+	async getUser({ userId }: AddPostPorts.GetUserInput): Promise<AddPostPorts.GetUserOutput> {
 		const { user } = await this.httpClient.getUser({ userId });
 
 		return {
