@@ -13,7 +13,7 @@ export class DefaultAddPostUsecase implements AddPostUsecase {
 			const [postResponse, user] = await Promise.all([await this.port.addPost({ post, userId }), await this.port.getUser({ userId })]);
 
 			return {
-				response: {
+				post: {
 					post: postResponse.post,
 					updatedAt: postResponse.updatedAt,
 					name: user.name,

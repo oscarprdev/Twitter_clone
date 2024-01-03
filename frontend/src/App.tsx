@@ -1,14 +1,18 @@
 import Aside from './components/Aside';
-import Main from './components/Main';
-import Nav from './components/Nav';
+import PostFeed from './components/PostsFeed/PostsFeed';
+import Nav from './components/Nav/Nav';
+import { postsStore } from './store/posts/posts-store';
+import { Provider } from 'react-redux';
 
 function App() {
 	return (
-		<main className='flex h-screen w-screen justify-center items-start'>
-			<Nav />
-			<Main />
-			<Aside />
-		</main>
+		<Provider store={postsStore}>
+			<main className='flex h-screen w-screen justify-center items-start'>
+				<Nav />
+				<PostFeed />
+				<Aside />
+			</main>
+		</Provider>
 	);
 }
 

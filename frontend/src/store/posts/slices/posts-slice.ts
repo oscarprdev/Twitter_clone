@@ -1,0 +1,25 @@
+import { createSlice } from '@reduxjs/toolkit';
+import { Post } from '../../../types/posts';
+import { addPostReducer } from '../reducers/add-post.reducer';
+import { getPostsReducer } from '../reducers/get-posts.reducer';
+
+export interface PostSliceState {
+	posts: Post[];
+}
+
+const initialState: PostSliceState = {
+	posts: [],
+};
+
+export const PostSlice = createSlice({
+	name: 'posts',
+	initialState,
+	reducers: {
+		getPosts: getPostsReducer,
+		addPost: addPostReducer,
+	},
+});
+
+export const { getPosts, addPost } = PostSlice.actions;
+
+export default PostSlice.reducer;

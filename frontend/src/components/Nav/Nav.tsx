@@ -1,11 +1,11 @@
 import NavItem from './NavItem';
-import { BrandIcon } from './icons/BrandIcon';
-import { HomeActiveIcon } from './icons/HomeActiveIcon';
-import { HomeIcon } from './icons/HomeIcon';
-import { NotificationsActiveIcon } from './icons/NotificationsActiveIcon';
-import { NotificationsIcon } from './icons/NotificationsIcon';
-import { ProfileActiveIcon } from './icons/ProfileActiveIcon';
-import { ProfileIcon } from './icons/ProfileIcon';
+import { BrandIcon } from '../icons/BrandIcon';
+import { HomeActiveIcon } from '../icons/HomeActiveIcon';
+import { HomeIcon } from '../icons/HomeIcon';
+import { NotificationsActiveIcon } from '../icons/NotificationsActiveIcon';
+import { NotificationsIcon } from '../icons/NotificationsIcon';
+import { ProfileActiveIcon } from '../icons/ProfileActiveIcon';
+import { ProfileIcon } from '../icons/ProfileIcon';
 
 const Nav = () => {
 	return (

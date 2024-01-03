@@ -1,6 +1,6 @@
 import NavItem from './NavItem';
-import { HomeIcon } from './icons/HomeIcon';
-import { HomeActiveIcon } from './icons/HomeActiveIcon';
+import { HomeIcon } from '../icons/HomeIcon';
+import { HomeActiveIcon } from '../icons/HomeActiveIcon';
 import { describe, it, beforeEach, afterEach, expect } from 'vitest';
 
 import { fireEvent, render, RenderResult } from '@testing-library/react';

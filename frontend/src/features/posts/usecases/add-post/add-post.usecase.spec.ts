@@ -41,7 +41,7 @@ describe('Add post usecase', () => {
 		const response = await usecase.addPost({ post: 'test post', userId: 'user-id' });
 
 		if (response.state === 'success') {
-			expect(response.response).toEqual({
+			expect(response.post).toEqual({
 				post: 'test post',
 				updatedAt: '',
 				name: 'test-name',
