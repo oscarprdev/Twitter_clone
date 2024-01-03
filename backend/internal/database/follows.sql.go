@@ -69,24 +69,32 @@ func (q *Queries) DeleteFollower(ctx context.Context, arg DeleteFollowerParams) 
 }
 
 const getFollowersByUser = `-- name: GetFollowersByUser :many
-SELECT id, created_at, updated_at, user_id, follow_to FROM followers WHERE user_id = $1
+SELECT users.id, users.created_at, users.updated_at, users.username, users.email, users.name, users.surname, users.password, users.profile_img_url, users.profile_bg_img_url
+FROM users
+JOIN followers ON users.id = followers.user_id
+WHERE followers.follow_to = $1
 `
 
-func (q *Queries) GetFollowersByUser(ctx context.Context, userID uuid.UUID) ([]Follower, error) {
-	rows, err := q.db.QueryContext(ctx, getFollowersByUser, userID)
+func (q *Queries) GetFollowersByUser(ctx context.Context, followTo uuid.UUID) ([]User, error) {
+	rows, err := q.db.QueryContext(ctx, getFollowersByUser, followTo)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Follower
+	var items []User
 	for rows.Next() {
-		var i Follower
+		var i User
 		if err := rows.Scan(
 			&i.ID,
 			&i.CreatedAt,
 			&i.UpdatedAt,
-			&i.UserID,
-			&i.FollowTo,
+			&i.Username,
+			&i.Email,
+			&i.Name,
+			&i.Surname,
+			&i.Password,
+			&i.ProfileImgUrl,
+			&i.ProfileBgImgUrl,
 		); err != nil {
 			return nil, err
 		}
@@ -104,12 +112,16 @@ func (q *Queries) GetFollowersByUser(ctx context.Context, userID uuid.UUID) ([]F
 const getNoFollowersByUser = `-- name: GetNoFollowersByUser :many
 SELECT users.id, users.created_at, users.updated_at, users.username, users.email, users.name, users.surname, users.password, users.profile_img_url, users.profile_bg_img_url
 FROM users
-LEFT JOIN followers ON users.id = followers.follow_to AND followers.user_id = $1
-WHERE followers.user_id IS NULL
+WHERE users.id NOT IN (
+    SELECT user_id
+    FROM followers
+    WHERE follow_to = $1
+)
+AND users.id <> $1
 `
 
-func (q *Queries) GetNoFollowersByUser(ctx context.Context, userID uuid.UUID) ([]User, error) {
-	rows, err := q.db.QueryContext(ctx, getNoFollowersByUser, userID)
+func (q *Queries) GetNoFollowersByUser(ctx context.Context, followTo uuid.UUID) ([]User, error) {
+	rows, err := q.db.QueryContext(ctx, getNoFollowersByUser, followTo)
 	if err != nil {
 		return nil, err
 	}

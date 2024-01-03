@@ -1,11 +1,18 @@
 -- name: GetFollowersByUser :many 
-SELECT * FROM followers WHERE user_id = $1;
+SELECT users.*
+FROM users
+JOIN followers ON users.id = followers.user_id
+WHERE followers.follow_to = $1;
 
 -- name: GetNoFollowersByUser :many
 SELECT users.*
 FROM users
-LEFT JOIN followers ON users.id = followers.follow_to AND followers.user_id = $1
-WHERE followers.user_id IS NULL;
+WHERE users.id NOT IN (
+    SELECT user_id
+    FROM followers
+    WHERE follow_to = $1
+)
+AND users.id <> $1;
 
 -- name: CreateFollower :one 
 INSERT INTO followers (id, created_at, updated_at, user_id, follow_to) 
