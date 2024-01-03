@@ -10,9 +10,9 @@ import (
 func Env() (string, string ){
 	godotenv.Load()
 	
-	port := os.Getenv("PORT")
-	if port == "" {
-		log.Fatal("PORT is not found")
+	host := os.Getenv("HOST")
+	if host == "" {
+		log.Fatal("HOST is not found")
 	}
 
 	dbURL := os.Getenv("DB_URL")
@@ -20,5 +20,5 @@ func Env() (string, string ){
 		log.Fatal("DB_URL is not found")
 	}
 
-	return port, dbURL
+	return host, dbURL
 }
