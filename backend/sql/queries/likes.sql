@@ -19,5 +19,5 @@ VALUES ($1, $2, $3, $4, $5)
 RETURNING *;
 
 -- name: DeleteLike :one
-DELETE FROM likes WHERE post_id = $1
+DELETE FROM likes WHERE post_id = $1 AND user_id = $2
 RETURNING *;
