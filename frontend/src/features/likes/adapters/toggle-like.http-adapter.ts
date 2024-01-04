@@ -23,10 +23,12 @@ export class ToggleLikeHttpAdapter implements ToggleLikePorts {
 		};
 	}
 
-	deleteLike({ postId, userId }: ToggleLikePorts.DeleteLikeInput): Promise<ToggleLikePorts.DeleteLikeOutput> {
-		return Promise.resolve({
-			postId,
-			userId,
-		});
+	async deleteLike({ postId, userId }: ToggleLikePorts.DeleteLikeInput): Promise<ToggleLikePorts.DeleteLikeOutput> {
+		const response = await this.httpClient.deleteLike({ postId, userId });
+
+		return {
+			userId: response.likeDeleted.userId,
+			postId: response.likeDeleted.postId,
+		};
 	}
 }

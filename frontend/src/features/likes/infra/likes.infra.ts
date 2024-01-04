@@ -1,6 +1,8 @@
 import {
 	AddLikeInfraInput,
 	AddLikeInfraResponse,
+	DeleteLikeInfraInput,
+	DeleteLikeInfraResponse,
 	GetLikesInfraInput,
 	GetLikesInfraResponse,
 	GetUsersLikesFromPostInput,
@@ -11,6 +13,7 @@ export interface LikesInfra {
 	getLikes(input: GetLikesInfraInput): Promise<GetLikesInfraResponse>;
 	getUsersLikesFromPost(input: GetUsersLikesFromPostInput): Promise<GetUsersLikesFromPostResponse>;
 	addLike(input: AddLikeInfraInput): Promise<AddLikeInfraResponse>;
+	deleteLike(input: DeleteLikeInfraInput): Promise<DeleteLikeInfraResponse>;
 }
 
 export class DefaultLikesInfra implements LikesInfra {
@@ -40,6 +43,22 @@ export class DefaultLikesInfra implements LikesInfra {
 		try {
 			const response = await fetch(`${this.API_URL}/likes`, {
 				method: 'POST',
+				body: JSON.stringify({
+					userId,
+					postId,
+				}),
+			});
+
+			return await response.json();
+		} catch (err) {
+			throw new Error(`Error retrieving likes: ${err}`);
+		}
+	}
+
+	async deleteLike({ userId, postId }: DeleteLikeInfraInput): Promise<DeleteLikeInfraResponse> {
+		try {
+			const response = await fetch(`${this.API_URL}/likes`, {
+				method: 'DELETE',
 				body: JSON.stringify({
 					userId,
 					postId,
