@@ -17,6 +17,14 @@ export const useLikes = (postId: string) => {
 		updateLikes();
 	});
 
+	useEffect(() => {
+		const updateIsLiked = async () => {
+			setIsLiked(await toggleLikeUsecase.isUserAlreadyLiked({ postId, userId: 'c6471755-03fc-4a38-badd-43ba864bd98e' }));
+		};
+
+		updateIsLiked();
+	}, [likes]);
+
 	const toggleLikes = async () => {
 		const response = await toggleLikeUsecase.toggleLike({ postId, userId: 'c6471755-03fc-4a38-badd-43ba864bd98e' });
 
@@ -25,7 +33,6 @@ export const useLikes = (postId: string) => {
 
 			if (likesResponse.state === 'success') {
 				setLikes(likesResponse.likeInfo.numLikes);
-				setIsLiked(await toggleLikeUsecase.isUserAlreadyLiked({ postId, userId: 'c6471755-03fc-4a38-badd-43ba864bd98e' }));
 			}
 		}
 	};

@@ -9,6 +9,7 @@ const PostLikes = ({ postId }: PostLikesProps) => {
 
 	return (
 		<div
+			role='like-container'
 			className={`cursor-pointer flex items-center gap-1 w-fit ${
 				isLiked ? 'text-[var(--like)] hover:text-[var(--like)]' : 'text-zinc-500 hover:text-[var(--like)]'
 			}`}

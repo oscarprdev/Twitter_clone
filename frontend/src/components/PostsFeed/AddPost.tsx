@@ -1,9 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { strCapitalize } from '../../utils/strCapitalize';
-import { usePostsDispatch } from '../../store/posts/hooks/usePostsDispatch';
 import { addPostUsecase } from '../../features/posts/graph';
 import { addPost } from '../../store/posts/slices/posts-slice';
 import { ADD_POST_TYPES } from '../../store/posts/reducers/add-post/add-post.reducer.types';
+import { usePostsDispatch } from '../../store/posts/hooks/usePostsDispatch';
 
 interface PostState {
 	content: string;
@@ -38,10 +38,10 @@ const AddPost = () => {
 			<figure className='w-12 h-12 bg-zinc-200 rounded-full'></figure>
 			<form
 				className='w-full mt-2'
-				onSubmit={handleSubmit}>
+				onSubmit={handleSubmit}
+				role='form'>
 				<textarea
-					id='content'
-					name='content'
+					role='textarea'
 					placeholder="What's going on?!"
 					maxLength={300}
 					value={strCapitalize(post.content)}
