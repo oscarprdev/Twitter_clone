@@ -15,6 +15,6 @@ func handleLikesRoutes(api *api.ApiConfig, router *chi.Mux) {
 	getLikesByPostUsecase := getlikesbypost.GetLikesByPostProvider(api)
 
 	router.Post("/likes", createLikeUsecase.CreateLike)
-	router.Delete("/likes/{id}", deleteLikeUsecase.DeleteLike)
+	router.Delete("/likes", deleteLikeUsecase.DeleteLike)
 	router.Get("/likes/post/{id}", getLikesByPostUsecase.GetLikesByPost)
 }
