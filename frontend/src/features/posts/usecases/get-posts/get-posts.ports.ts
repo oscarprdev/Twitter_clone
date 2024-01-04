@@ -9,6 +9,7 @@ export namespace GetPostsPorts {
 	}
 
 	export interface PostResponse {
+		id: string;
 		updatedAt: string;
 		userId: string;
 		post: string;
@@ -19,6 +20,7 @@ export namespace GetPostsPorts {
 	}
 
 	export interface GetUserOutput {
+		id: string;
 		updatedAt: string;
 		name: string;
 		surname: string;

@@ -5,6 +5,7 @@ import { AddPostPorts } from './add-post.ports';
 class TestAddPostHttpAdapter implements AddPostPorts {
 	async addPost({ post, userId }: AddPostPorts.AddPostInput): Promise<AddPostPorts.AddPostOutput> {
 		return {
+			id: '1',
 			updatedAt: '',
 			userId,
 			post,
@@ -14,6 +15,7 @@ class TestAddPostHttpAdapter implements AddPostPorts {
 	// eslint-disable-next-line no-empty-pattern
 	async getUser({}: AddPostPorts.GetUserInput): Promise<AddPostPorts.GetUserOutput> {
 		return {
+			id: '1',
 			updatedAt: '',
 			name: 'test-name',
 			surname: 'test-surname',
@@ -42,6 +44,8 @@ describe('Add post usecase', () => {
 
 		if (response.state === 'success') {
 			expect(response.post).toEqual({
+				id: '1',
+				userId: 'user-id',
 				post: 'test post',
 				updatedAt: '',
 				name: 'test-name',

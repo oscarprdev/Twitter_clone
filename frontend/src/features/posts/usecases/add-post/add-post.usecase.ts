@@ -14,6 +14,8 @@ export class DefaultAddPostUsecase implements AddPostUsecase {
 
 			return {
 				post: {
+					id: postResponse.id,
+					userId: postResponse.userId,
 					post: postResponse.post,
 					updatedAt: postResponse.updatedAt,
 					name: user.name,

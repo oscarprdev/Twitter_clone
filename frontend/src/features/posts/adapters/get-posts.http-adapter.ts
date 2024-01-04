@@ -5,8 +5,9 @@ import { GetPostsPorts } from '../usecases/get-posts/get-posts.ports';
 export class GetPostsHttpAdapter implements GetPostsPorts {
 	constructor(private readonly httpClient: PostInfra) {}
 
-	private mapDbPostToUsecase({ updated_at, userId, post }: DbPost): GetPostsPorts.PostResponse {
+	private mapDbPostToUsecase({ updated_at, userId, post, id }: DbPost): GetPostsPorts.PostResponse {
 		return {
+			id,
 			updatedAt: updated_at,
 			userId: userId,
 			post,
@@ -25,6 +26,7 @@ export class GetPostsHttpAdapter implements GetPostsPorts {
 		const { user } = await this.httpClient.getUser({ userId });
 
 		return {
+			id: user.id,
 			updatedAt: user.updatedAt,
 			username: user.username,
 			name: user.name,

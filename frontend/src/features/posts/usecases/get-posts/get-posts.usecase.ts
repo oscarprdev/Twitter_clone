@@ -14,8 +14,10 @@ export class DefaultGetPostsUsecase implements GetPostsUsecase {
 			const user = await this.ports.getUser({ userId: post.userId });
 
 			return {
+				id: post.id,
 				post: post.post,
 				updatedAt: post.updatedAt,
+				userId: user.id,
 				name: user.name,
 				email: user.email,
 				surname: user.surname,

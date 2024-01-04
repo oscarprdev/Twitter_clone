@@ -8,6 +8,7 @@ export class AddPostHttpAdapter implements AddPostPorts {
 		const response = await this.httpClient.addPost({ post, userId });
 
 		return {
+			id: response.post.id,
 			updatedAt: response.post.updated_at,
 			userId: response.post.userId,
 			post: response.post.post,
@@ -18,6 +19,7 @@ export class AddPostHttpAdapter implements AddPostPorts {
 		const { user } = await this.httpClient.getUser({ userId });
 
 		return {
+			id: user.id,
 			updatedAt: user.updatedAt,
 			username: user.username,
 			name: user.name,

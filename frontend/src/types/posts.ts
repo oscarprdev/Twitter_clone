@@ -1,4 +1,6 @@
 export interface Post {
+	id: string;
+	userId: string;
 	post: string;
 	updatedAt: string;
 	name: string;

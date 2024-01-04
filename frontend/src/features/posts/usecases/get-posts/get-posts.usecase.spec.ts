@@ -7,6 +7,7 @@ class TestGetPostsHttpAdapter implements GetPostsPorts {
 		return {
 			posts: [
 				{
+					id: '1',
 					updatedAt: '',
 					userId: 'mocket-userid',
 					post: 'mocked-post',
@@ -18,6 +19,7 @@ class TestGetPostsHttpAdapter implements GetPostsPorts {
 	// eslint-disable-next-line no-empty-pattern
 	async getUser({}: GetPostsPorts.GetUserInput): Promise<GetPostsPorts.GetUserOutput> {
 		return {
+			id: '1',
 			updatedAt: '',
 			name: 'test-name',
 			surname: 'test-surname',
@@ -50,6 +52,8 @@ describe('Get posts usecase', () => {
 		if (response.state === 'success') {
 			expect(response.posts).toEqual([
 				{
+					id: '1',
+					userId: '1',
 					post: 'mocked-post',
 					updatedAt: '',
 					name: 'test-name',
