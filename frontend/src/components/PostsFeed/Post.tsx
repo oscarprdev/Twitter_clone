@@ -1,5 +1,6 @@
 import { Post } from '../../types/posts';
 import { strDateToTime } from '../../utils/strDateToTime';
+import UserImage from '../UserImage';
 import PostLikes from './PostLikes';
 
 interface PostProps {
@@ -11,18 +12,12 @@ const Post = ({ post }: PostProps) => {
 		<article
 			role='post'
 			className='flex items-start gap-4 w-full min-h-[150px] p-4 border-y-[1px] border-y-zinc-700'>
-			<figure className='w-12 h-12 bg-zinc-200 rounded-full overflow-hidden'>
-				<img
-					src={post.owner.profileImgUrl}
-					alt='Profile image'
-					className='w-full h-full object-cover'
-				/>
-			</figure>
+			<UserImage userImage={post.owner.profileImgUrl} />
 			<div className='flex flex-col h-full'>
 				<header
 					className='flex items-center gap-2 text-zinc-500'
 					role='post-header'>
-					<p className='text-white font-bold'>{post.owner.name}</p>
+					<p className='text-white font-extrabold'>{post.owner.name}</p>
 					<p>@{post.owner.username}</p>
 					<span className='w-[2px] h-[2px] bg-zinc-500 rounded-full' />
 					<p>{strDateToTime(post.updatedAt)}</p>

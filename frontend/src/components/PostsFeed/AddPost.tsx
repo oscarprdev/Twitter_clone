@@ -6,6 +6,7 @@ import { ADD_POST_TYPES } from '../../store/reducers/posts/add-post/add-post.red
 import { USER_ID } from '../../constants/constants';
 import { useStoreSelector } from '../../store/hooks/useSelector';
 import { useStoreDispatch } from '../../store/hooks/useDispatch';
+import UserImage from '../UserImage';
 
 interface PostState {
 	content: string;
@@ -40,14 +41,9 @@ const AddPost = () => {
 
 	return (
 		<article className='relative flex items-start gap-4 p-5 w-full h-[150px]'>
-			<figure className='w-12 h-12 bg-zinc-200 rounded-full'>
-				<img
-					src={userLogged.profileImgUrl}
-					alt='Profile user image'
-				/>
-			</figure>
+			<UserImage userImage={userLogged.profileImgUrl} />
 			<form
-				className='w-full mt-2'
+				className='mt-2'
 				onSubmit={handleSubmit}
 				role='form'>
 				<textarea
