@@ -7,7 +7,7 @@ const PostFeed = () => {
 	const { posts, isLoading } = usePosts();
 
 	return (
-		<section className='flex flex-col items-center w-[800px] h-full border border-y-0 border-x-zinc-500'>
+		<>
 			<AddPost />
 			{isLoading ? (
 				<span className='w-10 mt-20 text-[var(--contrast)] animate-spin'>
@@ -21,7 +21,7 @@ const PostFeed = () => {
 					/>
 				))
 			)}
-		</section>
+		</>
 	);
 };
 

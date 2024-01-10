@@ -34,8 +34,10 @@ const AddPost = () => {
 		}
 	};
 
+	const isButtonDisabled = post.content.length === 0;
+
 	return (
-		<article className='relative flex items-start gap-4 p-5 w-full h-[200px] border-b-[1px] border-b-zinc-500'>
+		<article className='relative flex items-start gap-4 p-5 w-full h-[150px] border-b-[1px] border-b-zinc-700'>
 			<figure className='w-12 h-12 bg-zinc-200 rounded-full'></figure>
 			<form
 				className='w-full mt-2'
@@ -51,8 +53,9 @@ const AddPost = () => {
 				/>
 				<button
 					type='submit'
+					disabled={isButtonDisabled}
 					className={`absolute font-bold bottom-5 right-5 px-5 py-2 rounded-full bg-[var(--contrast)] ${
-						post.content.length > 0 ? 'opacity-none' : 'opacity-70'
+						isButtonDisabled ? 'opacity-70' : 'opacity-none hover:bg-[var(--contrast-dark)] duration-300'
 					} `}>
 					Post
 				</button>

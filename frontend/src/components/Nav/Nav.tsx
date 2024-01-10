@@ -6,14 +6,16 @@ import { NotificationsActiveIcon } from '../icons/NotificationsActiveIcon';
 import { NotificationsIcon } from '../icons/NotificationsIcon';
 import { ProfileActiveIcon } from '../icons/ProfileActiveIcon';
 import { ProfileIcon } from '../icons/ProfileIcon';
+import { useModal } from '../../hooks/useModal';
 
 const Nav = () => {
+	const { openModal } = useModal();
 	return (
 		<nav className='flex flex-col p-5 w-[25vw] items-start py-3 pl-32'>
 			<span className='block w-12'>
 				<BrandIcon color='white' />
 			</span>
-			<ul className='mt-10 ml-[-16px] flex flex-col gap-5 w-full'>
+			<ul className='mt-10 ml-[-16px] flex flex-col gap-3 w-full'>
 				<NavItem
 					text='home'
 					defaultIcon={<HomeIcon />}
@@ -29,6 +31,11 @@ const Nav = () => {
 					defaultIcon={<ProfileIcon />}
 					activeIcon={<ProfileActiveIcon />}
 				/>
+				<button
+					onClick={openModal}
+					className='font-bold mt-5 text-xl px-5 py-4 rounded-full bg-[var(--contrast)] hover:bg-[var(--contrast-dark)] duration-300'>
+					Post
+				</button>
 			</ul>
 		</nav>
 	);

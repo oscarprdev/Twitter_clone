@@ -10,7 +10,7 @@ const Post = ({ post }: PostProps) => {
 	return (
 		<article
 			role='post'
-			className='flex items-start gap-4 w-full min-h-[150px] p-4 border-b-[1px] border-b-zinc-500'>
+			className='flex items-start gap-4 w-full min-h-[150px] p-4 border-b-[1px] border-b-zinc-700'>
 			<figure className='w-12 h-12 bg-zinc-200 rounded-full overflow-hidden'>
 				<img
 					src={post.owner.profileImgUrl}

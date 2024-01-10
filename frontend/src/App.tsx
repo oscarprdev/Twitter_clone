@@ -1,17 +1,14 @@
-import Aside from './components/Aside';
-import PostFeed from './components/PostsFeed/PostsFeed';
-import Nav from './components/Nav/Nav';
 import { postsStore } from './store/posts/posts-store';
 import { Provider } from 'react-redux';
+import { ModalProvider } from './context/ModalProvider';
+import Layout from './layout/Layout';
 
 function App() {
 	return (
 		<Provider store={postsStore}>
-			<main className='flex h-screen w-screen justify-center items-start'>
-				<Nav />
-				<PostFeed />
-				<Aside />
-			</main>
+			<ModalProvider>
+				<Layout />
+			</ModalProvider>
 		</Provider>
 	);
 }
