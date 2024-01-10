@@ -3,7 +3,7 @@ import { fireEvent, render, RenderResult } from '@testing-library/react';
 import AddPost from './AddPost';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { PostSlice } from '../../store/posts/slices/posts-slice';
+import { PostSlice } from '../../store/slices/posts-slice';
 
 const mockStore = configureStore({
 	reducer: {

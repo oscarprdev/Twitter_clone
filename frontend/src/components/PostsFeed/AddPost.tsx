@@ -1,18 +1,20 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { strCapitalize } from '../../utils/strCapitalize';
 import { addPostUsecase } from '../../features/posts/graph';
-import { addPost } from '../../store/posts/slices/posts-slice';
-import { ADD_POST_TYPES } from '../../store/posts/reducers/add-post/add-post.reducer.types';
-import { usePostsDispatch } from '../../store/posts/hooks/usePostsDispatch';
+import { addPost } from '../../store/slices/posts-slice';
+import { ADD_POST_TYPES } from '../../store/reducers/posts/add-post/add-post.reducer.types';
 import { USER_ID } from '../../constants/constants';
+import { useStoreSelector } from '../../store/hooks/useSelector';
+import { useStoreDispatch } from '../../store/hooks/useDispatch';
 
 interface PostState {
 	content: string;
 }
 
 const AddPost = () => {
+	const userLogged = useStoreSelector((state) => state.users.userLogged);
 	const [post, setPost] = useState<PostState>({ content: '' });
-	const dispatch = usePostsDispatch();
+	const dispatch = useStoreDispatch();
 
 	const handleTextareaChange = (e: ChangeEvent) => {
 		const target = e.target;
@@ -37,8 +39,13 @@ const AddPost = () => {
 	const isButtonDisabled = post.content.length === 0;
 
 	return (
-		<article className='relative flex items-start gap-4 p-5 w-full h-[150px] border-b-[1px] border-b-zinc-700'>
-			<figure className='w-12 h-12 bg-zinc-200 rounded-full'></figure>
+		<article className='relative flex items-start gap-4 p-5 w-full h-[150px]'>
+			<figure className='w-12 h-12 bg-zinc-200 rounded-full'>
+				<img
+					src={userLogged.profileImgUrl}
+					alt='Profile user image'
+				/>
+			</figure>
 			<form
 				className='w-full mt-2'
 				onSubmit={handleSubmit}

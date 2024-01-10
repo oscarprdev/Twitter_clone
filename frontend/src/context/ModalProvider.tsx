@@ -1,5 +1,6 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 import { ModalContext } from './ModalContext';
+import ModalWrapper from '../components/Modals/ModalWrapper';
 
 interface ModalContextProviderProps {
 	children: ReactNode;
@@ -7,9 +8,21 @@ interface ModalContextProviderProps {
 
 export const ModalProvider = ({ children }: ModalContextProviderProps) => {
 	const [isOpen, setIsOpen] = useState(false);
+	const modalRef = useRef<ReactNode>();
 
-	const openModal = () => setIsOpen(true);
-	const closeModal = () => setIsOpen(false);
+	const openModal = (modal: ReactNode) => {
+		modalRef.current = modal;
+		setIsOpen(true);
+	};
+	const closeModal = () => {
+		modalRef.current = null;
+		setIsOpen(false);
+	};
 
-	return <ModalContext.Provider value={{ isOpen, openModal, closeModal }}>{children}</ModalContext.Provider>;
+	return (
+		<ModalContext.Provider value={{ isOpen, openModal, closeModal }}>
+			{children}
+			{isOpen && <ModalWrapper>{modalRef.current}</ModalWrapper>}
+		</ModalContext.Provider>
+	);
 };

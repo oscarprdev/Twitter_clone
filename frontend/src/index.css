@@ -19,5 +19,7 @@
 	--contrast: rgb(29, 155, 240);
 	--contrast-dark: rgb(20, 128, 200);
 
+	--backdrop: rgb(91, 112, 131, 0.4);
+
 	--like: rgb(232, 36, 127);
 }

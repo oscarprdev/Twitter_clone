@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import { usePostsDispatch } from '../store/posts/hooks/usePostsDispatch';
-import { usePostsSelector } from '../store/posts/hooks/usePostsSelector';
-import { getPosts } from '../store/posts/slices/posts-slice';
-import { GET_POST_TYPES } from '../store/posts/reducers/get-post/get-posts.reducer.types';
+import { getPosts } from '../store/slices/posts-slice';
+import { GET_POST_TYPES } from '../store/reducers/posts/get-post/get-posts.reducer.types';
 import { getPostsUsecase } from '../features/posts/graph';
+import { useStoreDispatch } from '../store/hooks/useDispatch';
+import { useStoreSelector } from '../store/hooks/useSelector';
 
 const usePosts = () => {
-	const dispatch = usePostsDispatch();
-	const { posts, isLoading } = usePostsSelector((state) => state.posts);
+	const dispatch = useStoreDispatch();
+	const { posts, isLoading } = useStoreSelector((state) => state.posts);
 
 	useEffect(() => {
 		const getInitialPosts = async () => {

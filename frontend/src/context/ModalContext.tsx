@@ -1,8 +1,8 @@
-import { createContext } from 'react';
+import { ReactNode, createContext } from 'react';
 
 interface ModalContext {
 	isOpen: boolean;
-	openModal: () => void;
+	openModal: (modal: ReactNode) => void;
 	closeModal: () => void;
 }
 

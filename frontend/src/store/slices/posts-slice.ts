@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Post } from '../../../types/posts';
-import { addPostReducer } from '../reducers/add-post/add-post.reducer';
-import { getPostsReducer } from '../reducers/get-post/get-posts.reducer';
+import { Post } from '../../types/posts';
+import { addPostReducer } from '../reducers/posts/add-post/add-post.reducer';
+import { getPostsReducer } from '../reducers/posts/get-post/get-posts.reducer';
 
 export interface PostSliceState {
 	posts: Post[];

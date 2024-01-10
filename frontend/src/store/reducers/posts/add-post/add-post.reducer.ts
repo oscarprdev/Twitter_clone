@@ -1,5 +1,5 @@
 import { Draft, PayloadAction } from '@reduxjs/toolkit';
-import { PostSliceState } from '../../slices/posts-slice';
+import { PostSliceState } from '../../../slices/posts-slice';
 import { ADD_POST_TYPES, AddPostPayloadAction } from './add-post.reducer.types';
 
 export const addPostReducer = (state: Draft<PostSliceState>, action: PayloadAction<AddPostPayloadAction>) => {
