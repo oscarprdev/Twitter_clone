@@ -46,7 +46,8 @@ func (q *Queries) CreatePost(ctx context.Context, arg CreatePostParams) (Post, e
 }
 
 const getAllPosts = `-- name: GetAllPosts :many
-SELECT id, created_at, updated_at, user_id, post FROM posts
+SELECT id, created_at, updated_at, user_id, post FROM posts 
+ORDER BY updated_at DESC
 `
 
 func (q *Queries) GetAllPosts(ctx context.Context) ([]Post, error) {
@@ -100,6 +101,7 @@ SELECT posts.id, posts.created_at, posts.updated_at, posts.user_id, posts.post
 FROM posts
 LEFT JOIN followers ON posts.user_id = followers.follow_to
 WHERE followers.user_id = $1 OR posts.user_id = $1
+ORDER BY posts.updated_at DESC
 `
 
 func (q *Queries) GetPostsByFollowers(ctx context.Context, userID uuid.UUID) ([]Post, error) {
@@ -132,7 +134,8 @@ func (q *Queries) GetPostsByFollowers(ctx context.Context, userID uuid.UUID) ([]
 }
 
 const getPostsByUser = `-- name: GetPostsByUser :many
-SELECT id, created_at, updated_at, user_id, post FROM posts WHERE user_id = $1
+SELECT id, created_at, updated_at, user_id, post FROM posts WHERE user_id = $1 
+ORDER BY updated_at DESC
 `
 
 func (q *Queries) GetPostsByUser(ctx context.Context, userID uuid.UUID) ([]Post, error) {
