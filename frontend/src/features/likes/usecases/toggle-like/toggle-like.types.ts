@@ -12,6 +12,8 @@ export type ToggleLikeOutput = SuccessToggleLikeOutput | ErrorToggleLikeOutput;
 
 export interface SuccessToggleLikeOutput {
 	state: 'success';
+	isLikeDeleted: boolean;
+	numLikes: number;
 }
 
 export interface ErrorToggleLikeOutput {

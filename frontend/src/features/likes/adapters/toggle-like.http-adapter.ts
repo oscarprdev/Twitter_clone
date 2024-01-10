@@ -14,21 +14,12 @@ export class ToggleLikeHttpAdapter implements ToggleLikePorts {
 		};
 	}
 
-	async addLike({ userId, postId }: ToggleLikePorts.AddLikeInput): Promise<ToggleLikePorts.AddLikeOutput> {
-		const response = await this.httpClient.addLike({ userId, postId });
+	async toggleLike({ userId, postId }: ToggleLikePorts.ToggleLikeInput): Promise<ToggleLikePorts.ToggleLikeOutput> {
+		const response = await this.httpClient.toggleLike({ userId, postId });
 
 		return {
-			userId: response.userId,
-			postId: response.postId,
-		};
-	}
-
-	async deleteLike({ postId, userId }: ToggleLikePorts.DeleteLikeInput): Promise<ToggleLikePorts.DeleteLikeOutput> {
-		const response = await this.httpClient.deleteLike({ postId, userId });
-
-		return {
-			userId: response.likeDeleted.userId,
-			postId: response.likeDeleted.postId,
+			isLikeDeleted: response.isLikeDeleted,
+			numLikes: response.numLikes,
 		};
 	}
 }

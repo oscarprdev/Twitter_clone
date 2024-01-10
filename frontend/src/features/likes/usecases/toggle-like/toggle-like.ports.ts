@@ -1,28 +1,17 @@
 export interface ToggleLikePorts {
-	addLike(input: ToggleLikePorts.AddLikeInput): Promise<ToggleLikePorts.AddLikeOutput>;
-	deleteLike(input: ToggleLikePorts.DeleteLikeInput): Promise<ToggleLikePorts.DeleteLikeOutput>;
+	toggleLike(input: ToggleLikePorts.ToggleLikeInput): Promise<ToggleLikePorts.ToggleLikeOutput>;
 	getUsersLikesFromPost(input: ToggleLikePorts.GetUsersLikesFromPostInput): Promise<ToggleLikePorts.GetUsersLikesFromPostOutput>;
 }
 
 export namespace ToggleLikePorts {
-	export interface AddLikeInput {
+	export interface ToggleLikeInput {
 		userId: string;
 		postId: string;
 	}
 
-	export interface AddLikeOutput {
-		userId: string;
-		postId: string;
-	}
-
-	export interface DeleteLikeInput {
-		userId: string;
-		postId: string;
-	}
-
-	export interface DeleteLikeOutput {
-		userId: string;
-		postId: string;
+	export interface ToggleLikeOutput {
+		isLikeDeleted: boolean;
+		numLikes: number;
 	}
 
 	export interface GetUsersLikesFromPostInput {

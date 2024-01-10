@@ -3,9 +3,13 @@ export interface Post {
 	userId: string;
 	post: string;
 	updatedAt: string;
+	owner: PostOwner;
+}
+
+export interface PostOwner {
 	name: string;
 	surname: string;
 	username: string;
-	email: string;
 	profileImgUrl: string;
+	email: string;
 }

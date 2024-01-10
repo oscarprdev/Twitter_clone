@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getLikesUsecase, toggleLikeUsecase } from '../features/likes/graph';
+import { USER_ID } from '../constants/constants';
 
 export const useLikes = (postId: string) => {
 	const [likes, setLikes] = useState(0);
@@ -19,21 +20,17 @@ export const useLikes = (postId: string) => {
 
 	useEffect(() => {
 		const updateIsLiked = async () => {
-			setIsLiked(await toggleLikeUsecase.isUserAlreadyLiked({ postId, userId: 'c6471755-03fc-4a38-badd-43ba864bd98e' }));
+			setIsLiked(await toggleLikeUsecase.isUserAlreadyLiked({ postId, userId: USER_ID }));
 		};
 
 		updateIsLiked();
-	}, [likes]);
+	}, [likes, postId]);
 
 	const toggleLikes = async () => {
-		const response = await toggleLikeUsecase.toggleLike({ postId, userId: 'c6471755-03fc-4a38-badd-43ba864bd98e' });
+		const response = await toggleLikeUsecase.toggleLike({ postId, userId: USER_ID });
 
 		if (response.state === 'success') {
-			const likesResponse = await getLikesUsecase.getLikes({ postId });
-
-			if (likesResponse.state === 'success') {
-				setLikes(likesResponse.likeInfo.numLikes);
-			}
+			setLikes(response.numLikes);
 		}
 	};
 

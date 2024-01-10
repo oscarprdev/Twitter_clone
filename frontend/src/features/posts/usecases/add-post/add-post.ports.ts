@@ -1,6 +1,5 @@
 export interface AddPostPorts {
 	addPost(input: AddPostPorts.AddPostInput): Promise<AddPostPorts.AddPostOutput>;
-	getUser(input: AddPostPorts.GetUserInput): Promise<AddPostPorts.GetUserOutput>;
 }
 
 export namespace AddPostPorts {
@@ -14,19 +13,14 @@ export namespace AddPostPorts {
 		updatedAt: string;
 		userId: string;
 		post: string;
+		owner: PostOwner;
 	}
 
-	export interface GetUserInput {
-		userId: string;
-	}
-
-	export interface GetUserOutput {
-		id: string;
-		updatedAt: string;
+	export interface PostOwner {
 		name: string;
 		surname: string;
 		username: string;
-		email: string;
 		profileImgUrl: string;
+		email: string;
 	}
 }

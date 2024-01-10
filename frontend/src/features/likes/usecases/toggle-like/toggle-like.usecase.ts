@@ -19,18 +19,12 @@ export class DefaultToggleLikeUsecase implements ToggleLikeUsecase {
 
 	async toggleLike({ userId, postId }: ToogleLikeInput): Promise<ToggleLikeOutput> {
 		try {
-			const isAlreadyLiked = await this.isUserAlreadyLiked({ userId, postId });
-
-			if (isAlreadyLiked) {
-				await this.ports.deleteLike({ postId, userId });
-			}
-
-			if (!isAlreadyLiked) {
-				await this.ports.addLike({ postId, userId });
-			}
+			const { isLikeDeleted, numLikes } = await this.ports.toggleLike({ userId, postId });
 
 			return {
 				state: 'success',
+				isLikeDeleted,
+				numLikes,
 			};
 		} catch (err: unknown) {
 			return {

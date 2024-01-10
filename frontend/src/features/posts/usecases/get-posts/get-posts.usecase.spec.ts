@@ -1,4 +1,4 @@
-import { SpyInstance, beforeEach, describe, expect, it, vi } from 'vitest';
+import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GetPostsPorts } from './get-posts.ports';
 import { DefaultGetPostsUsecase, GetPostsUsecase } from './get-posts.usecase';
 
@@ -11,37 +11,28 @@ class TestGetPostsHttpAdapter implements GetPostsPorts {
 					updatedAt: '',
 					userId: 'mocket-userid',
 					post: 'mocked-post',
+					owner: {
+						username: 'username',
+						name: 'name',
+						surname: 'surname',
+						profileImgUrl: '',
+						email: 'email',
+					},
 				},
 			],
-		};
-	}
-
-	// eslint-disable-next-line no-empty-pattern
-	async getUser({}: GetPostsPorts.GetUserInput): Promise<GetPostsPorts.GetUserOutput> {
-		return {
-			id: '1',
-			updatedAt: '',
-			name: 'test-name',
-			surname: 'test-surname',
-			username: 'test-username',
-			email: 'test-email',
-			profileImgUrl: 'test-profile-img',
 		};
 	}
 }
 
 describe('Get posts usecase', () => {
 	let usecase: GetPostsUsecase;
-
-	let getPostsSpy: SpyInstance;
-	let getUserSpy: SpyInstance;
+	let getPostsSpy: MockInstance;
 
 	beforeEach(() => {
 		const ports = new TestGetPostsHttpAdapter();
 		usecase = new DefaultGetPostsUsecase(ports);
 
 		getPostsSpy = vi.spyOn(ports, 'getPosts');
-		getUserSpy = vi.spyOn(ports, 'getUser');
 	});
 
 	it('Should return success response', async () => {
@@ -56,11 +47,13 @@ describe('Get posts usecase', () => {
 					userId: '1',
 					post: 'mocked-post',
 					updatedAt: '',
-					name: 'test-name',
-					surname: 'test-surname',
-					username: 'test-username',
-					email: 'test-email',
-					profileImgUrl: 'test-profile-img',
+					owner: {
+						username: 'username',
+						name: 'name',
+						surname: 'surname',
+						profileImgUrl: '',
+						email: 'email',
+					},
 				},
 			]);
 		}
@@ -68,18 +61,6 @@ describe('Get posts usecase', () => {
 
 	it('Should return error response if getPosts method fails', async () => {
 		getPostsSpy.mockImplementationOnce(() => Promise.reject({}));
-
-		const response = await usecase.getPosts();
-
-		expect(response.state).toBe('error');
-
-		if (response.state === 'error') {
-			expect(response.error).toContain('Error listing all posts');
-		}
-	});
-
-	it('Should return error response if getUser method fails', async () => {
-		getUserSpy.mockImplementationOnce(() => Promise.reject({}));
 
 		const response = await usecase.getPosts();
 

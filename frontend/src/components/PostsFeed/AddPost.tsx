@@ -4,6 +4,7 @@ import { addPostUsecase } from '../../features/posts/graph';
 import { addPost } from '../../store/posts/slices/posts-slice';
 import { ADD_POST_TYPES } from '../../store/posts/reducers/add-post/add-post.reducer.types';
 import { usePostsDispatch } from '../../store/posts/hooks/usePostsDispatch';
+import { USER_ID } from '../../constants/constants';
 
 interface PostState {
 	content: string;
@@ -26,7 +27,7 @@ const AddPost = () => {
 
 		dispatch(addPost({ type: ADD_POST_TYPES.LOADING }));
 
-		const response = await addPostUsecase.addPost({ userId: 'c6471755-03fc-4a38-badd-43ba864bd98e', post: post.content });
+		const response = await addPostUsecase.addPost({ userId: USER_ID, post: post.content });
 
 		if (response.state === 'success') {
 			dispatch(addPost({ post: response.post, type: ADD_POST_TYPES.ADD_POST }));

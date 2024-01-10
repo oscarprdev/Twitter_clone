@@ -17,6 +17,7 @@ export interface DbPost {
 	updated_at: string;
 	userId: string;
 	post: string;
+	owner: PostOwner;
 }
 
 export interface GetUserPayload {
@@ -25,6 +26,14 @@ export interface GetUserPayload {
 
 export interface GetUserResponse {
 	user: DbUser;
+}
+
+export interface PostOwner {
+	name: string;
+	surname: string;
+	username: string;
+	profileImgUrl: string;
+	email: string;
 }
 
 export interface DbUser {
