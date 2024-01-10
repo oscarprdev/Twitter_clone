@@ -41,7 +41,19 @@ func (api *ApiConfig) CreatePost(w http.ResponseWriter, r *http.Request) {
 		Post: params.Post,
 	})
 
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error creating post: %v", err))
+		return
+	}
+
+	userDB, err := api.DB.GetUserById(r.Context(), userId)
+
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error Providing post owner: %v", err))
+		return
+	}
+
 	responses.RespondWithJSON(w, 201, CreatePostResponse{
-		Post: postshared.DatabasePostToPost(post),
+		Post: postshared.DatabasePostToPost(post, userDB),
 	})
 }

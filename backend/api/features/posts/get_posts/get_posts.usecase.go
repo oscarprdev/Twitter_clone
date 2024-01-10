@@ -26,9 +26,15 @@ func (api *ApiConfig) GetPosts(w http.ResponseWriter, r *http.Request) {
 	}
 
 	posts := []postshared.Post{}
-
 	for _, post := range dbPosts {
-		posts = append(posts, postshared.DatabasePostToPost(post))
+		userDB, err := api.DB.GetUserById(r.Context(), post.UserID)
+
+		if err != nil {
+			responses.RespondWithError(w, 400, fmt.Sprintf("Error Providing post owner: %v", err))
+			return
+		}
+
+		posts = append(posts, postshared.DatabasePostToPost(post, userDB))
 	}
 
 	responses.RespondWithJSON(w, 200, GetPostsResponse{
@@ -55,7 +61,14 @@ func (api *ApiConfig) GetPostsByParam(w http.ResponseWriter, r *http.Request) {
 
 	posts := []postshared.Post{}
 	for _, post := range dbPosts {
-		posts = append(posts, postshared.DatabasePostToPost(post))
+		userDB, err := api.DB.GetUserById(r.Context(), post.UserID)
+
+		if err != nil {
+			responses.RespondWithError(w, 400, fmt.Sprintf("Error Providing post owner: %v", err))
+			return
+		}
+
+		posts = append(posts, postshared.DatabasePostToPost(post, userDB))
 	}
 
 	responses.RespondWithJSON(w, 200, GetPostsResponse{

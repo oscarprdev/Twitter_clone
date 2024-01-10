@@ -10,5 +10,5 @@ type CreatePostPayload struct {
 }
 
 type CreatePostResponse struct {
-	Post postshared.Post `json:"post"`
+	Post  postshared.Post  `json:"post"`
 }

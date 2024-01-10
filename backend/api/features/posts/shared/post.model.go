@@ -12,4 +12,13 @@ type Post struct {
 	UpdatedAt       time.Time `json:"updated_at"`
 	UserId          uuid.UUID `json:"userId"`
 	Post         	string 	  `json:"post"`
+	Owner 			Owner	  `json:"owner"`
+}
+
+type Owner struct {
+	Name string `json:"name"`
+	Surname string `json:"surname"`
+	Username string `json:"username"`
+	ProfileImgUrl string `json:"profileImgUrl"`
+	Email string `json:"email"`
 }
