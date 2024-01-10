@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"time"
 	"twitter_clone/api"
-	likeshared "twitter_clone/api/features/likes/shared"
 	"twitter_clone/api/responses"
 	"twitter_clone/internal/database"
 
@@ -48,7 +47,7 @@ func (api *ApiConfig) ToggleLike(w http.ResponseWriter, r *http.Request) {
 	isUserAlreadyLikes := isUserAlreadyLikedPost(users, userId)
 
 	if isUserAlreadyLikes {
-		like, err := api.DB.DeleteLike(r.Context(), database.DeleteLikeParams{
+		_, err := api.DB.DeleteLike(r.Context(), database.DeleteLikeParams{
 			UserID: userId,
 			PostID: postId,
 		})
@@ -63,12 +62,12 @@ func (api *ApiConfig) ToggleLike(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	
-		responses.RespondWithJSON(w, 203, DeleteLikeResponse{
-			LikeDeleted: likeshared.LikeDatabaseToLike(like),
+		responses.RespondWithJSON(w, 203, ToggleLikeResponse{
+			IsLikeDeleted: true,
 			NumLikes: int(numLikes.LikesCount),
 		})
 	} else {
-		like, err := api.DB.CreateLike(r.Context(), database.CreateLikeParams{
+		_, err := api.DB.CreateLike(r.Context(), database.CreateLikeParams{
 			ID: uuid.New(),
 			CreatedAt: time.Now().UTC(),
 			UpdatedAt: time.Now().UTC(),
@@ -87,8 +86,8 @@ func (api *ApiConfig) ToggleLike(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	
-		responses.RespondWithJSON(w, 201, CreateLikeResponse{
-			Like: likeshared.LikeDatabaseToLike(like),
+		responses.RespondWithJSON(w, 203, ToggleLikeResponse{
+			IsLikeDeleted: false,
 			NumLikes: int(numLikes.LikesCount),
 		})
 	}
