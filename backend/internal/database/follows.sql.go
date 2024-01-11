@@ -113,15 +113,15 @@ const getNoFollowersByUser = `-- name: GetNoFollowersByUser :many
 SELECT users.id, users.created_at, users.updated_at, users.username, users.email, users.name, users.surname, users.password, users.profile_img_url, users.profile_bg_img_url
 FROM users
 WHERE users.id NOT IN (
-    SELECT user_id
+    SELECT follow_to
     FROM followers
-    WHERE follow_to = $1
+    WHERE user_id = $1
 )
 AND users.id <> $1
 `
 
-func (q *Queries) GetNoFollowersByUser(ctx context.Context, followTo uuid.UUID) ([]User, error) {
-	rows, err := q.db.QueryContext(ctx, getNoFollowersByUser, followTo)
+func (q *Queries) GetNoFollowersByUser(ctx context.Context, userID uuid.UUID) ([]User, error) {
+	rows, err := q.db.QueryContext(ctx, getNoFollowersByUser, userID)
 	if err != nil {
 		return nil, err
 	}

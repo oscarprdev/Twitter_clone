@@ -8,9 +8,9 @@ WHERE followers.follow_to = $1;
 SELECT users.*
 FROM users
 WHERE users.id NOT IN (
-    SELECT user_id
+    SELECT follow_to
     FROM followers
-    WHERE follow_to = $1
+    WHERE user_id = $1
 )
 AND users.id <> $1;
 
