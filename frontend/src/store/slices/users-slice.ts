@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { User } from '../../types/user';
+import { User } from '../../features/shared/types/user';
 import { getUserLoggedReducer } from '../reducers/users/get-user-logged/get-user-logged.reducer';
 import { updateUnfollowersReducer } from '../reducers/users/update-unfollowers/unfollowers.reducer';
+import { addFollowersReducer } from '../reducers/users/add-follow/add-follow.reducer';
 
 export interface UsersSliceState {
 	userLogged: User;
@@ -29,9 +30,10 @@ export const UsersSlice = createSlice({
 	reducers: {
 		getUserLogged: getUserLoggedReducer,
 		updateUnfollowers: updateUnfollowersReducer,
+		addFollow: addFollowersReducer,
 	},
 });
 
-export const { getUserLogged, updateUnfollowers } = UsersSlice.actions;
+export const { getUserLogged, updateUnfollowers, addFollow } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

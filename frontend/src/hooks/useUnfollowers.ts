@@ -26,7 +26,7 @@ export const useUnfollowers = () => {
 		};
 
 		getUnfollowers();
-	});
+	}, [userLogged.id, dispatch]);
 
 	return {
 		unfollowers,
