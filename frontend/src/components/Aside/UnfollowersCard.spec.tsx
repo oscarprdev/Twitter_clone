@@ -6,10 +6,12 @@ import { PostSlice } from '../../store/slices/posts-slice';
 import { Provider } from 'react-redux';
 import { getUserLoggedReducer } from '../../store/reducers/users/get-user-logged/get-user-logged.reducer';
 import { UsersSliceState } from '../../store/slices/users-slice';
+import { updateUnfollowersReducer } from '../../store/reducers/users/update-unfollowers/update-unfollowers.reducer';
+import { addFollowersReducer } from '../../store/reducers/users/add-follow/add-follow.reducer';
 
-const initialState: UsersSliceState = {
+export const initialState: UsersSliceState = {
 	userLogged: {
-		id: '10cf35c4-adab-4057-b41b-6f55d0d0af7d',
+		id: 'mocked-id-1',
 		createdAt: '2024-01-10T11:29:27.134295Z',
 		updatedAt: '2024-01-10T11:29:27.134295Z',
 		name: 'Oscar',
@@ -21,28 +23,30 @@ const initialState: UsersSliceState = {
 	},
 	unfollowers: [
 		{
-			id: '1a26b3e6-1e2a-497a-9155-009968e8efc5',
-			createdAt: '2024-01-10T18:35:30.728283Z',
-			updatedAt: '2024-01-10T18:35:30.728283Z',
-			name: 'Zaida',
-			surname: 'Pintado',
-			username: 'zaidapf',
-			email: 'zaidapintado@email.com',
-			profileImgUrl: 'https://pub-43949222ba2448cbbff5d5c5019cd5e6.r2.dev/woman-random.avif',
+			id: 'mocked-id-2',
+			createdAt: '2024-01-10T19:14:04.489431Z',
+			updatedAt: '2024-01-10T19:14:04.489431Z',
+			name: 'Jordi',
+			surname: 'Ripollo',
+			username: 'jordirp',
+			email: 'jordiripoll@email.com',
+			profileImgUrl: '',
 			profileBgImgUrl: '',
 		},
 	],
 };
 
-const MockUsersSlice = createSlice({
+export const MockUsersSlice = createSlice({
 	name: 'users',
 	initialState,
 	reducers: {
 		getUserLogged: getUserLoggedReducer,
+		updateUnfollowers: updateUnfollowersReducer,
+		addFollow: addFollowersReducer,
 	},
 });
 
-const mockStore = configureStore({
+export const mockStore = configureStore({
 	reducer: {
 		posts: PostSlice.reducer,
 		users: MockUsersSlice.reducer,
@@ -62,7 +66,7 @@ describe('UnfollowersCard', () => {
 
 	afterEach(() => component.unmount());
 
-	it('should render successfully', () => {
+	it('should render successfully', async () => {
 		component.getByText('Who to follow');
 		component.getByRole('button', { name: 'Follow' });
 	});

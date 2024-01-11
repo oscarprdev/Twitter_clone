@@ -1,6 +1,8 @@
 import { RenderResult, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, it } from 'vitest';
 import Unfollower from './Unfollower';
+import { Provider } from 'react-redux';
+import { mockStore } from './UnfollowersCard.spec';
 
 const mockFollower = {
 	id: '1a26b3e6-1e2a-497a-9155-009968e8efc5',
@@ -18,7 +20,11 @@ describe('Unfollower', () => {
 	let component: RenderResult;
 
 	beforeEach(() => {
-		component = render(<Unfollower unfollower={mockFollower} />);
+		component = render(
+			<Provider store={mockStore}>
+				<Unfollower unfollower={mockFollower} />
+			</Provider>
+		);
 	});
 
 	afterEach(() => component.unmount());
