@@ -7,6 +7,7 @@ export const getUserLoggedReducer = (state: Draft<UsersSliceState>, action: Payl
 		case GET_USER_LOGGED_TYPES.GET_USER_LOGGED:
 			return {
 				userLogged: action.payload.user,
+				unfollowers: state.unfollowers,
 			};
 		default:
 			return state;
