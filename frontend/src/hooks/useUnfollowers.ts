@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useStoreDispatch } from '../store/hooks/useDispatch';
 import { useStoreSelector } from '../store/hooks/useSelector';
 import { getUnfollowersUsecase } from '../features/followers/graph';
-import { UPDATE_UNFOLLOWERS_TYPES } from '../store/reducers/users/update-unfollowers/update-unfollowers.types';
 import { updateUnfollowers } from '../store/slices/users-slice';
 
 export const useUnfollowers = () => {
@@ -18,7 +17,6 @@ export const useUnfollowers = () => {
 			if (unfollowersResponse.state === 'success') {
 				dispatch(
 					updateUnfollowers({
-						type: UPDATE_UNFOLLOWERS_TYPES.UPDATE_UNFOLLOWERS,
 						unfollowers: unfollowersResponse.unfollowers,
 					})
 				);
@@ -26,7 +24,7 @@ export const useUnfollowers = () => {
 		};
 
 		getUnfollowers();
-	}, [userLogged.id, dispatch]);
+	}, [userLogged.id]);
 
 	return {
 		unfollowers,

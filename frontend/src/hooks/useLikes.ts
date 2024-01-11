@@ -16,7 +16,7 @@ export const useLikes = (postId: string) => {
 		};
 
 		updateLikes();
-	});
+	}, [postId]);
 
 	useEffect(() => {
 		const updateIsLiked = async () => {
@@ -24,7 +24,7 @@ export const useLikes = (postId: string) => {
 		};
 
 		updateIsLiked();
-	}, [likes, postId]);
+	}, [postId]);
 
 	const toggleLikes = async () => {
 		const response = await toggleLikeUsecase.toggleLike({ postId, userId: USER_ID });

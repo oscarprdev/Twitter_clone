@@ -21,7 +21,7 @@ const usePosts = () => {
 		};
 
 		getInitialPosts();
-	}, [dispatch]);
+	}, []);
 
 	return { posts, isLoading };
 };
