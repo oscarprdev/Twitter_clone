@@ -30,6 +30,7 @@ func handleUserRoutes(api *api.ApiConfig, router *chi.Mux) {
 	router.Get("/users/username/{username}", getUserUsecase.GetUserByUsername)
 
 	router.Get("/users/likes/{postId}", getUsersUsecase.GetUsersFromLikes)
+	router.Get("/users/search/{name}", getUsersUsecase.GetUsersByUsernameOrName)
 
 	router.Post("/users/login", loginUserUsecase.LogIn)
 }

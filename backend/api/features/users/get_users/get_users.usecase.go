@@ -1,6 +1,7 @@
 package getusers
 
 import (
+	"database/sql"
 	"fmt"
 	"net/http"
 	"twitter_clone/api"
@@ -44,6 +45,29 @@ func (api *ApiConfig) GetUsersFromLikes(w http.ResponseWriter, r *http.Request) 
 	dbUsers, err := api.DB.GetUsersFromLikes(r.Context(), postId)
 	if err != nil {
 		responses.RespondWithError(w, 400, fmt.Sprintf("Error retrieving users: %v", err))
+		return
+	}
+
+	users := []usershared.User{}
+	for _, user := range dbUsers {
+		users = append(users, usershared.DatabaseUserToUser(user))
+	}
+
+	responses.RespondWithJSON(w, 200, GetUsersResponse{
+		Users: users,
+	})
+}
+
+func (api *ApiConfig) GetUsersByUsernameOrName(w http.ResponseWriter, r *http.Request) {
+	name := chi.URLParam(r, "name")
+	nameValue := sql.NullString{
+		String: name,
+		Valid:  true, 
+	}
+
+	dbUsers, err := api.DB.GetUsersByUsernameOrName(r.Context(), nameValue)
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error retrieving users by name or username: %v", err))
 		return
 	}
 
