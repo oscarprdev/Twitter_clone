@@ -43,7 +43,7 @@ const AddPost = () => {
 		<article className='relative flex items-start gap-4 p-5 w-full h-[150px]'>
 			<UserImage userImage={userLogged.profileImgUrl} />
 			<form
-				className='mt-2'
+				className='mt-2 w-full'
 				onSubmit={handleSubmit}
 				role='form'>
 				<textarea

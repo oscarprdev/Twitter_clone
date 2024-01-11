@@ -1,4 +1,4 @@
-import { Post } from '../../../../types/posts';
+import { Post } from '../../../../features/shared/types/posts';
 
 enum AddPostTypes {
 	addPost = 'ADD_POST',

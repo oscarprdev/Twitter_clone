@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Post } from '../../types/posts';
+import { Post } from '../../features/shared/types/posts';
 import { addPostReducer } from '../reducers/posts/add-post/add-post.reducer';
 import { getPostsReducer } from '../reducers/posts/get-post/get-posts.reducer';
 

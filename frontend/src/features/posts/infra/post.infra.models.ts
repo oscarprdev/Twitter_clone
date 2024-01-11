@@ -1,3 +1,5 @@
+import { DbUser } from '../../shared/types/user';
+
 export interface AddPostPayload {
 	userId: string;
 	post: string;
@@ -34,16 +36,4 @@ export interface PostOwner {
 	username: string;
 	profileImgUrl: string;
 	email: string;
-}
-
-export interface DbUser {
-	id: string;
-	createdAt: string;
-	updatedAt: string;
-	name: string;
-	surname: string;
-	username: string;
-	email: string;
-	profileImgUrl: string;
-	profileBgImgUrl: string;
 }

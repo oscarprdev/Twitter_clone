@@ -1,4 +1,4 @@
-import { User } from '../../../../types/user';
+import { User } from '../../../../features/shared/types/user';
 
 enum UpdateUnfollowersTypes {
 	updateUnfollowers = 'UPDATE_UNFOLLOWERS',

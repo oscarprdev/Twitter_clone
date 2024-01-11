@@ -1,4 +1,4 @@
-import { Post } from '../../../../types/posts';
+import { Post } from '../../../shared/types/posts';
 
 export type GetPostsUsecaseOutput = SuccessGetPostsUsecaseOutput | ErrorGetPostsUsecaseOutput;
 
