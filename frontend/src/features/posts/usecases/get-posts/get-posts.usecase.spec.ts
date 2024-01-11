@@ -9,7 +9,7 @@ class TestGetPostsHttpAdapter implements GetPostsPorts {
 				{
 					id: '1',
 					updatedAt: '',
-					userId: 'mocket-userid',
+					userId: 'mocked-userid',
 					post: 'mocked-post',
 					owner: {
 						username: 'username',
@@ -44,7 +44,7 @@ describe('Get posts usecase', () => {
 			expect(response.posts).toEqual([
 				{
 					id: '1',
-					userId: '1',
+					userId: 'mocked-userid',
 					post: 'mocked-post',
 					updatedAt: '',
 					owner: {

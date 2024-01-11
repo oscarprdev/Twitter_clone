@@ -8,11 +8,13 @@ const mockPost = {
 	userId: 'userid',
 	post: 'post',
 	updatedAt: '2023-12-27T23:13:10.788165Z',
-	name: 'name',
-	surname: 'surname',
-	username: 'username',
-	email: 'email',
-	profileImgUrl: 'img',
+	owner: {
+		name: 'name',
+		surname: 'surname',
+		username: 'username',
+		email: 'email',
+		profileImgUrl: 'img',
+	},
 };
 
 describe('AddPost', () => {
@@ -25,8 +27,8 @@ describe('AddPost', () => {
 	afterEach(() => component.unmount());
 
 	it('should render successfully', () => {
-		component.getByText(mockPost.name);
-		component.getByText(`@${mockPost.username}`);
+		component.getByText(mockPost.owner.name);
+		component.getByText(`@${mockPost.owner.username}`);
 		component.getByText(strDateToTime(mockPost.updatedAt));
 		component.getByText(mockPost.post);
 		component.getByRole('post-header');

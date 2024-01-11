@@ -4,10 +4,12 @@ import PostFeed from './PostsFeed';
 import { configureStore } from '@reduxjs/toolkit';
 import { PostSlice } from '../../store/slices/posts-slice';
 import { Provider } from 'react-redux';
+import { UsersSlice } from '../../store/slices/users-slice';
 
 const mockStore = configureStore({
 	reducer: {
 		posts: PostSlice.reducer,
+		users: UsersSlice.reducer,
 	},
 });
 

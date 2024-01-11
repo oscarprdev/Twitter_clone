@@ -17,7 +17,7 @@ const Nav = () => {
 	};
 
 	return (
-		<nav className='flex flex-col p-5 w-[25vw] items-start py-3 pl-32'>
+		<nav className='flex flex-col p-5 items-start py-3 pl-25'>
 			<span className='block w-12'>
 				<BrandIcon color='white' />
 			</span>
