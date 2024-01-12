@@ -184,3 +184,16 @@ func (q *Queries) GetTotalPostsCount(ctx context.Context) (int64, error) {
 	err := row.Scan(&post_count)
 	return post_count, err
 }
+
+const getTotalPostsCountByUser = `-- name: GetTotalPostsCountByUser :one
+SELECT COUNT(id) AS post_count
+FROM posts 
+WHERE user_id = $1
+`
+
+func (q *Queries) GetTotalPostsCountByUser(ctx context.Context, userID uuid.UUID) (int64, error) {
+	row := q.db.QueryRowContext(ctx, getTotalPostsCountByUser, userID)
+	var post_count int64
+	err := row.Scan(&post_count)
+	return post_count, err
+}

@@ -97,8 +97,15 @@ func (api *ApiConfig) GetPostsByParam(w http.ResponseWriter, r *http.Request) {
 		posts = append(posts, postshared.DatabasePostToPost(post, userDB))
 	}
 
+	postsCount, err := api.DB.GetTotalPostsCountByUser(r.Context(), userId)
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error providing posts count: %v", err))
+		return
+	}
+
 	responses.RespondWithJSON(w, 200, GetPostsResponse{
 		Posts: posts,
+		Posts_Count: int(postsCount),
 	})
 }
 

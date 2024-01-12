@@ -21,6 +21,11 @@ ORDER BY posts.updated_at DESC;
 SELECT * FROM posts WHERE user_id = $1 
 ORDER BY updated_at DESC;
 
+-- name: GetTotalPostsCountByUser :one 
+SELECT COUNT(id) AS post_count
+FROM posts 
+WHERE user_id = $1;
+
 -- name: CreatePost :one 
 INSERT INTO posts (id, created_at, updated_at, user_id, post) 
 VALUES ($1, $2, $3, $4, $5)
