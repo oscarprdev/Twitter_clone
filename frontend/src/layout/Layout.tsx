@@ -4,6 +4,7 @@ import { Route } from 'wouter';
 import Notifications from './Notifications';
 import Profile from './Profile';
 import Home from './Home';
+import UserInfo from './UserInfo';
 
 const Layout = () => {
 	return (
@@ -21,6 +22,7 @@ const Layout = () => {
 				path='/profile'
 				component={Profile}
 			/>
+			<Route path='/user/:id'>{(params) => <UserInfo id={params.id} />}</Route>
 			<Aside />
 		</main>
 	);

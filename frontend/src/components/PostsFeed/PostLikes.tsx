@@ -14,8 +14,8 @@ const PostLikes = ({ postId }: PostLikesProps) => {
 				isLiked ? 'text-[var(--like)] hover:text-[var(--like)]' : 'text-zinc-500 hover:text-[var(--like)]'
 			}`}
 			onClick={toggleLikes}>
-			<span className='w-4'>
-				<LikeIcon />
+			<span className='w-5'>
+				<LikeIcon isLiked={isLiked} />
 			</span>
 			<p>{likes}</p>
 		</div>

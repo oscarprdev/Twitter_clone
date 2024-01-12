@@ -23,3 +23,7 @@
 
 	--like: rgb(232, 36, 127);
 }
+
+.searchIcon::-webkit-search-cancel-button {
+	appearance: none;
+}

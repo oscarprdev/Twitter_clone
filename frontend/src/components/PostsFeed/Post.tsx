@@ -17,7 +17,9 @@ const Post = ({ post }: PostProps) => {
 				<header
 					className='flex items-center gap-2 text-zinc-500'
 					role='post-header'>
-					<p className='text-white font-extrabold'>{post.owner.name}</p>
+					<p className='text-white font-extrabold'>
+						{post.owner.name} {post.owner.surname}
+					</p>
 					<p>@{post.owner.username}</p>
 					<span className='w-[2px] h-[2px] bg-zinc-500 rounded-full' />
 					<p>{strDateToTime(post.updatedAt)}</p>

@@ -24,7 +24,7 @@ export const useLikes = (postId: string) => {
 		};
 
 		updateIsLiked();
-	}, [postId]);
+	}, [likes, postId]);
 
 	const toggleLikes = async () => {
 		const response = await toggleLikeUsecase.toggleLike({ postId, userId: USER_ID });
