@@ -1,4 +1,4 @@
-import AddPost from '../PostsFeed/AddPost';
+import AddPost from '../Home/AddPost';
 
 const AddPostModal = () => {
 	return (

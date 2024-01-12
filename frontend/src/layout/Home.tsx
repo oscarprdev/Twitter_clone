@@ -1,5 +1,5 @@
 import PageWrapper from '../components/PageWrapper';
-import PostFeed from '../components/PostsFeed/PostsFeed';
+import PostFeed from '../components/Home/PostsFeed';
 
 const Home = () => {
 	return (
