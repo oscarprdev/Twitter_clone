@@ -4,7 +4,7 @@ import { User } from '../features/shared/types/user';
 
 export const useFollowings = (id: string) => {
 	const [followingCount, setFollowingCount] = useState(0);
-	const [followings, setFollowings] = useState<User[]>();
+	const [followings, setFollowings] = useState<User[]>([]);
 
 	useEffect(() => {
 		const getFollowing = async () => {

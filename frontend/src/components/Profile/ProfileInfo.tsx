@@ -6,12 +6,19 @@ import CalendarIcon from '../icons/CalendarIcon';
 import FollowersCount from './FollowersCount';
 import ProfileNav from './ProfileNav';
 import { TAB_ACTIVE, tabs } from './utils';
+import ProfilePosts from './ProfilePosts';
+import ProfileFollowers from './ProfileFollowers';
+import { useFollowings } from '../../hooks/useFollowings';
+import { useFollowers } from '../../hooks/useFollowers';
 
 interface ProfileInfoProps {
 	user: User;
 }
 
 const ProfileInfo = ({ user }: ProfileInfoProps) => {
+	const { followers, followersCount } = useFollowers(user.id);
+	const { followings, followingCount } = useFollowings(user.id);
+
 	const { postsCount } = usePostsByUser(user.id);
 	const [navState, setNavState] = useState<TAB_ACTIVE>(tabs.POSTS);
 
@@ -20,7 +27,7 @@ const ProfileInfo = ({ user }: ProfileInfoProps) => {
 	};
 
 	return (
-		<section className='w-full'>
+		<section className='w-full h-fit overflow-scroll'>
 			<header className='pt-5 pl-5 pb-2 flex flex-col justify-start w-full'>
 				<p className='capitalize text-xl font-white font-extrabold'>{`${user.name} ${user.surname}`}</p>
 				<p className='text-zinc-500'>{postsCount} posts</p>
@@ -44,11 +51,27 @@ const ProfileInfo = ({ user }: ProfileInfoProps) => {
 					<p className='text-zinc-500'>Joined {strDateToTime(user.createdAt)} ago</p>
 				</div>
 			</div>
-			<FollowersCount id={user.id} />
+			<FollowersCount
+				followersCount={followersCount}
+				followingCount={followingCount}
+			/>
 			<ProfileNav
 				handleTabActive={handleTabActive}
 				navState={navState}
 			/>
+			{navState === tabs.POSTS && <ProfilePosts id={user.id} />}
+			{navState === tabs.FOLLOWERS && (
+				<ProfileFollowers
+					kind={'followers'}
+					users={followers}
+				/>
+			)}
+			{navState === tabs.FOLLOWINGS && (
+				<ProfileFollowers
+					kind={'following'}
+					users={followings}
+				/>
+			)}
 		</section>
 	);
 };

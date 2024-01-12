@@ -8,7 +8,7 @@ interface ProfileNavProps {
 const ProfileNav = ({ navState, handleTabActive }: ProfileNavProps) => {
 	return (
 		<nav className='w-full p-5'>
-			<ul className='w-full flex items-center justify-between'>
+			<ul className='w-full flex items-center justify-between border-b border-zinc-700'>
 				<li
 					className={`${
 						navState === tabs.POSTS ? 'font-bold border-[var(--contrast)]' : 'font-light border-transparent'
