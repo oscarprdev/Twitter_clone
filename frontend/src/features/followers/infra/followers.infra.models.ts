@@ -18,3 +18,21 @@ export interface AddFollowInfraResponse {
 	user: DbUser;
 	followTo: DbUser;
 }
+
+export interface GetFollowersInfraPayload {
+	userId: string;
+}
+
+export interface GetFollowersInfraResponse {
+	followers: DbUser[];
+	count: number;
+}
+
+export interface GetFollowingInfraPayload {
+	userId: string;
+}
+
+export interface GetFollowingInfraResponse {
+	following: DbUser[];
+	count: number;
+}
