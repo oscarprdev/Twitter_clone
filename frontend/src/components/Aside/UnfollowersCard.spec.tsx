@@ -1,57 +1,8 @@
 import { RenderResult, render } from '@testing-library/react';
 import UnfollowersCard from './UnfollowersCard';
 import { afterEach, beforeEach, describe, it } from 'vitest';
-import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { PostSlice } from '../../store/slices/posts-slice';
 import { Provider } from 'react-redux';
-import { getUserLoggedReducer } from '../../store/reducers/users/get-user-logged/get-user-logged.reducer';
-import { UsersSliceState } from '../../store/slices/users-slice';
-import { updateUnfollowersReducer } from '../../store/reducers/users/update-unfollowers/update-unfollowers.reducer';
-import { addFollowersReducer } from '../../store/reducers/users/add-follow/add-follow.reducer';
-
-export const initialState: UsersSliceState = {
-	userLogged: {
-		id: 'mocked-id-1',
-		createdAt: '2024-01-10T11:29:27.134295Z',
-		updatedAt: '2024-01-10T11:29:27.134295Z',
-		name: 'Oscar',
-		surname: 'Perez',
-		username: 'oscarpr',
-		email: 'oscarperez@email.com',
-		profileImgUrl: 'https://pub-43949222ba2448cbbff5d5c5019cd5e6.r2.dev/personal-image.jpeg',
-		profileBgImgUrl: '',
-	},
-	unfollowers: [
-		{
-			id: 'mocked-id-2',
-			createdAt: '2024-01-10T19:14:04.489431Z',
-			updatedAt: '2024-01-10T19:14:04.489431Z',
-			name: 'Jordi',
-			surname: 'Ripollo',
-			username: 'jordirp',
-			email: 'jordiripoll@email.com',
-			profileImgUrl: '',
-			profileBgImgUrl: '',
-		},
-	],
-};
-
-export const MockUsersSlice = createSlice({
-	name: 'users',
-	initialState,
-	reducers: {
-		getUserLogged: getUserLoggedReducer,
-		updateUnfollowers: updateUnfollowersReducer,
-		addFollow: addFollowersReducer,
-	},
-});
-
-export const mockStore = configureStore({
-	reducer: {
-		posts: PostSlice.reducer,
-		users: MockUsersSlice.reducer,
-	},
-});
+import { mockStore } from '../../tests/utils/store/store.mock';
 
 describe('UnfollowersCard', () => {
 	let component: RenderResult;

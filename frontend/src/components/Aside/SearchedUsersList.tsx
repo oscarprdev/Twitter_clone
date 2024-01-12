@@ -15,6 +15,7 @@ const SearchedUsersList = ({ searchedUsers }: SearchedUsersListProps) => {
 					<div className='mt-2'>
 						{searchedUsers.map((user) => (
 							<Link
+								key={user.id}
 								href={`/user/${user.id}`}
 								className='flex gap-2 hover:bg-zinc-900 p-2 cursor-pointer pl-4'>
 								<UserImage userImage={user.profileImgUrl} />

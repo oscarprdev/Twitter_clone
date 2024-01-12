@@ -7,6 +7,7 @@ interface ClearSearchBtnProps {
 const ClearSearchBtn = ({ handleClearSearch }: ClearSearchBtnProps) => {
 	return (
 		<span
+			data-testid='close-icon-container'
 			onMouseDown={(e) => {
 				e.preventDefault();
 				handleClearSearch();

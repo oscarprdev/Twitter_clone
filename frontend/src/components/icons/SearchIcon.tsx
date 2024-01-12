@@ -8,7 +8,8 @@ const SearchIcon = () => {
 			stroke='currentColor'
 			fill='none'
 			strokeLinecap='round'
-			strokeLinejoin='round'>
+			strokeLinejoin='round'
+			role='search-icon'>
 			<path
 				stroke='none'
 				d='M0 0h24v24H0z'

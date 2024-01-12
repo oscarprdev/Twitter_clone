@@ -1,4 +1,4 @@
-import { SpyInstance, expect, it, vi, describe, beforeEach } from 'vitest';
+import { MockInstance, expect, it, vi, describe, beforeEach } from 'vitest';
 import { GetLikesPorts } from './get-likes.ports';
 import { DefaultGetLikesUsecase, GetLikesUsecase } from './get-likes.usecase';
 
@@ -15,7 +15,7 @@ class TestGetLikesHttpAdapter implements GetLikesPorts {
 
 describe('Get likes usecase', () => {
 	let usecase: GetLikesUsecase;
-	let getLikesSpy: SpyInstance;
+	let getLikesSpy: MockInstance;
 
 	beforeEach(() => {
 		const testHttpAdapter = new TestGetLikesHttpAdapter();

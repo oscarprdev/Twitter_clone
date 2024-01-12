@@ -2,7 +2,8 @@ import { RenderResult, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import AddFollowBtn from './AddFollowBtn';
 import { afterEach, beforeEach, describe, it } from 'vitest';
-import { mockStore } from './UnfollowersCard.spec';
+import { mockStore } from '../../tests/utils/store/store.mock';
+import { userMocked } from '../../tests/utils/user.mock';
 
 describe('AddFollowBtn', () => {
 	let component: RenderResult;
@@ -10,7 +11,7 @@ describe('AddFollowBtn', () => {
 	beforeEach(() => {
 		component = render(
 			<Provider store={mockStore}>
-				<AddFollowBtn id='mocked-id-2' />
+				<AddFollowBtn id={userMocked.id} />
 			</Provider>
 		);
 	});

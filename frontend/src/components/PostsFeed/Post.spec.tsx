@@ -27,7 +27,7 @@ describe('AddPost', () => {
 	afterEach(() => component.unmount());
 
 	it('should render successfully', () => {
-		component.getByText(mockPost.owner.name);
+		component.getByText(`${mockPost.owner.name} ${mockPost.owner.surname}`);
 		component.getByText(`@${mockPost.owner.username}`);
 		component.getByText(strDateToTime(mockPost.updatedAt));
 		component.getByText(mockPost.post);

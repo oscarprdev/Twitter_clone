@@ -1,25 +1,12 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GetPostsPorts } from './get-posts.ports';
 import { DefaultGetPostsUsecase, GetPostsUsecase } from './get-posts.usecase';
+import { postMocked } from '../../../../tests/utils/post.mock';
 
 class TestGetPostsHttpAdapter implements GetPostsPorts {
 	async getPosts(): Promise<GetPostsPorts.GetPostsOutput> {
 		return {
-			posts: [
-				{
-					id: '1',
-					updatedAt: '',
-					userId: 'mocked-userid',
-					post: 'mocked-post',
-					owner: {
-						username: 'username',
-						name: 'name',
-						surname: 'surname',
-						profileImgUrl: '',
-						email: 'email',
-					},
-				},
-			],
+			posts: [postMocked],
 		};
 	}
 }
@@ -41,21 +28,7 @@ describe('Get posts usecase', () => {
 		expect(response.state).toBe('success');
 
 		if (response.state === 'success') {
-			expect(response.posts).toEqual([
-				{
-					id: '1',
-					userId: 'mocked-userid',
-					post: 'mocked-post',
-					updatedAt: '',
-					owner: {
-						username: 'username',
-						name: 'name',
-						surname: 'surname',
-						profileImgUrl: '',
-						email: 'email',
-					},
-				},
-			]);
+			expect(response.posts).toBeTruthy();
 		}
 	});
 

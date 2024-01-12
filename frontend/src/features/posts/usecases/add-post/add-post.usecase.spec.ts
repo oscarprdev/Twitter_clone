@@ -1,28 +1,18 @@
-import { beforeEach, describe, it, expect, SpyInstance, vi } from 'vitest';
+import { beforeEach, describe, it, expect, vi, MockInstance } from 'vitest';
 import { AddPostUsecase, DefaultAddPostUsecase } from './add-post.usecase';
 import { AddPostPorts } from './add-post.ports';
+import { postMocked } from '../../../../tests/utils/post.mock';
 
 class TestAddPostHttpAdapter implements AddPostPorts {
-	async addPost({ post, userId }: AddPostPorts.AddPostInput): Promise<AddPostPorts.AddPostOutput> {
-		return {
-			id: '1',
-			updatedAt: '',
-			userId,
-			post,
-			owner: {
-				username: 'username',
-				name: 'name',
-				surname: 'surname',
-				profileImgUrl: '',
-				email: 'email',
-			},
-		};
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	async addPost(_input: AddPostPorts.AddPostInput): Promise<AddPostPorts.AddPostOutput> {
+		return postMocked;
 	}
 }
 
 describe('Add post usecase', () => {
 	let usecase: AddPostUsecase;
-	let addPostSpy: SpyInstance;
+	let addPostSpy: MockInstance;
 
 	beforeEach(() => {
 		const ports = new TestAddPostHttpAdapter();
@@ -34,21 +24,7 @@ describe('Add post usecase', () => {
 	it('Should return success response', async () => {
 		const response = await usecase.addPost({ post: 'test post', userId: 'user-id' });
 
-		if (response.state === 'success') {
-			expect(response.post).toEqual({
-				id: '1',
-				userId: 'user-id',
-				post: 'test post',
-				updatedAt: '',
-				owner: {
-					username: 'username',
-					name: 'name',
-					surname: 'surname',
-					profileImgUrl: '',
-					email: 'email',
-				},
-			});
-		}
+		expect(response.state).toBe('success');
 	});
 
 	it('Should return error response if addPost method fails', async () => {

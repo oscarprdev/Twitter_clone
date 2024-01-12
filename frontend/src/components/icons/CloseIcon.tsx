@@ -5,7 +5,8 @@ export const CloseIcon = () => (
 		stroke='currentColor'
 		fill='none'
 		strokeLinecap='round'
-		strokeLinejoin='round'>
+		strokeLinejoin='round'
+		role='close-icon'>
 		<path
 			stroke='none'
 			d='M0 0h24v24H0z'
