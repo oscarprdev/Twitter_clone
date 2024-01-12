@@ -4,6 +4,12 @@ FROM users
 JOIN followers ON users.id = followers.user_id
 WHERE followers.follow_to = $1;
 
+-- name: GetFollowingByUser :many 
+SELECT users.*
+FROM users
+JOIN followers ON users.id = followers.follow_to
+WHERE followers.user_id = $1;
+
 -- name: GetNoFollowersByUser :many
 SELECT users.*
 FROM users
