@@ -63,8 +63,12 @@ const SearchContainer = () => {
 					inputFocused ? 'bg-black' : 'bg-zinc-800'
 				} searchIcon py-3 pl-16 rounded-full placeholder:text-zinc-400  w-full outline-[var(--contrast)] outline-1`}
 			/>
-			{inputFocused && inputValue.length > 0 && <ClearSearchBtn handleClearSearch={handleClearSearch} />}
-			{inputFocused && <SearchedUsersList searchedUsers={searchedUsers} />}
+			{inputFocused && inputValue.length > 0 && (
+				<>
+					<ClearSearchBtn handleClearSearch={handleClearSearch} />
+					<SearchedUsersList searchedUsers={searchedUsers} />
+				</>
+			)}
 		</div>
 	);
 };

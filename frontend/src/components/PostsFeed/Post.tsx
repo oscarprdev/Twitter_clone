@@ -13,7 +13,7 @@ const Post = ({ post }: PostProps) => {
 			role='post'
 			className='flex items-start gap-4 w-full min-h-[150px] p-4 border-y-[1px] border-y-zinc-700'>
 			<UserImage userImage={post.owner.profileImgUrl} />
-			<div className='flex flex-col h-full'>
+			<div className='flex flex-col h-full w-[90%]'>
 				<header
 					className='flex items-center gap-2 text-zinc-500'
 					role='post-header'>

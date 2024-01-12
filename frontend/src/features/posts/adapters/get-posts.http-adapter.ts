@@ -15,11 +15,12 @@ export class GetPostsHttpAdapter implements GetPostsPorts {
 		};
 	}
 
-	async getPosts(): Promise<GetPostsPorts.GetPostsOutput> {
-		const dbResponse = await this.httpClient.getPosts();
+	async getPosts({ limit, offset }: GetPostsPorts.GetPostsInput): Promise<GetPostsPorts.GetPostsOutput> {
+		const dbResponse = await this.httpClient.getPosts({ limit, offset });
 
 		return {
 			posts: dbResponse.posts.map((post) => this.mapDbPostToUsecase(post)),
+			postsCount: dbResponse.postsCount,
 		};
 	}
 }

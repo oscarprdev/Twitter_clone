@@ -8,6 +8,7 @@ interface ModalProps {
 
 const ModalWrapper = ({ children }: ModalProps) => {
 	const { closeModal } = useModal();
+
 	return (
 		<div
 			role='modal-wrapper'
@@ -15,7 +16,7 @@ const ModalWrapper = ({ children }: ModalProps) => {
 			<div className='relative p-5 pt-10 mt-[5%] w-fit h-fit min-w-[300px] bg-black rounded-2xl'>
 				<div
 					onClick={closeModal}
-					className='absolute grid place-items-center rounded-full p-2 top-2 left-2 cursor-pointer hover:bg-zinc-900 duration-300'>
+					className='absolute grid place-items-center w-10 h-10 text-white rounded-full p-2 top-2 left-2 cursor-pointer hover:bg-zinc-900 duration-300'>
 					<CloseIcon />
 				</div>
 				{children}

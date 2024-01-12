@@ -4,7 +4,7 @@ import Post from './Post';
 import LoaderIcon from '../icons/LoaderIcon';
 
 const PostFeed = () => {
-	const { posts, isLoading } = usePosts();
+	const { posts, isLoading, getMorePosts, morePostsAvailable } = usePosts();
 
 	return (
 		<>
@@ -14,12 +14,21 @@ const PostFeed = () => {
 					<LoaderIcon />
 				</span>
 			) : (
-				posts.map((post) => (
-					<Post
-						key={post.id}
-						post={post}
-					/>
-				))
+				<div className='flex flex-col overflow-scroll'>
+					{posts.map((post) => (
+						<Post
+							key={post.id}
+							post={post}
+						/>
+					))}
+					{morePostsAvailable && (
+						<button
+							className='py-5 text-[var(--contrast)] hover:bg-zinc-900 duration-300'
+							onClick={getMorePosts}>
+							See more
+						</button>
+					)}
+				</div>
 			)}
 		</>
 	);

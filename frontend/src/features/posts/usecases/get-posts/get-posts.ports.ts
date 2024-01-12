@@ -1,10 +1,16 @@
 export interface GetPostsPorts {
-	getPosts(): Promise<GetPostsPorts.GetPostsOutput>;
+	getPosts(input: GetPostsPorts.GetPostsInput): Promise<GetPostsPorts.GetPostsOutput>;
 }
 
 export namespace GetPostsPorts {
+	export interface GetPostsInput {
+		limit: number;
+		offset: number;
+	}
+
 	export interface GetPostsOutput {
 		posts: PostResponse[];
+		postsCount: number;
 	}
 
 	export interface PostResponse {

@@ -7,6 +7,7 @@ class TestGetPostsHttpAdapter implements GetPostsPorts {
 	async getPosts(): Promise<GetPostsPorts.GetPostsOutput> {
 		return {
 			posts: [postMocked],
+			postsCount: 10,
 		};
 	}
 }
@@ -23,19 +24,20 @@ describe('Get posts usecase', () => {
 	});
 
 	it('Should return success response', async () => {
-		const response = await usecase.getPosts();
+		const response = await usecase.getPosts({ limit: 10, offset: 0 });
 
 		expect(response.state).toBe('success');
 
 		if (response.state === 'success') {
 			expect(response.posts).toBeTruthy();
+			expect(response.postsCount).toBeTruthy();
 		}
 	});
 
 	it('Should return error response if getPosts method fails', async () => {
 		getPostsSpy.mockImplementationOnce(() => Promise.reject({}));
 
-		const response = await usecase.getPosts();
+		const response = await usecase.getPosts({ limit: 10, offset: 0 });
 
 		expect(response.state).toBe('error');
 

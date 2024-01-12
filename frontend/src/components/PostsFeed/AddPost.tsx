@@ -7,6 +7,7 @@ import { USER_ID } from '../../constants/constants';
 import { useStoreSelector } from '../../store/hooks/useSelector';
 import { useStoreDispatch } from '../../store/hooks/useDispatch';
 import UserImage from '../UserImage';
+import { useModal } from '../../hooks/useModal';
 
 interface PostState {
 	content: string;
@@ -16,6 +17,7 @@ const AddPost = () => {
 	const userLogged = useStoreSelector((state) => state.users.userLogged);
 	const [post, setPost] = useState<PostState>({ content: '' });
 	const dispatch = useStoreDispatch();
+	const { closeModal } = useModal();
 
 	const handleTextareaChange = (e: ChangeEvent) => {
 		const target = e.target;
@@ -34,6 +36,9 @@ const AddPost = () => {
 
 		if (response.state === 'success') {
 			dispatch(addPost({ post: response.post, type: ADD_POST_TYPES.ADD_POST }));
+
+			setPost({ content: '' });
+			closeModal();
 		}
 	};
 

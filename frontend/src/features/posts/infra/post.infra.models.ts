@@ -9,8 +9,14 @@ export interface AddPostResponse {
 	post: DbPost;
 }
 
+export interface GetPostsInput {
+	limit: number;
+	offset: number;
+}
+
 export interface GetPostsResponse {
 	posts: DbPost[];
+	postsCount: number;
 }
 
 export interface DbPost {
