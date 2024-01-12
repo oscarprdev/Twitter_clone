@@ -1,6 +1,11 @@
 -- name: GetAllPosts :many
 SELECT * FROM posts 
-ORDER BY updated_at DESC;
+ORDER BY updated_at DESC
+LIMIT $1 OFFSET $2;
+
+-- name: GetTotalPostsCount :one 
+SELECT COUNT(id) AS post_count
+FROM posts;
 
 -- name: GetPostByPostId :one
 SELECT * FROM posts WHERE id = $1;
