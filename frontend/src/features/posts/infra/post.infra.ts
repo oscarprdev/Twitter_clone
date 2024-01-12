@@ -1,7 +1,17 @@
-import { AddPostPayload, AddPostResponse, GetPostsInput, GetPostsResponse, GetUserPayload, GetUserResponse } from './post.infra.models';
+import {
+	AddPostPayload,
+	AddPostResponse,
+	GetPostsByUserInput,
+	GetPostsByUserResponse,
+	GetPostsInput,
+	GetPostsResponse,
+	GetUserPayload,
+	GetUserResponse,
+} from './post.infra.models';
 
 export interface PostInfra {
 	getPosts(input: GetPostsInput): Promise<GetPostsResponse>;
+	getPostsByUser(input: GetPostsByUserInput): Promise<GetPostsByUserResponse>;
 	addPost(payload: AddPostPayload): Promise<AddPostResponse>;
 	getUser(payload: GetUserPayload): Promise<GetUserResponse>;
 }
@@ -18,6 +28,18 @@ export class DefaultPostInfra implements PostInfra {
 			return jsonResponse;
 		} catch (error: unknown) {
 			throw new Error(`Error retrieving all posts: ${error}`);
+		}
+	}
+
+	async getPostsByUser({ userId }: GetPostsByUserInput): Promise<GetPostsByUserResponse> {
+		try {
+			const response = await fetch(`${this.API_URL}/posts/user/${userId}`);
+
+			const jsonResponse = await response.json();
+
+			return jsonResponse;
+		} catch (error: unknown) {
+			throw new Error(`Error retrieving all posts by user: ${error}`);
 		}
 	}
 

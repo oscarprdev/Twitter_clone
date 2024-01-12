@@ -12,8 +12,6 @@ export class DefaultGetPostsUsecase implements GetPostsUsecase {
 		try {
 			const { posts, postsCount } = await this.ports.getPosts({ limit, offset });
 
-			console.log(postsCount);
-
 			return {
 				posts,
 				postsCount,

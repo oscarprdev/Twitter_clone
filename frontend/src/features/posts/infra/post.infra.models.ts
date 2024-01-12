@@ -19,6 +19,15 @@ export interface GetPostsResponse {
 	postsCount: number;
 }
 
+export interface GetPostsByUserInput {
+	userId: string;
+}
+
+export interface GetPostsByUserResponse {
+	posts: DbPost[];
+	postsCount: number;
+}
+
 export interface DbPost {
 	id: string;
 	created_at: string;
