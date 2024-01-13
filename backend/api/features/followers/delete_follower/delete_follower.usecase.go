@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"twitter_clone/api"
+	usershared "twitter_clone/api/features/users/shared"
 	"twitter_clone/api/responses"
 	"twitter_clone/internal/database"
 
@@ -33,7 +34,7 @@ func (api *ApiConfig) DeleteFollower(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	unfollowTo, err := uuid.Parse(params.UnfollowTo)
+	unfollowToId, err := uuid.Parse(params.UnfollowTo)
 
 	if err != nil {
 		responses.RespondWithError(w, 400, fmt.Sprintf("unfollowTo id not uuid valid: %v", err))
@@ -42,7 +43,7 @@ func (api *ApiConfig) DeleteFollower(w http.ResponseWriter, r *http.Request) {
 
 	follower, err := api.DB.DeleteFollower(r.Context(), database.DeleteFollowerParams{
 		UserID: userId,
-		FollowTo: unfollowTo,
+		FollowTo: unfollowToId,
 	})
 
 	if err != nil {
@@ -50,11 +51,20 @@ func (api *ApiConfig) DeleteFollower(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	responses.RespondWithJSON(w, 200, DeleteFollowerResponse{
-		UserId: follower.UserID,
-		UnfollowTo: follower.FollowTo,
-		Message: "User successfully deleted",
-	})
+	userDb, err := api.DB.GetUserById(r.Context(), follower.UserID)
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error retrieving user by userId param: %v", err))
+		return
+	}
 
-	
+	unfollowToDb, err := api.DB.GetUserById(r.Context(), follower.FollowTo)
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error retrieving user by followTo param: %v", err))
+		return
+	}
+
+	responses.RespondWithJSON(w, 200, DeleteFollowerResponse{
+		User: usershared.DatabaseUserToUser(userDb),
+		UnfollowTo: usershared.DatabaseUserToUser(unfollowToDb),
+	})
 }
