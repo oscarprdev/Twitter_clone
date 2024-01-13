@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getLikesUsecase, toggleLikeUsecase } from '../../features/likes/graph';
-import { USER_ID } from '../../features/shared/constants/constants';
+import { USER_ID } from '../../features/shared/domain/constants/constants';
 
 export const useLikes = (postId: string) => {
 	const [likes, setLikes] = useState(0);

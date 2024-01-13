@@ -1,4 +1,4 @@
-import { DbUser } from '../../shared/types/user';
+import { DbUser } from '../../shared/domain/types/user';
 
 export interface AddPostPayload {
 	userId: string;

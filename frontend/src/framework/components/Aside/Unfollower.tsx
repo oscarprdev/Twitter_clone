@@ -1,4 +1,4 @@
-import { User } from '../../../features/shared/types/user';
+import { User } from '../../../features/shared/domain/types/user';
 import UserImage from '../UserImage';
 import AddFollowBtn from './AddFollowBtn';
 

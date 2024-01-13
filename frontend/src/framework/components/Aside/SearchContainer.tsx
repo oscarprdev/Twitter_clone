@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { searchUsersUsecase } from '../../../features/users/graph';
-import { User } from '../../../features/shared/types/user';
+import { User } from '../../../features/shared/domain/types/user';
 import SearchedUsersList from './SearchedUsersList';
 import SearchIcon from '../icons/SearchIcon';
 import ClearSearchBtn from './ClearSearchBtn';

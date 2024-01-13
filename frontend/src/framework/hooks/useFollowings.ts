@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getFollowingUsecase } from '../../features/followers/graph';
-import { User } from '../../features/shared/types/user';
+import { User } from '../../features/shared/domain/types/user';
 
 export const useFollowings = (id: string) => {
 	const [followingCount, setFollowingCount] = useState(0);

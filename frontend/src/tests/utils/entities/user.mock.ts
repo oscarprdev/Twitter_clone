@@ -1,4 +1,4 @@
-import { User } from '../../../features/shared/types/user';
+import { User } from '../../../features/shared/domain/types/user';
 
 export const userMocked: User = {
 	id: 'mocked-id-2',

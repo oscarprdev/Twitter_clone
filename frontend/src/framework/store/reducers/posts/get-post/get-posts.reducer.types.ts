@@ -1,4 +1,4 @@
-import { Post } from '../../../../../features/shared/types/posts';
+import { Post } from '../../../../../features/shared/domain/types/posts';
 
 enum GetPostTypes {
 	getPost = 'GET_POSTS',

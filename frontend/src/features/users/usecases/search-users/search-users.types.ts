@@ -1,4 +1,4 @@
-import { User } from '../../../shared/types/user';
+import { User } from '../../../shared/domain/types/user';
 
 export interface GetUsersBySearchInput {
 	searchValue: string;

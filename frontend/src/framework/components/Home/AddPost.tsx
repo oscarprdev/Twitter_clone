@@ -3,7 +3,7 @@ import { strCapitalize } from '../../utils/strCapitalize';
 import { addPostUsecase } from '../../../features/posts/graph';
 import { addPost } from '../../store/slices/posts-slice';
 import { ADD_POST_TYPES } from '../../store/reducers/posts/add-post/add-post.reducer.types';
-import { USER_ID } from '../../../features/shared/constants/constants';
+import { USER_ID } from '../../../features/shared/domain/constants/constants';
 import { useStoreSelector } from '../../store/hooks/useSelector';
 import { useStoreDispatch } from '../../store/hooks/useDispatch';
 import UserImage from '../UserImage';

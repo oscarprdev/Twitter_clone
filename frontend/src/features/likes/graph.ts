@@ -1,4 +1,4 @@
-import { API_URL } from '../shared/constants/constants';
+import { API_URL } from '../shared/domain/constants/constants';
 import { GetLikesHttpAdapter } from './adapters/get-likes.http-adapter';
 import { ToggleLikeHttpAdapter } from './adapters/toggle-like.http-adapter';
 import { DefaultLikesInfra } from './infra/likes.infra';

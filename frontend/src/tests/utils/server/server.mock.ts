@@ -1,5 +1,5 @@
 import { HttpResponse, http } from 'msw';
-import { API_URL } from '../../../features/shared/constants/constants';
+import { API_URL } from '../../../features/shared/domain/constants/constants';
 import { userMocked } from '../entities/user.mock';
 import { setupServer } from 'msw/node';
 import { postMocked } from '../entities/post.mock';

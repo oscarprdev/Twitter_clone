@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { User } from '../../../features/shared/types/user';
+import { User } from '../../../features/shared/domain/types/user';
 import { usePostsByUser } from '../../hooks/usePostsByUser';
 import { strDateToTime } from '../../utils/strDateToTime';
 import CalendarIcon from '../icons/CalendarIcon';

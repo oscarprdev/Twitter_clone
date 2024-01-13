@@ -1,4 +1,4 @@
-import { User } from '../../../shared/types/user';
+import { User } from '../../../shared/domain/types/user';
 
 export type GetUnfollowersUsecaseOutput = SuccessGetUnfollowersUsecaseOutput | ErrorGetUnfollowersUsecaseOutput;
 

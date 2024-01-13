@@ -1,4 +1,4 @@
-import { DbUser, User } from '../types/user';
+import { DbUser, User } from '../domain/types/user';
 
 export const mapDbUserToApplication = (dbUser: DbUser): User => {
 	return {

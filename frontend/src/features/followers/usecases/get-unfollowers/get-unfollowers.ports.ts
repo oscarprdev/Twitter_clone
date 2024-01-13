@@ -1,4 +1,4 @@
-import { User } from '../../../shared/types/user';
+import { User } from '../../../shared/domain/types/user';
 
 export interface GetUnfollowersPorts {
 	getUnfollowers(input: GetUnfollowersPorts.GetUnfollowersInput): Promise<GetUnfollowersPorts.GetUnfollowersOutput>;

@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { User } from '../../../features/shared/types/user';
+import { User } from '../../../features/shared/domain/types/user';
 import UserImage from '../UserImage';
 
 interface SearchedUsersListProps {

@@ -1,4 +1,4 @@
-import { User } from '../../../shared/types/user';
+import { User } from '../../../shared/domain/types/user';
 
 export interface GetFollowingPorts {
 	getFollowing(input: GetFollowingPortsInput): Promise<GetFollowingPortsOutput>;

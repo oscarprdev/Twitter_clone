@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { User } from '../../../features/shared/types/user';
+import { User } from '../../../features/shared/domain/types/user';
 import { getUserLoggedReducer } from '../reducers/users/get-user-logged/get-user-logged.reducer';
 import { updateUnfollowersReducer } from '../reducers/users/update-unfollowers/update-unfollowers.reducer';
 import { addFollowersReducer } from '../reducers/users/add-follow/add-follow.reducer';

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getPostsByUserUsecase } from '../../features/posts/graph';
-import { Post } from '../../features/shared/types/posts';
+import { Post } from '../../features/shared/domain/types/posts';
 
 export const usePostsByUser = (id: string) => {
 	const [postsByUser, setPostsByUser] = useState<Post[]>([]);

@@ -1,4 +1,4 @@
-import { Post } from '../../../features/shared/types/posts';
+import { Post } from '../../../features/shared/domain/types/posts';
 import { strDateToTime } from '../../utils/strDateToTime';
 import UserImage from '../UserImage';
 import PostLikes from './PostLikes';

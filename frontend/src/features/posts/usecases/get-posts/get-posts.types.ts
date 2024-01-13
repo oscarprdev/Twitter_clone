@@ -1,4 +1,4 @@
-import { Post } from '../../../shared/types/posts';
+import { Post } from '../../../shared/domain/types/posts';
 
 export interface GetPostsInput {
 	limit: number;
