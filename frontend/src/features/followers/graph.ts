@@ -1,4 +1,4 @@
-import { API_URL } from '../../constants/constants';
+import { API_URL } from '../shared/constants/constants';
 import { AddFollowHttpAdapter } from './adapters/add-follow.http-adapter';
 import { GetFollowersHttpAdapter } from './adapters/get-followers.http-adapter';
 import { GetFollowingHttpAdapter } from './adapters/get-following.http-adapter';

@@ -1,4 +1,4 @@
-import { API_URL } from '../../constants/constants';
+import { API_URL } from '../shared/constants/constants';
 import { AddPostHttpAdapter } from './adapters/add-post.http-adapter';
 import { GetPostsByUserHttpAdapter } from './adapters/get-posts-by-user.http-adapter';
 import { GetPostsHttpAdapter } from './adapters/get-posts.http-adapter';

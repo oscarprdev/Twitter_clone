@@ -1,4 +1,4 @@
-import { API_URL } from '../../constants/constants';
+import { API_URL } from '../shared/constants/constants';
 import { SearchUsersHttpAdapter } from './adapters/search-users.http-adapter';
 import { DefaultUsersInfra } from './infra/users.infra';
 import { DefaultSearchUsersUsecase } from './usecases/search-users/search-users.usecase';
