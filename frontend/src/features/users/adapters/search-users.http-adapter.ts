@@ -1,6 +1,6 @@
 import { mapDbUserToApplication } from '../../shared/mappers/map-db-user-to-app';
 import { UsersInfra } from '../infra/users.infra';
-import { SearchUsersPorts } from '../usecases/search-users/search-users.ports';
+import { SearchUsersPorts } from '../application/search-users/search-users.ports';
 
 export class SearchUsersHttpAdapter implements SearchUsersPorts {
 	constructor(private readonly httpClient: UsersInfra) {}

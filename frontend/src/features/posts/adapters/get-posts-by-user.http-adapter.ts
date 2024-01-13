@@ -1,6 +1,6 @@
 import { PostInfra } from '../infra/post.infra';
 import { DbPost } from '../infra/post.infra.models';
-import { GetPostsByUserPorts } from '../usecases/get-posts-by-user/get-posts-by-user.ports';
+import { GetPostsByUserPorts } from '../application/get-posts-by-user/get-posts-by-user.ports';
 
 export class GetPostsByUserHttpAdapter implements GetPostsByUserPorts {
 	constructor(private readonly httpClient: PostInfra) {}

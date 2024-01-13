@@ -1,5 +1,5 @@
 import { LikesInfra } from '../infra/likes.infra';
-import { ToggleLikePorts } from '../usecases/toggle-like/toggle-like.ports';
+import { ToggleLikePorts } from '../application/toggle-like/toggle-like.ports';
 
 export class ToggleLikeHttpAdapter implements ToggleLikePorts {
 	constructor(private readonly httpClient: LikesInfra) {}

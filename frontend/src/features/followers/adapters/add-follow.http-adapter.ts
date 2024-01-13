@@ -1,5 +1,5 @@
 import { FollowersInfra } from '../infra/followers.infra';
-import { AddFollowPorts } from '../usecases/add-follow/add-follow.ports';
+import { AddFollowPorts } from '../application/add-follow/add-follow.ports';
 import { mapDbUserToApplication } from '../../shared/mappers/map-db-user-to-app';
 
 export class AddFollowHttpAdapter implements AddFollowPorts {

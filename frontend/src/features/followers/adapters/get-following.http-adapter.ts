@@ -1,6 +1,6 @@
 import { mapDbUserToApplication } from '../../shared/mappers/map-db-user-to-app';
 import { FollowersInfra } from '../infra/followers.infra';
-import { GetFollowingPorts, GetFollowingPortsInput, GetFollowingPortsOutput } from '../usecases/get-following/get-followers.ports';
+import { GetFollowingPorts, GetFollowingPortsInput, GetFollowingPortsOutput } from '../application/get-following/get-followers.ports';
 
 export class GetFollowingHttpAdapter implements GetFollowingPorts {
 	constructor(private readonly httpClient: FollowersInfra) {}

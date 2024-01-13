@@ -1,5 +1,5 @@
 import { LikesInfra } from '../infra/likes.infra';
-import { GetLikesPorts } from '../usecases/get-likes/get-likes.ports';
+import { GetLikesPorts } from '../application/get-likes/get-likes.ports';
 
 export class GetLikesHttpAdapter implements GetLikesPorts {
 	constructor(private readonly httpClient: LikesInfra) {}

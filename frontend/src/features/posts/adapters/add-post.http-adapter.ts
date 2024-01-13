@@ -1,5 +1,5 @@
 import { PostInfra } from '../infra/post.infra';
-import { AddPostPorts } from '../usecases/add-post/add-post.ports';
+import { AddPostPorts } from '../application/add-post/add-post.ports';
 
 export class AddPostHttpAdapter implements AddPostPorts {
 	constructor(private readonly httpClient: PostInfra) {}
