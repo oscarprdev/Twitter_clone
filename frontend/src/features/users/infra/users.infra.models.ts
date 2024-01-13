@@ -7,3 +7,11 @@ export interface GetUsersBySearchInfraInput {
 export interface GetUsersBySearchInfraResponse {
 	users: DbUser[];
 }
+
+export interface GetUserByIdPayload {
+	userId: string;
+}
+
+export interface GetUserByIdResponse {
+	user: DbUser;
+}

@@ -1,3 +1,4 @@
+import { HttpInfra } from '../../shared/infra/http.infra';
 import {
 	GetLikesInfraInput,
 	GetLikesInfraResponse,
@@ -13,42 +14,26 @@ export interface LikesInfra {
 	toggleLike({ userId, postId }: ToggleLikeInfraInput): Promise<ToggleLikeInfraResponse>;
 }
 
-export class DefaultLikesInfra implements LikesInfra {
-	constructor(private readonly API_URL: string) {}
+export class DefaultLikesInfra extends HttpInfra implements LikesInfra {
+	constructor(private readonly API_URL: string) {
+		super();
+	}
 
 	async getLikes({ postId }: GetLikesInfraInput): Promise<GetLikesInfraResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/likes/post/${postId}`);
+		const url = `${this.API_URL}/likes/post/${postId}`;
 
-			return await response.json();
-		} catch (err) {
-			throw new Error(`Error retrieving likes: ${err}`);
-		}
+		return this.GET<GetLikesInfraResponse>(url);
 	}
 
 	async getUsersLikesFromPost({ postId }: GetUsersLikesFromPostInput): Promise<GetUsersLikesFromPostResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/users/likes/${postId}`);
+		const url = `${this.API_URL}/users/likes/${postId}`;
 
-			return await response.json();
-		} catch (err) {
-			throw new Error(`Error retrieving users likes from post: ${err}`);
-		}
+		return this.GET<GetUsersLikesFromPostResponse>(url);
 	}
 
-	async toggleLike({ userId, postId }: ToggleLikeInfraInput): Promise<ToggleLikeInfraResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/likes`, {
-				method: 'POST',
-				body: JSON.stringify({
-					userId,
-					postId,
-				}),
-			});
+	async toggleLike(payload: ToggleLikeInfraInput): Promise<ToggleLikeInfraResponse> {
+		const url = `${this.API_URL}/likes`;
 
-			return await response.json();
-		} catch (err) {
-			throw new Error(`Error retrieving likes: ${err}`);
-		}
+		return this.POST<ToggleLikeInfraResponse, ToggleLikeInfraInput>(url, payload);
 	}
 }

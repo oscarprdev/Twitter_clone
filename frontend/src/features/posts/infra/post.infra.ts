@@ -1,3 +1,4 @@
+import { HttpInfra } from '../../shared/infra/http.infra';
 import {
 	AddPostPayload,
 	AddPostResponse,
@@ -5,68 +6,34 @@ import {
 	GetPostsByUserResponse,
 	GetPostsInput,
 	GetPostsResponse,
-	GetUserPayload,
-	GetUserResponse,
 } from './post.infra.models';
 
 export interface PostInfra {
 	getPosts(input: GetPostsInput): Promise<GetPostsResponse>;
 	getPostsByUser(input: GetPostsByUserInput): Promise<GetPostsByUserResponse>;
 	addPost(payload: AddPostPayload): Promise<AddPostResponse>;
-	getUser(payload: GetUserPayload): Promise<GetUserResponse>;
 }
 
-export class DefaultPostInfra implements PostInfra {
-	constructor(private readonly API_URL: string) {}
+export class DefaultPostInfra extends HttpInfra implements PostInfra {
+	constructor(private readonly API_URL: string) {
+		super();
+	}
 
 	async getPosts({ limit, offset }: GetPostsInput): Promise<GetPostsResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/posts?limit=${limit}&offset=${offset}`);
+		const url = `${this.API_URL}/posts?limit=${limit}&offset=${offset}`;
 
-			const jsonResponse = await response.json();
-
-			return jsonResponse;
-		} catch (error: unknown) {
-			throw new Error(`Error retrieving all posts: ${error}`);
-		}
+		return await this.GET<GetPostsResponse>(url);
 	}
 
 	async getPostsByUser({ userId }: GetPostsByUserInput): Promise<GetPostsByUserResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/posts/user/${userId}`);
+		const url = `${this.API_URL}/posts/user/${userId}`;
 
-			const jsonResponse = await response.json();
-
-			return jsonResponse;
-		} catch (error: unknown) {
-			throw new Error(`Error retrieving all posts by user: ${error}`);
-		}
+		return await this.GET<GetPostsByUserResponse>(url);
 	}
 
 	async addPost(payload: AddPostPayload): Promise<AddPostResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/posts`, {
-				method: 'POST',
-				body: JSON.stringify(payload),
-			});
+		const url = `${this.API_URL}/posts`;
 
-			const jsonResponse = await response.json();
-
-			return jsonResponse;
-		} catch (error: unknown) {
-			throw new Error(`Error creating a post: ${error}`);
-		}
-	}
-
-	async getUser({ userId }: GetUserPayload): Promise<GetUserResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/users/${userId}`);
-
-			const jsonResponse = await response.json();
-
-			return jsonResponse;
-		} catch (error: unknown) {
-			throw new Error(`Error retrieving an user: ${error}`);
-		}
+		return await this.POST<AddPostResponse, AddPostPayload>(url, payload);
 	}
 }

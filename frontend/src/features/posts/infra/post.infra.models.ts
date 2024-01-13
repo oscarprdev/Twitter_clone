@@ -1,5 +1,3 @@
-import { DbUser } from '../../shared/domain/types/user';
-
 export interface AddPostPayload {
 	userId: string;
 	post: string;
@@ -35,14 +33,6 @@ export interface DbPost {
 	userId: string;
 	post: string;
 	owner: PostOwner;
-}
-
-export interface GetUserPayload {
-	userId: string;
-}
-
-export interface GetUserResponse {
-	user: DbUser;
 }
 
 export interface PostOwner {

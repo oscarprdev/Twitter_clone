@@ -1,3 +1,4 @@
+import { HttpInfra } from '../../shared/infra/http.infra';
 import {
 	AddFollowInfraPayload,
 	AddFollowInfraResponse,
@@ -16,60 +17,32 @@ export interface FollowersInfra {
 	addFollow(input: AddFollowInfraPayload): Promise<AddFollowInfraResponse>;
 }
 
-export class DefaultFollowersInfra {
-	constructor(private readonly API_URL: string) {}
+export class DefaultFollowersInfra extends HttpInfra implements FollowersInfra {
+	constructor(private readonly API_URL: string) {
+		super();
+	}
 
 	async getFollowers({ userId }: GetFollowersInfraPayload): Promise<GetFollowersInfraResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/followers/${userId}`);
+		const url = `${this.API_URL}/followers/${userId}`;
 
-			const jsonResponse = await response.json();
-
-			return jsonResponse;
-		} catch (error: unknown) {
-			throw new Error(`Error retrieving all followers: ${error}`);
-		}
+		return this.GET<GetFollowersInfraResponse>(url);
 	}
 
 	async getFollowing({ userId }: GetFollowingInfraPayload): Promise<GetFollowingInfraResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/followings/${userId}`);
+		const url = `${this.API_URL}/followings/${userId}`;
 
-			const jsonResponse = await response.json();
-
-			return jsonResponse;
-		} catch (error: unknown) {
-			throw new Error(`Error retrieving all following users: ${error}`);
-		}
+		return this.GET<GetFollowingInfraResponse>(url);
 	}
 
 	async getUnfollowers({ userId }: GetUnfollowersInfraPayload): Promise<GetUnfollowersInfraResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/unfollowers/${userId}`);
+		const url = `${this.API_URL}/unfollowers/${userId}`;
 
-			const jsonResponse = await response.json();
-
-			return jsonResponse;
-		} catch (error: unknown) {
-			throw new Error(`Error retrieving all unfollowers: ${error}`);
-		}
+		return this.GET<GetUnfollowersInfraResponse>(url);
 	}
 
-	async addFollow({ userId, followTo }: AddFollowInfraPayload): Promise<AddFollowInfraResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/follower`, {
-				method: 'POST',
-				body: JSON.stringify({
-					userId,
-					followTo,
-				}),
-			});
+	async addFollow(payload: AddFollowInfraPayload): Promise<AddFollowInfraResponse> {
+		const url = `${this.API_URL}/follower`;
 
-			const jsonResponse = await response.json();
-
-			return jsonResponse;
-		} catch (error: unknown) {
-			throw new Error(`Error adding a follower: ${error}`);
-		}
+		return await this.POST<AddFollowInfraResponse, AddFollowInfraPayload>(url, payload);
 	}
 }

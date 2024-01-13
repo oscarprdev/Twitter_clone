@@ -1,21 +1,25 @@
-import { GetUsersBySearchInfraInput, GetUsersBySearchInfraResponse } from './users.infra.models';
+import { HttpInfra } from '../../shared/infra/http.infra';
+import { GetUserByIdPayload, GetUserByIdResponse, GetUsersBySearchInfraInput, GetUsersBySearchInfraResponse } from './users.infra.models';
 
 export interface UsersInfra {
 	getUsersBySearch(input: GetUsersBySearchInfraInput): Promise<GetUsersBySearchInfraResponse>;
+	getUserById({ userId }: GetUserByIdPayload): Promise<GetUserByIdResponse>;
 }
 
-export class DefaultUsersInfra implements UsersInfra {
-	constructor(private readonly API_URL: string) {}
+export class DefaultUsersInfra extends HttpInfra implements UsersInfra {
+	constructor(private readonly API_URL: string) {
+		super();
+	}
 
 	async getUsersBySearch({ searchValue }: GetUsersBySearchInfraInput): Promise<GetUsersBySearchInfraResponse> {
-		try {
-			const response = await fetch(`${this.API_URL}/users/search/${searchValue}`);
+		const url = `${this.API_URL}/users/search/${searchValue}`;
 
-			const jsonResponse = await response.json();
+		return await this.GET<GetUsersBySearchInfraResponse>(url);
+	}
 
-			return jsonResponse;
-		} catch (error) {
-			throw new Error(`Error searching users: ${error}`);
-		}
+	async getUserById({ userId }: GetUserByIdPayload): Promise<GetUserByIdResponse> {
+		const url = `${this.API_URL}/users/${userId}`;
+
+		return await this.GET<GetUserByIdResponse>(url);
 	}
 }
