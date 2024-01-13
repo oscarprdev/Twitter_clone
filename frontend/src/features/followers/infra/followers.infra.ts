@@ -8,6 +8,8 @@ import {
 	GetFollowingInfraResponse,
 	GetUnfollowersInfraPayload,
 	GetUnfollowersInfraResponse,
+	RemoveFollowInfraPayload,
+	RemoveFollowInfraResponse,
 } from './followers.infra.models';
 
 export interface FollowersInfra {
@@ -15,6 +17,7 @@ export interface FollowersInfra {
 	getFollowing(input: GetFollowingInfraPayload): Promise<GetFollowingInfraResponse>;
 	getUnfollowers(input: GetUnfollowersInfraPayload): Promise<GetUnfollowersInfraResponse>;
 	addFollow(input: AddFollowInfraPayload): Promise<AddFollowInfraResponse>;
+	removeFollow(payload: RemoveFollowInfraPayload): Promise<RemoveFollowInfraResponse>;
 }
 
 export class DefaultFollowersInfra extends HttpInfra implements FollowersInfra {
@@ -44,5 +47,11 @@ export class DefaultFollowersInfra extends HttpInfra implements FollowersInfra {
 		const url = `${this.API_URL}/follower`;
 
 		return await this.POST<AddFollowInfraResponse, AddFollowInfraPayload>(url, payload);
+	}
+
+	async removeFollow(payload: RemoveFollowInfraPayload): Promise<RemoveFollowInfraResponse> {
+		const url = `${this.API_URL}/follower`;
+
+		return await this.DELETE<RemoveFollowInfraResponse, RemoveFollowInfraPayload>(url, payload);
 	}
 }

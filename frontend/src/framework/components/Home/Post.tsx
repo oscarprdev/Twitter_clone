@@ -9,7 +9,7 @@ interface PostProps {
 
 const Post = ({ post }: PostProps) => {
 	return (
-		<article
+		<li
 			role='post'
 			className='flex items-start gap-4 w-full min-h-[150px] p-4 border-y-[1px] border-y-zinc-700'>
 			<UserImage userImage={post.owner.profileImgUrl} />
@@ -29,7 +29,7 @@ const Post = ({ post }: PostProps) => {
 					<PostLikes postId={post.id} />
 				</footer>
 			</div>
-		</article>
+		</li>
 	);
 };
 

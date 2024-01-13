@@ -14,7 +14,7 @@ const PostFeed = () => {
 					<LoaderIcon />
 				</span>
 			) : (
-				<div className='flex flex-col overflow-scroll'>
+				<ul className='flex flex-col overflow-y-scroll'>
 					{posts.map((post) => (
 						<Post
 							key={post.id}
@@ -28,7 +28,7 @@ const PostFeed = () => {
 							See more
 						</button>
 					)}
-				</div>
+				</ul>
 			)}
 		</>
 	);

@@ -36,3 +36,13 @@ export interface GetFollowingInfraResponse {
 	following: DbUser[];
 	count: number;
 }
+
+export interface RemoveFollowInfraPayload {
+	userId: string;
+	unfollowTo: string;
+}
+
+export interface RemoveFollowInfraResponse {
+	user: DbUser;
+	unfollowTo: DbUser;
+}

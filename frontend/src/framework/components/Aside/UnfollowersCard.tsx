@@ -15,7 +15,7 @@ const UnfollowersCard = () => {
 					/>
 				))
 			) : (
-				<p>No unfollowers</p>
+				<p className='w-full grid place-items-center'>No more users</p>
 			)}
 		</section>
 	);

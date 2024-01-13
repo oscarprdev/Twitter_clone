@@ -1,34 +1,32 @@
-import UserImage from '../UserImage';
 import { User } from '../../../features/shared/domain/types/user';
+import AddFollowBtn from '../Aside/AddFollowBtn';
+import ProfileFollower from './ProfileFollower';
+import RemoveFollowBtn from './RemoveFollowBtn';
 
 interface ProfileFollowersProps {
 	users: User[];
+	followings: User[];
 	kind: 'followers' | 'following';
 }
 
-const ProfileFollowers = ({ users, kind }: ProfileFollowersProps) => {
+const ProfileFollowers = ({ users, kind, followings }: ProfileFollowersProps) => {
 	return (
-		<section className='w-full h-fit flex flex-col items-center mt-[-1.3rem]'>
+		<ul className='w-full h-fit flex flex-col items-center mt-[-1.3rem]'>
 			{users.length > 0 ? (
 				users.map((user) => (
-					<div
-						aria-roledescription='follower-item'
-						className='flex gap-2 w-full p-8 hover:bg-zinc-900'>
-						<UserImage userImage={user.profileImgUrl} />
-						<div
-							aria-roledescription='follower-personal-info'
-							className='flex flex-col'>
-							<p className='font-extrabold text-md'>
-								{user.name} {user.surname}
-							</p>
-							<p className='text-zinc-400 text-md'>@{user.username}</p>
-						</div>
-					</div>
+					<ProfileFollower
+						key={user.id}
+						name={user.name}
+						surname={user.surname}
+						username={user.username}
+						profileImgUrl={user.profileImgUrl}>
+						{followings?.some((following) => following.id === user.id) ? <RemoveFollowBtn id={user.id} /> : <AddFollowBtn id={user.id} />}
+					</ProfileFollower>
 				))
 			) : (
 				<p className='mt-10 font-light text-zinc-200'>0 {kind}</p>
 			)}
-		</section>
+		</ul>
 	);
 };
 

@@ -14,7 +14,7 @@ const ProfileContainer = ({ user }: ProfileContainerProps) => {
 	const { followings, followingCount } = useFollowings(user.id);
 
 	return (
-		<section className='w-full h-fit overflow-y-scroll'>
+		<section className='w-full h-full overflow-y-scroll'>
 			<ProfileHeader
 				name={user.name}
 				surname={user.surname}

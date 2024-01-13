@@ -8,6 +8,8 @@ import { DefaultAddFollowUsecase } from './application/add-follow/add-follow.use
 import { DefaultGetFollowersUsecase } from './application/get-followers/get-followers.usecase';
 import { DefaultGetFollowingUsecase } from './application/get-following/get-following.usecase';
 import { DefaultGetUnfollowersUsecase } from './application/get-unfollowers/get-unfollowers.usecase';
+import { RemoveFollowHttpAdapter } from './adapters/remove-follow.http-adapter';
+import { DefaultRemoveFollowUsecase } from './application/remove-follow/remove-follow.usecase';
 
 const followersInfra = new DefaultFollowersInfra(API_URL);
 
@@ -22,3 +24,6 @@ export const getUnfollowersUsecase = new DefaultGetUnfollowersUsecase(getUnfollo
 
 const addFollowHttpAdapter = new AddFollowHttpAdapter(followersInfra);
 export const addFollowUsecase = new DefaultAddFollowUsecase(addFollowHttpAdapter);
+
+const removeFollowHttpAdapter = new RemoveFollowHttpAdapter(followersInfra);
+export const removeFollowUsecase = new DefaultRemoveFollowUsecase(removeFollowHttpAdapter);

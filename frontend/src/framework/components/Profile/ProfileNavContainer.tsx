@@ -29,12 +29,14 @@ const ProfileNavContainer = ({ id, followers, followings }: ProfileNavContainerP
 				<ProfileFollowers
 					kind={'followers'}
 					users={followers}
+					followings={followings}
 				/>
 			)}
 			{navState === tabs.FOLLOWINGS && (
 				<ProfileFollowers
 					kind={'following'}
 					users={followings}
+					followings={followings}
 				/>
 			)}
 		</>

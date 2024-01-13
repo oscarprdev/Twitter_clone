@@ -4,7 +4,7 @@ import { UpdateUnfollowersPayload } from './update-unfollowers.types';
 
 export const updateUnfollowersReducer = (state: Draft<UsersSliceState>, action: PayloadAction<UpdateUnfollowersPayload>) => {
 	return {
-		userLogged: state.userLogged,
+		...state,
 		unfollowers: action.payload.unfollowers,
 	};
 };

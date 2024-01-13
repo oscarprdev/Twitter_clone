@@ -4,7 +4,8 @@ import { AddfollowersPayload } from './add-follow.types';
 
 export const addFollowersReducer = (state: Draft<UsersSliceState>, action: PayloadAction<AddfollowersPayload>) => {
 	return {
-		userLogged: state.userLogged,
+		...state,
 		unfollowers: state.unfollowers.filter((unfollower) => unfollower.id !== action.payload.follower.id),
+		followers: state.followers.concat(action.payload.follower),
 	};
 };

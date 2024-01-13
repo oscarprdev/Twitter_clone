@@ -10,7 +10,7 @@ const AddFollowBtn = ({ id }: AddFollowBtnProps) => {
 	return (
 		<button
 			onClick={handleAddFollowClick}
-			className='px-5 font-bold bg-white hover:bg-slate-200 duration-200 text-black rounded-full'>
+			className='ml-auto px-5 font-bold bg-white hover:bg-slate-200 duration-200 text-black rounded-full'>
 			<p>Follow</p>
 		</button>
 	);

@@ -3,10 +3,12 @@ import { User } from '../../../features/shared/domain/types/user';
 import { getUserLoggedReducer } from '../reducers/users/get-user-logged/get-user-logged.reducer';
 import { updateUnfollowersReducer } from '../reducers/users/update-unfollowers/update-unfollowers.reducer';
 import { addFollowersReducer } from '../reducers/users/add-follow/add-follow.reducer';
+import { removeFollowersReducer } from '../reducers/users/remove-follow/remove-follow.reducer';
 
 export interface UsersSliceState {
 	userLogged: User;
 	unfollowers: User[];
+	followers: User[];
 }
 
 const initialState: UsersSliceState = {
@@ -22,6 +24,7 @@ const initialState: UsersSliceState = {
 		profileBgImgUrl: '',
 	},
 	unfollowers: [],
+	followers: [],
 };
 
 export const UsersSlice = createSlice({
@@ -31,9 +34,10 @@ export const UsersSlice = createSlice({
 		getUserLogged: getUserLoggedReducer,
 		updateUnfollowers: updateUnfollowersReducer,
 		addFollow: addFollowersReducer,
+		removeFollow: removeFollowersReducer,
 	},
 });
 
-export const { getUserLogged, updateUnfollowers, addFollow } = UsersSlice.actions;
+export const { getUserLogged, updateUnfollowers, addFollow, removeFollow } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

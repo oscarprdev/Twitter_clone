@@ -4,7 +4,7 @@ import { GetUserLoggedPayload } from './get-user-logged.types';
 
 export const getUserLoggedReducer = (state: Draft<UsersSliceState>, action: PayloadAction<GetUserLoggedPayload>) => {
 	return {
+		...state,
 		userLogged: action.payload.user,
-		unfollowers: state.unfollowers,
 	};
 };
