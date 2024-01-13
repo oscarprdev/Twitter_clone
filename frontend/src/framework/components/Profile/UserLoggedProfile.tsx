@@ -1,12 +1,12 @@
 import { useStoreSelector } from '../../store/hooks/useSelector';
-import ProfileInfo from './ProfileInfo';
+import ProfileContainer from './ProfileContainer';
 
 const UserLoggedProfile = () => {
 	const userLogged = useStoreSelector((state) => state.users.userLogged);
 
 	return (
 		<>
-			<ProfileInfo user={userLogged} />
+			<ProfileContainer user={userLogged} />
 		</>
 	);
 };
