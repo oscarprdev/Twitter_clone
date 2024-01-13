@@ -1,5 +1,4 @@
-import { User } from '../types/user';
-import { DbUser } from '../../followers/infra/followers.infra.models';
+import { DbUser, User } from '../types/user';
 
 export const mapDbUserToApplication = (dbUser: DbUser): User => {
 	return {

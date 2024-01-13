@@ -3,7 +3,7 @@ import { PostSlice } from '../../../framework/store/slices/posts-slice';
 import { getUserLoggedReducer } from '../../../framework/store/reducers/users/get-user-logged/get-user-logged.reducer';
 import { updateUnfollowersReducer } from '../../../framework/store/reducers/users/update-unfollowers/update-unfollowers.reducer';
 import { addFollowersReducer } from '../../../framework/store/reducers/users/add-follow/add-follow.reducer';
-import { userLoggedMocked, userMocked } from '../user.mock';
+import { userLoggedMocked, userMocked } from '../entities/user.mock';
 import { UsersSliceState } from '../../../framework/store/slices/users-slice';
 
 export const initialState: UsersSliceState = {

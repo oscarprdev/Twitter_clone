@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import AddFollowBtn from './AddFollowBtn';
 import { afterEach, beforeEach, describe, it } from 'vitest';
 import { mockStore } from '../../../tests/utils/store/store.mock';
-import { userMocked } from '../../../tests/utils/user.mock';
+import { userMocked } from '../../../tests/utils/entities/user.mock';
 
 describe('AddFollowBtn', () => {
 	let component: RenderResult;

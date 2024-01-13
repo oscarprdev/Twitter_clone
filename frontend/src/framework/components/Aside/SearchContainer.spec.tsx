@@ -4,7 +4,7 @@ import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from 'vitest
 import SearchContainer from './SearchContainer';
 import { mockSearchUser, serverMocked } from '../../../tests/utils/server/server.mock';
 import { mockStore } from '../../../tests/utils/store/store.mock';
-import { userMocked } from '../../../tests/utils/user.mock';
+import { userMocked } from '../../../tests/utils/entities/user.mock';
 
 describe('SearchContainer', () => {
 	let component: RenderResult;

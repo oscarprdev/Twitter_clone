@@ -1,7 +1,7 @@
 import { beforeEach, describe, it, expect, vi, MockInstance } from 'vitest';
 import { AddPostUsecase, DefaultAddPostUsecase } from './add-post.usecase';
 import { AddPostPorts } from './add-post.ports';
-import { postMocked } from '../../../../tests/utils/post.mock';
+import { postMocked } from '../../../../tests/utils/entities/post.mock';
 
 class TestAddPostHttpAdapter implements AddPostPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -2,7 +2,7 @@ import { RenderResult, fireEvent, render, waitFor } from '@testing-library/react
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import PostLikes from './PostLikes';
 import { mockHandlers, serverMocked } from '../../../tests/utils/server/server.mock';
-import { postMocked } from '../../../tests/utils/post.mock';
+import { postMocked } from '../../../tests/utils/entities/post.mock';
 
 describe('AddPost', () => {
 	let component: RenderResult;

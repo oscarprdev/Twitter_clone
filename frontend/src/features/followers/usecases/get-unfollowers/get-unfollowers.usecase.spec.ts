@@ -1,7 +1,7 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GetUnfollowersPorts } from './get-unfollowers.ports';
 import { DefaultGetUnfollowersUsecase, GetUnfollowersUsecase } from './get-unfollowers.usecase';
-import { userMocked } from '../../../../tests/utils/user.mock';
+import { userMocked } from '../../../../tests/utils/entities/user.mock';
 
 class MockSearchUsersHttpAdapter implements GetUnfollowersPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

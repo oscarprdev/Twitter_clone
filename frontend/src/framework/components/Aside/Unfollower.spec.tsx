@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, it } from 'vitest';
 import Unfollower from './Unfollower';
 import { Provider } from 'react-redux';
 import { mockStore } from '../../../tests/utils/store/store.mock';
-import { userMocked } from '../../../tests/utils/user.mock';
+import { userMocked } from '../../../tests/utils/entities/user.mock';
 
 describe('Unfollower', () => {
 	let component: RenderResult;
