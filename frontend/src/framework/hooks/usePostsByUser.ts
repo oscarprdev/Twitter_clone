@@ -10,8 +10,6 @@ export const usePostsByUser = (id: string) => {
 		const getPostsByUser = async () => {
 			const postsByUserResponse = await getPostsByUserUsecase.getPostsByUser({ userId: id });
 
-			console.log(postsByUserResponse);
-
 			if (postsByUserResponse.state === 'success') {
 				setPostsByUser(postsByUserResponse.posts);
 				setPostsCount(postsByUserResponse.postsCount);
