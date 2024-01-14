@@ -37,6 +37,8 @@ const AddPost = () => {
 		if (response.state === 'success') {
 			dispatch(addPost({ post: response.post, type: ADD_POST_TYPES.ADD_POST }));
 
+			console.log(response.post);
+
 			setPost({ content: '' });
 			closeModal();
 		}

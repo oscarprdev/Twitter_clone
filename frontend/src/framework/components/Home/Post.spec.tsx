@@ -2,35 +2,22 @@ import { RenderResult, render } from '@testing-library/react';
 import Post from './Post';
 import { afterEach, beforeEach, describe, it } from 'vitest';
 import { strDateToTime } from '../../utils/strDateToTime';
+import { postResponse } from '../../../tests/unit/responses/posts.response';
 
-const mockPost = {
-	id: 'id',
-	userId: 'userid',
-	post: 'post',
-	updatedAt: '2023-12-27T23:13:10.788165Z',
-	owner: {
-		name: 'name',
-		surname: 'surname',
-		username: 'username',
-		email: 'email',
-		profileImgUrl: 'img',
-	},
-};
-
-describe('AddPost', () => {
+describe('Post', () => {
 	let component: RenderResult;
 
 	beforeEach(() => {
-		component = render(<Post post={mockPost} />);
+		component = render(<Post post={postResponse} />);
 	});
 
 	afterEach(() => component.unmount());
 
 	it('should render successfully', () => {
-		component.getByText(`${mockPost.owner.name} ${mockPost.owner.surname}`);
-		component.getByText(`@${mockPost.owner.username}`);
-		component.getByText(strDateToTime(mockPost.updatedAt));
-		component.getByText(mockPost.post);
+		component.getByText(`${postResponse.owner.name} ${postResponse.owner.surname}`);
+		component.getByText(`@${postResponse.owner.username}`);
+		component.getByText(strDateToTime(postResponse.updatedAt));
+		component.getByText(postResponse.post);
 		component.getByRole('post-header');
 		component.getByRole('post-footer');
 		component.getByRole('post');

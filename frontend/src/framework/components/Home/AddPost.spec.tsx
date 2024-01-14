@@ -1,20 +1,16 @@
-import { describe, it, beforeEach, afterEach, expect } from 'vitest';
-import { fireEvent, render, RenderResult } from '@testing-library/react';
+import { describe, it, beforeEach, afterEach, expect, beforeAll, afterAll } from 'vitest';
+import { fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
 import AddPost from './AddPost';
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import { PostSlice } from '../../store/slices/posts-slice';
-import { UsersSlice } from '../../store/slices/users-slice';
-
-const mockStore = configureStore({
-	reducer: {
-		posts: PostSlice.reducer,
-		users: UsersSlice.reducer,
-	},
-});
+import { mockStore } from '../../../tests/unit/store/store.mock';
+import { server } from '../../../tests/unit/server/server.mock';
+import { testAddPostHandler, testGetPostsHandler } from '../../../tests/unit/handlers/posts.handlers';
 
 describe('AddPost', () => {
 	let component: RenderResult;
+
+	beforeAll(() => server.listen());
+	afterAll(() => server.close());
 
 	beforeEach(() => {
 		component = render(
@@ -24,7 +20,10 @@ describe('AddPost', () => {
 		);
 	});
 
-	afterEach(() => component.unmount());
+	afterEach(() => {
+		server.resetHandlers();
+		component.unmount();
+	});
 
 	it('should render successfully', () => {
 		component.getByRole('textarea');
@@ -44,12 +43,36 @@ describe('AddPost', () => {
 		}
 	});
 
-	it('Should update button styles when textarea value length is greater than 0', () => {
+	it('Should update button disabled status when textarea value length is greater than 0', () => {
 		const textarea = component.getByRole('textarea');
+		const button = component.getByRole('button', { name: 'Post' });
+
+		expect(button.getAttribute('disabled')).toBe('');
 
 		fireEvent.change(textarea, { target: { value: 'test content' } });
 
+		expect(button.getAttribute('disabled')).not.toBe('');
+	});
+
+	it('Should add a post when user clicks on Post button', async () => {
+		server.use(testGetPostsHandler);
+		server.use(testAddPostHandler);
+
+		const textarea = component.getByRole('textarea');
 		const button = component.getByRole('button', { name: 'Post' });
-		expect(button.className).toContain('opacity-none');
+
+		fireEvent.change(textarea, { target: { value: 'test content' } });
+		fireEvent.click(button);
+
+		await waitFor(() => {
+			const { posts } = mockStore.getState();
+
+			expect(posts.isLoading).toBeTruthy();
+		});
+
+		const { posts } = mockStore.getState();
+
+		expect(posts.isLoading).toBeFalsy();
+		expect(posts.posts).toHaveLength(1);
 	});
 });

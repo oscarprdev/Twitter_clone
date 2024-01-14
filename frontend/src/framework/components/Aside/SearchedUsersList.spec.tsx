@@ -1,18 +1,18 @@
 import { RenderResult, render } from '@testing-library/react';
 import { describe, it } from 'vitest';
 import SearchedUsersList from './SearchedUsersList';
-import { userMocked } from '../../../tests/utils/entities/user.mock';
+import { userTestResponse } from '../../../tests/unit/responses/users.response';
 
 describe('SearchedUsersList', () => {
 	let component: RenderResult;
 
 	it('should render users if there are users searched ', () => {
-		component = render(<SearchedUsersList searchedUsers={[userMocked]} />);
+		component = render(<SearchedUsersList searchedUsers={[userTestResponse]} />);
 
 		component.getByText('Users:');
 		component.getByAltText('Profile image');
-		component.getByText(`${userMocked.name} ${userMocked.surname}`);
-		component.getByText(`@${userMocked.username}`);
+		component.getByText(`${userTestResponse.name} ${userTestResponse.surname}`);
+		component.getByText(`@${userTestResponse.username}`);
 
 		component.unmount();
 	});

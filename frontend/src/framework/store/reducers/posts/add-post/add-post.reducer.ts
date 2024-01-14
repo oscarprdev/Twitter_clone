@@ -7,7 +7,7 @@ export const addPostReducer = (state: Draft<PostSliceState>, action: PayloadActi
 		case ADD_POST_TYPES.ADD_POST:
 			return {
 				isLoading: false,
-				posts: [action.payload.post, ...(state.posts ? state.posts : [])],
+				posts: [action.payload.post, ...state.posts],
 			};
 		case ADD_POST_TYPES.LOADING:
 			return {

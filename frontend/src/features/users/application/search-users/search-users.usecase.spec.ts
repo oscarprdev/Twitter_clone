@@ -1,24 +1,13 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DefaultSearchUsersUsecase, SearchUsersUsecase } from './search-users.usecase';
 import { SearchUsersPorts } from './search-users.ports';
+import { userTestResponse } from '../../../../tests/unit/responses/users.response';
 
 class MockSearchUsersHttpAdapter implements SearchUsersPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	async getUsersBySearch(_input: SearchUsersPorts.GetUsersBySearchInput): Promise<SearchUsersPorts.GetUsersBySearchOutput> {
 		return {
-			users: [
-				{
-					id: 'mocked-id',
-					createdAt: '2024-01-10T11:29:27.134295Z',
-					updatedAt: '2024-01-10T11:29:27.134295Z',
-					name: 'mocked-name',
-					surname: 'mocked-surname',
-					username: 'mocked-username',
-					email: 'mocked-email',
-					profileImgUrl: '',
-					profileBgImgUrl: '',
-				},
-			],
+			users: [userTestResponse],
 		};
 	}
 }

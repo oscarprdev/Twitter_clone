@@ -1,14 +1,14 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AddFollowPorts } from './add-follow.ports';
 import { DefaultAddFollowUsecase } from './add-follow.usecase';
-import { userMocked } from '../../../../tests/utils/entities/user.mock';
+import { userTestResponse } from '../../../../tests/unit/responses/users.response';
 
 class MockAddFollowHttpAdapter implements AddFollowPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	async addFollow(_input: AddFollowPorts.AddFollowInput): Promise<AddFollowPorts.AddFollowOutput> {
 		return {
-			user: userMocked,
-			followTo: userMocked,
+			user: userTestResponse,
+			followTo: userTestResponse,
 		};
 	}
 }

@@ -1,27 +1,43 @@
-import { RenderResult, render } from '@testing-library/react';
-import { afterEach, beforeEach, describe, it } from 'vitest';
+import { RenderResult, fireEvent, render } from '@testing-library/react';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from 'vitest';
 import Unfollower from './Unfollower';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../../tests/utils/store/store.mock';
-import { userMocked } from '../../../tests/utils/entities/user.mock';
+import { mockStore } from '../../../tests/unit/store/store.mock';
+import { userTestResponse } from '../../../tests/unit/responses/users.response';
+import { server } from '../../../tests/unit/server/server.mock';
+import { testAddFollowerHandler } from '../../../tests/unit/handlers/followers.handlers';
 
 describe('Unfollower', () => {
 	let component: RenderResult;
 
+	beforeAll(() => server.listen());
+	afterAll(() => server.close());
+
 	beforeEach(() => {
 		component = render(
 			<Provider store={mockStore}>
-				<Unfollower unfollower={userMocked} />
+				<Unfollower unfollower={userTestResponse} />
 			</Provider>
 		);
 	});
 
-	afterEach(() => component.unmount());
+	afterEach(() => {
+		server.resetHandlers();
+		component.unmount();
+	});
 
 	it('should render successfully', () => {
 		component.getByRole('img');
-		component.getByText(userMocked.name);
-		component.getByText(`@${userMocked.username}`);
+		component.getByText(userTestResponse.name);
+		component.getByText(`@${userTestResponse.username}`);
 		component.getByRole('button', { name: 'Follow' });
+	});
+
+	it('Should call to api when click on button ', async () => {
+		server.use(testAddFollowerHandler);
+
+		const button = component.getByRole('button', { name: 'Follow' });
+
+		fireEvent.click(button);
 	});
 });

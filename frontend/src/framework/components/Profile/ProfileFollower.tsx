@@ -11,7 +11,9 @@ interface ProfileFollowerProps {
 
 const ProfileFollower = ({ profileImgUrl, name, surname, username, children }: ProfileFollowerProps) => {
 	return (
-		<li className='flex gap-5 w-full p-8 hover:bg-zinc-900'>
+		<li
+			role='profile-user-item'
+			className='flex gap-5 w-full p-8 hover:bg-zinc-900'>
 			<UserImage userImage={profileImgUrl} />
 			<div
 				aria-roledescription='follower-personal-info'

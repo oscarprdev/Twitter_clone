@@ -1,12 +1,12 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GetPostsPorts } from './get-posts.ports';
 import { DefaultGetPostsUsecase, GetPostsUsecase } from './get-posts.usecase';
-import { postMocked } from '../../../../tests/utils/entities/post.mock';
+import { postResponse } from '../../../../tests/unit/responses/posts.response';
 
 class TestGetPostsHttpAdapter implements GetPostsPorts {
 	async getPosts(): Promise<GetPostsPorts.GetPostsOutput> {
 		return {
-			posts: [postMocked],
+			posts: [postResponse],
 			postsCount: 10,
 		};
 	}

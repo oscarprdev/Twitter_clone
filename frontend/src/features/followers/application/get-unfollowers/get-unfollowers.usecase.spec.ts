@@ -1,13 +1,13 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GetUnfollowersPorts } from './get-unfollowers.ports';
 import { DefaultGetUnfollowersUsecase, GetUnfollowersUsecase } from './get-unfollowers.usecase';
-import { userMocked } from '../../../../tests/utils/entities/user.mock';
+import { userTestResponse } from '../../../../tests/unit/responses/users.response';
 
 class MockSearchUsersHttpAdapter implements GetUnfollowersPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	async getUnfollowers(_input: GetUnfollowersPorts.GetUnfollowersInput): Promise<GetUnfollowersPorts.GetUnfollowersOutput> {
 		return {
-			unfollowers: [userMocked],
+			unfollowers: [userTestResponse],
 			count: 1,
 		};
 	}

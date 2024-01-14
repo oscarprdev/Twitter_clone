@@ -1,46 +1,70 @@
 import { RenderResult, fireEvent, render, waitFor } from '@testing-library/react';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import PostLikes from './PostLikes';
-import { mockHandlers, serverMocked } from '../../../tests/utils/server/server.mock';
-import { postMocked } from '../../../tests/utils/entities/post.mock';
+import { server } from '../../../tests/unit/server/server.mock';
+import { postResponse } from '../../../tests/unit/responses/posts.response';
+import {
+	testAddLikeLikeHandler,
+	testGetLikesHandler,
+	testGetLowerLikesHandler,
+	testGetUsersLikesHandler,
+	testRemoveLikeLikeHandler,
+} from '../../../tests/unit/handlers/likes.handlers';
 
-describe('AddPost', () => {
+describe('PostsLikes', () => {
 	let component: RenderResult;
 
-	beforeAll(() => serverMocked.listen());
-	afterAll(() => serverMocked.close());
+	beforeAll(() => server.listen());
+	afterAll(() => server.close());
 
-	beforeEach(() => {});
+	beforeEach(() => {
+		component = render(<PostLikes postId={postResponse.id} />);
+	});
 
 	afterEach(() => {
-		serverMocked.close();
+		server.resetHandlers();
 		component.unmount();
 	});
 
-	it('should render successfully', () => {
-		serverMocked.use(...mockHandlers);
-
-		component = render(<PostLikes postId={postMocked.id} />);
+	it('should render successfully', async () => {
+		server.use(testGetLikesHandler);
 
 		component.getByRole('like-icon');
-		component.getByText('0');
 
 		const likeContainer = component.getByRole('like-container');
 
 		expect(likeContainer.className).toContain('hover:text-[var(--like)]');
+
+		await waitFor(() => {
+			component.getByText('5');
+		});
 	});
 
-	it('Should update likes if user clicks on like icon', async () => {
-		serverMocked.use(...mockHandlers);
-
-		component = render(<PostLikes postId={postMocked.id} />);
+	it('Should update likes if user add like', async () => {
+		server.use(testGetLikesHandler);
+		server.use(testAddLikeLikeHandler);
+		server.use(testGetUsersLikesHandler);
 
 		const iconContainer = component.getByRole('like-container');
-
 		fireEvent.click(iconContainer);
 
 		await waitFor(() => {
-			component.getByText('1');
+			server.use(testGetLowerLikesHandler);
+			component.getByText('6');
+		});
+	});
+
+	it('Should update likes if user remove like', async () => {
+		server.use(testGetLikesHandler);
+		server.use(testRemoveLikeLikeHandler);
+		server.use(testGetUsersLikesHandler);
+
+		const iconContainer = component.getByRole('like-container');
+		fireEvent.click(iconContainer);
+
+		await waitFor(() => {
+			server.use(testGetLowerLikesHandler);
+			component.getByText('5');
 		});
 	});
 });
