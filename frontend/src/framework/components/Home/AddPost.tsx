@@ -8,6 +8,7 @@ import { useStoreSelector } from '../../store/hooks/useSelector';
 import { useStoreDispatch } from '../../store/hooks/useDispatch';
 import UserImage from '../UserImage';
 import { useModal } from '../../hooks/useModal';
+import ImageUpload from './ImageUpload';
 
 interface PostState {
 	content: string;
@@ -59,6 +60,7 @@ const AddPost = () => {
 					onChange={handleTextareaChange}
 					className='w-full resize-none bg-transparent outline-none text-xl text-zinc-300 placeholder:text-zinc-500'
 				/>
+				<ImageUpload id={userLogged.id} />
 				<button
 					type='submit'
 					disabled={isButtonDisabled}
