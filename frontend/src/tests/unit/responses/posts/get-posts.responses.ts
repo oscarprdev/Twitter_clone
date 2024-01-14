@@ -1,5 +1,5 @@
 import { GetPostsResponse } from '../../../../features/posts/infra/post.infra.models';
-import { postDbResponse } from '../posts.response';
+import { postDbResponse, postResponse } from '../posts.response';
 
 export const SuccessfulGetPostsResponse: GetPostsResponse = {
 	posts: [postDbResponse],
@@ -12,6 +12,6 @@ export const SuccessfulGetPostsEmptyResponse: GetPostsResponse = {
 };
 
 export const SuccessfulGetMorePostsResponse: GetPostsResponse = {
-	posts: [postDbResponse, postDbResponse],
+	posts: [postDbResponse, { ...postDbResponse, id: postResponse.id }],
 	postsCount: 2,
 };

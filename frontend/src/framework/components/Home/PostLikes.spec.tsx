@@ -64,7 +64,7 @@ describe('PostsLikes', () => {
 
 		await waitFor(() => {
 			server.use(testGetLowerLikesHandler);
-			component.getByText('5');
+			component.getByText('4');
 		});
 	});
 });
