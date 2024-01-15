@@ -1,11 +1,11 @@
 import PageWrapper from '../components/PageWrapper';
 
-const Notifications = () => {
+const Settings = () => {
 	return (
-		<PageWrapper title='Notifications'>
+		<PageWrapper title='Settings'>
 			<></>
 		</PageWrapper>
 	);
 };
 
-export default Notifications;
+export default Settings;

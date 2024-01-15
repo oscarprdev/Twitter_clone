@@ -1,10 +1,10 @@
 import Nav from '../components/Nav/Nav';
 import Aside from '../components/Aside/Aside';
 import { Route } from 'wouter';
-import Notifications from './Notifications';
 import Profile from './Profile';
 import Home from './Home';
 import UserInfo from './UserInfo';
+import Settings from './Settings';
 
 const Layout = () => {
 	return (
@@ -15,8 +15,8 @@ const Layout = () => {
 				component={Home}
 			/>
 			<Route
-				path='/notifications'
-				component={Notifications}
+				path='/settings'
+				component={Settings}
 			/>
 			<Route
 				path='/profile'

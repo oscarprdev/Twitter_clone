@@ -2,12 +2,12 @@ import NavItem from './NavItem';
 import { BrandIcon } from '../icons/BrandIcon';
 import { HomeActiveIcon } from '../icons/HomeActiveIcon';
 import { HomeIcon } from '../icons/HomeIcon';
-import { NotificationsActiveIcon } from '../icons/NotificationsActiveIcon';
-import { NotificationsIcon } from '../icons/NotificationsIcon';
 import { ProfileActiveIcon } from '../icons/ProfileActiveIcon';
 import { ProfileIcon } from '../icons/ProfileIcon';
 import { useModal } from '../../hooks/useModal';
 import AddPostModal from '../Modals/AddPostModal';
+import SettingsIcon from '../icons/SettingsIcon';
+import SettingsFilledIcon from '../icons/SettingsFilledIcon';
 
 const Nav = () => {
 	const { openModal } = useModal();
@@ -28,14 +28,14 @@ const Nav = () => {
 					activeIcon={<HomeActiveIcon />}
 				/>
 				<NavItem
-					text='notifications'
-					defaultIcon={<NotificationsIcon />}
-					activeIcon={<NotificationsActiveIcon />}
-				/>
-				<NavItem
 					text='profile'
 					defaultIcon={<ProfileIcon />}
 					activeIcon={<ProfileActiveIcon />}
+				/>
+				<NavItem
+					text='settings'
+					defaultIcon={<SettingsIcon />}
+					activeIcon={<SettingsFilledIcon />}
 				/>
 				<button
 					onClick={handlePostButtonClick}
