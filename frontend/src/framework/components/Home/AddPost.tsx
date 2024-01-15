@@ -5,18 +5,22 @@ import { addPost } from '../../store/slices/posts-slice';
 import { ADD_POST_TYPES } from '../../store/reducers/posts/add-post/add-post.reducer.types';
 import { USER_ID } from '../../../features/shared/domain/constants/constants';
 import { useStoreSelector } from '../../store/hooks/useSelector';
-import { useStoreDispatch } from '../../store/hooks/useDispatch';
 import UserImage from '../UserImage';
 import { useModal } from '../../hooks/useModal';
 import ImageUpload from './ImageUpload';
+import LoaderIcon from '../icons/LoaderIcon';
+import { useStoreDispatch } from '../../store/hooks/useDispatch';
 
 interface PostState {
 	content: string;
+	file: File | null;
 }
 
 const AddPost = () => {
+	const [loading, setLoading] = useState(false);
+	const [post, setPost] = useState<PostState>({ content: '', file: null });
+
 	const userLogged = useStoreSelector((state) => state.users.userLogged);
-	const [post, setPost] = useState<PostState>({ content: '' });
 	const dispatch = useStoreDispatch();
 	const { closeModal } = useModal();
 
@@ -24,21 +28,27 @@ const AddPost = () => {
 		const target = e.target;
 
 		if (target instanceof HTMLTextAreaElement) {
-			setPost({ content: target.value });
+			setPost((prev) => ({ ...prev, content: target.value }));
 		}
+	};
+
+	const handleImageUpload = (file: File) => {
+		setPost((prev) => ({ ...prev, file }));
 	};
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		dispatch(addPost({ type: ADD_POST_TYPES.LOADING }));
+		setLoading(true);
 
-		const response = await addPostUsecase.addPost({ userId: USER_ID, post: post.content });
+		const response = await addPostUsecase.addPost({ userId: USER_ID, post: post.content, file: post.file });
 
 		if (response.state === 'success') {
 			dispatch(addPost({ post: response.post, type: ADD_POST_TYPES.ADD_POST }));
 
-			setPost({ content: '' });
+			setLoading(false);
+			setPost({ content: '', file: null });
+
 			closeModal();
 		}
 	};
@@ -53,6 +63,7 @@ const AddPost = () => {
 				onSubmit={handleSubmit}
 				role='form'>
 				<textarea
+					disabled={loading}
 					role='textarea'
 					placeholder="What's going on?!"
 					maxLength={300}
@@ -60,14 +71,24 @@ const AddPost = () => {
 					onChange={handleTextareaChange}
 					className='w-full resize-none bg-transparent outline-none text-xl text-zinc-300 placeholder:text-zinc-500'
 				/>
-				<ImageUpload id={userLogged.id} />
+				<ImageUpload
+					handleImageUpload={handleImageUpload}
+					loading={loading}
+					file={post.file}
+				/>
 				<button
 					type='submit'
-					disabled={isButtonDisabled}
+					disabled={isButtonDisabled || loading}
 					className={`absolute font-bold bottom-5 right-5 px-5 py-2 rounded-full bg-[var(--contrast)] ${
 						isButtonDisabled ? 'opacity-70' : 'opacity-none hover:bg-[var(--contrast-dark)] duration-300'
 					} `}>
-					Post
+					{loading ? (
+						<span className='block animate-spin w-5 h-5'>
+							<LoaderIcon />
+						</span>
+					) : (
+						'Post'
+					)}
 				</button>
 			</form>
 		</article>

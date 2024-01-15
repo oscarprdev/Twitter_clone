@@ -11,9 +11,9 @@ const Post = ({ post }: PostProps) => {
 	return (
 		<li
 			role='post'
-			className='flex items-start gap-4 w-full min-h-[150px] p-4 border-y-[1px] border-y-zinc-700'>
+			className='flex items-start gap-4 w-full p-4 border-y-[1px] border-y-zinc-700'>
 			<UserImage userImage={post.owner.profileImgUrl} />
-			<div className='flex flex-col h-full w-[90%]'>
+			<div className='flex flex-col min-h-[100px] w-[90%]'>
 				<header
 					className='flex items-center gap-2 text-zinc-500'
 					role='post-header'>
@@ -25,6 +25,15 @@ const Post = ({ post }: PostProps) => {
 					<p>{strDateToTime(post.updatedAt)}</p>
 				</header>
 				<p className='flex-grow text-white text-lg'>{post.post}</p>
+				{post.image !== '' && (
+					<figure className='w-[80%] my-5 h-full border border-zinc-400 rounded-xl overflow-hidden'>
+						<img
+							src={post.image}
+							alt='Post image'
+							className='w-full h-full object-cover'
+						/>
+					</figure>
+				)}
 				<footer role='post-footer'>
 					<PostLikes postId={post.id} />
 				</footer>

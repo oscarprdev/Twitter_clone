@@ -18,6 +18,7 @@ export namespace GetPostsPorts {
 		updatedAt: string;
 		userId: string;
 		post: string;
+		image: string;
 		owner: PostOwner;
 	}
 

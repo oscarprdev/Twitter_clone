@@ -2,6 +2,7 @@ export interface Post {
 	id: string;
 	userId: string;
 	post: string;
+	image: string;
 	updatedAt: string;
 	owner: PostOwner;
 }

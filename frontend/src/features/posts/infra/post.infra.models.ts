@@ -1,6 +1,7 @@
 export interface AddPostPayload {
 	userId: string;
 	post: string;
+	image: string;
 }
 
 export interface AddPostResponse {
@@ -32,6 +33,7 @@ export interface DbPost {
 	updated_at: string;
 	userId: string;
 	post: string;
+	image: string;
 	owner: PostOwner;
 }
 

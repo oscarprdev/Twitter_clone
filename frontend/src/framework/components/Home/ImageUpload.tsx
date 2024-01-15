@@ -1,16 +1,20 @@
 import { ChangeEvent, useRef } from 'react';
 import ImageSearch from '../icons/ImageSearch';
-import { uploadImageUsecase } from '../../../features/image/graph';
+import ImageCheck from '../icons/ImageCheck';
 
 interface ImageUploadProps {
-	id: string;
+	handleImageUpload(file: File): void;
+	loading: boolean;
+	file: File | null;
 }
 
-const ImageUpload = ({ id }: ImageUploadProps) => {
+const ImageUpload = ({ handleImageUpload, loading, file }: ImageUploadProps) => {
 	const imageInput = useRef<HTMLInputElement>(null);
 
 	const handleUploadImage = () => {
-		imageInput.current?.click();
+		if (!loading) {
+			imageInput.current?.click();
+		}
 	};
 
 	const handleImageInputChange = async (e: ChangeEvent) => {
@@ -19,9 +23,7 @@ const ImageUpload = ({ id }: ImageUploadProps) => {
 		if (target instanceof HTMLInputElement && target.files && imageInput.current) {
 			const file = target.files[0];
 
-			await uploadImageUsecase.uploadImage({ file, userId: id });
-
-			imageInput.current.value = '';
+			handleImageUpload(file);
 		}
 	};
 
@@ -29,8 +31,10 @@ const ImageUpload = ({ id }: ImageUploadProps) => {
 		<>
 			<span
 				onClick={handleUploadImage}
-				className='block w-fit text-[var(--contrast)] cursor-pointer hover:text-white'>
-				<ImageSearch />
+				className={`block w-fit cursor-pointer  ${
+					loading ? 'text-zinc-500' : file && !!file ? 'text-green-700 hover:text-green-500' : 'text-[var(--contrast)] hover:text-white'
+				}`}>
+				{file && !!file ? <ImageCheck /> : <ImageSearch />}
 			</span>
 			<input
 				ref={imageInput}
