@@ -4,6 +4,7 @@ import { getUserLoggedReducer } from '../reducers/users/get-user-logged/get-user
 import { updateUnfollowersReducer } from '../reducers/users/update-unfollowers/update-unfollowers.reducer';
 import { addFollowersReducer } from '../reducers/users/add-follow/add-follow.reducer';
 import { removeFollowersReducer } from '../reducers/users/remove-follow/remove-follow.reducer';
+import { updateUserLoggedReducer } from '../reducers/users/udpate-user-logged/update-user-logged.reducer';
 
 export interface UsersSliceState {
 	userLogged: User;
@@ -32,12 +33,13 @@ export const UsersSlice = createSlice({
 	initialState,
 	reducers: {
 		getUserLogged: getUserLoggedReducer,
+		updateUserLogged: updateUserLoggedReducer,
 		updateUnfollowers: updateUnfollowersReducer,
 		addFollow: addFollowersReducer,
 		removeFollow: removeFollowersReducer,
 	},
 });
 
-export const { getUserLogged, updateUnfollowers, addFollow, removeFollow } = UsersSlice.actions;
+export const { getUserLogged, updateUserLogged, updateUnfollowers, addFollow, removeFollow } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

@@ -1,9 +1,18 @@
 import { HttpInfra } from '../../shared/infra/http.infra';
-import { GetUserByIdPayload, GetUserByIdResponse, GetUsersBySearchInfraInput, GetUsersBySearchInfraResponse } from './users.infra.models';
+import {
+	GetUserByIdPayload,
+	GetUserByIdResponse,
+	GetUsersBySearchInfraInput,
+	GetUsersBySearchInfraResponse,
+	UpdateUserInfraInput,
+	UpdateUserInfraOutput,
+	UpdateUserInfraPayload,
+} from './users.infra.models';
 
 export interface UsersInfra {
 	getUsersBySearch(input: GetUsersBySearchInfraInput): Promise<GetUsersBySearchInfraResponse>;
-	getUserById({ userId }: GetUserByIdPayload): Promise<GetUserByIdResponse>;
+	getUserById(input: GetUserByIdPayload): Promise<GetUserByIdResponse>;
+	updateUser(input: UpdateUserInfraInput): Promise<UpdateUserInfraOutput>;
 }
 
 export class DefaultUsersInfra extends HttpInfra implements UsersInfra {
@@ -21,5 +30,16 @@ export class DefaultUsersInfra extends HttpInfra implements UsersInfra {
 		const url = `${this.API_URL}/users/${userId}`;
 
 		return await this.GET<GetUserByIdResponse>(url);
+	}
+
+	async updateUser({ userId, name, surname, image }: UpdateUserInfraInput): Promise<UpdateUserInfraOutput> {
+		const url = `${this.API_URL}/users/${userId}`;
+		const payload = {
+			name,
+			surname,
+			profileImgUrl: image,
+		};
+
+		return await this.PUT<UpdateUserInfraOutput, UpdateUserInfraPayload>(url, payload);
 	}
 }

@@ -28,6 +28,21 @@ export class HttpInfra {
 		}
 	}
 
+	async PUT<R, B>(url: string, body: B): Promise<R> {
+		try {
+			const response = await fetch(url, {
+				method: 'PUT',
+				body: JSON.stringify(body),
+			});
+
+			const jsonResponse = await response.json();
+
+			return jsonResponse;
+		} catch (error: unknown) {
+			throw new Error(`${error}`);
+		}
+	}
+
 	async DELETE<R, B>(url: string, body: B): Promise<R> {
 		try {
 			const response = await fetch(url, {
