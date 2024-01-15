@@ -27,6 +27,6 @@ FROM posts
 WHERE user_id = $1;
 
 -- name: CreatePost :one 
-INSERT INTO posts (id, created_at, updated_at, user_id, post) 
-VALUES ($1, $2, $3, $4, $5)
+INSERT INTO posts (id, created_at, updated_at, user_id, post, image) 
+VALUES ($1, $2, $3, $4, $5, $6)
 RETURNING *;

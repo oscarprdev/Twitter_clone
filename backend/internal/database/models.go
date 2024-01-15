@@ -32,6 +32,7 @@ type Post struct {
 	UpdatedAt time.Time
 	UserID    uuid.UUID
 	Post      string
+	Image     string
 }
 
 type User struct {

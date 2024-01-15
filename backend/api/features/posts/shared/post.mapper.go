@@ -9,6 +9,7 @@ func DatabasePostToPost(dbPost database.Post, dbUser database.User) Post{
 		UpdatedAt:		 dbPost.UpdatedAt,
 		UserId:			 dbPost.UserID,
 		Post:			 dbPost.Post,
+		Image:           dbPost.Image,
 		Owner: 			 Owner{
 			Username: 	   dbUser.Username,
 			Name: 		   dbUser.Name,

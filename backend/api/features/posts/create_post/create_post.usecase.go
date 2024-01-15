@@ -39,6 +39,7 @@ func (api *ApiConfig) CreatePost(w http.ResponseWriter, r *http.Request) {
 		UpdatedAt: time.Now().UTC(),
 		UserID: userId,
 		Post: params.Post,
+		Image: params.Image,
 	})
 
 	if err != nil {

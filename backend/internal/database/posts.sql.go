@@ -13,9 +13,9 @@ import (
 )
 
 const createPost = `-- name: CreatePost :one
-INSERT INTO posts (id, created_at, updated_at, user_id, post) 
-VALUES ($1, $2, $3, $4, $5)
-RETURNING id, created_at, updated_at, user_id, post
+INSERT INTO posts (id, created_at, updated_at, user_id, post, image) 
+VALUES ($1, $2, $3, $4, $5, $6)
+RETURNING id, created_at, updated_at, user_id, post, image
 `
 
 type CreatePostParams struct {
@@ -24,6 +24,7 @@ type CreatePostParams struct {
 	UpdatedAt time.Time
 	UserID    uuid.UUID
 	Post      string
+	Image     string
 }
 
 func (q *Queries) CreatePost(ctx context.Context, arg CreatePostParams) (Post, error) {
@@ -33,6 +34,7 @@ func (q *Queries) CreatePost(ctx context.Context, arg CreatePostParams) (Post, e
 		arg.UpdatedAt,
 		arg.UserID,
 		arg.Post,
+		arg.Image,
 	)
 	var i Post
 	err := row.Scan(
@@ -41,12 +43,13 @@ func (q *Queries) CreatePost(ctx context.Context, arg CreatePostParams) (Post, e
 		&i.UpdatedAt,
 		&i.UserID,
 		&i.Post,
+		&i.Image,
 	)
 	return i, err
 }
 
 const getAllPosts = `-- name: GetAllPosts :many
-SELECT id, created_at, updated_at, user_id, post FROM posts 
+SELECT id, created_at, updated_at, user_id, post, image FROM posts 
 ORDER BY updated_at DESC
 LIMIT $1 OFFSET $2
 `
@@ -71,6 +74,7 @@ func (q *Queries) GetAllPosts(ctx context.Context, arg GetAllPostsParams) ([]Pos
 			&i.UpdatedAt,
 			&i.UserID,
 			&i.Post,
+			&i.Image,
 		); err != nil {
 			return nil, err
 		}
@@ -86,7 +90,7 @@ func (q *Queries) GetAllPosts(ctx context.Context, arg GetAllPostsParams) ([]Pos
 }
 
 const getPostByPostId = `-- name: GetPostByPostId :one
-SELECT id, created_at, updated_at, user_id, post FROM posts WHERE id = $1
+SELECT id, created_at, updated_at, user_id, post, image FROM posts WHERE id = $1
 `
 
 func (q *Queries) GetPostByPostId(ctx context.Context, id uuid.UUID) (Post, error) {
@@ -98,12 +102,13 @@ func (q *Queries) GetPostByPostId(ctx context.Context, id uuid.UUID) (Post, erro
 		&i.UpdatedAt,
 		&i.UserID,
 		&i.Post,
+		&i.Image,
 	)
 	return i, err
 }
 
 const getPostsByFollowers = `-- name: GetPostsByFollowers :many
-SELECT posts.id, posts.created_at, posts.updated_at, posts.user_id, posts.post
+SELECT posts.id, posts.created_at, posts.updated_at, posts.user_id, posts.post, posts.image
 FROM posts
 LEFT JOIN followers ON posts.user_id = followers.follow_to
 WHERE followers.user_id = $1 OR posts.user_id = $1
@@ -125,6 +130,7 @@ func (q *Queries) GetPostsByFollowers(ctx context.Context, userID uuid.UUID) ([]
 			&i.UpdatedAt,
 			&i.UserID,
 			&i.Post,
+			&i.Image,
 		); err != nil {
 			return nil, err
 		}
@@ -140,7 +146,7 @@ func (q *Queries) GetPostsByFollowers(ctx context.Context, userID uuid.UUID) ([]
 }
 
 const getPostsByUser = `-- name: GetPostsByUser :many
-SELECT id, created_at, updated_at, user_id, post FROM posts WHERE user_id = $1 
+SELECT id, created_at, updated_at, user_id, post, image FROM posts WHERE user_id = $1 
 ORDER BY updated_at DESC
 `
 
@@ -159,6 +165,7 @@ func (q *Queries) GetPostsByUser(ctx context.Context, userID uuid.UUID) ([]Post,
 			&i.UpdatedAt,
 			&i.UserID,
 			&i.Post,
+			&i.Image,
 		); err != nil {
 			return nil, err
 		}
