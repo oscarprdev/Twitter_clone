@@ -6,6 +6,8 @@ import LoaderIcon from '../icons/LoaderIcon';
 import { updateUserUsecase } from '../../../features/users/graph';
 import { useStoreDispatch } from '../../store/hooks/useDispatch';
 import { updateUserLogged } from '../../store/slices/users-slice';
+import { useModal } from '../../hooks/useModal';
+import { USER_ID } from '../../../features/shared/domain/constants/constants';
 
 type UserInfo = {
 	name: string;
@@ -17,6 +19,7 @@ type UserInfo = {
 const UpdateUserModal = () => {
 	const userLogged = useStoreSelector((state) => state.users.userLogged);
 	const dispatch = useStoreDispatch();
+	const modal = useModal();
 
 	const [loading, setLoading] = useState(false);
 	const [userInfo, setUserInfo] = useState<UserInfo>({
@@ -61,6 +64,7 @@ const UpdateUserModal = () => {
 		if (updatedUserResponse.state === 'success') {
 			setLoading(false);
 			dispatch(updateUserLogged({ user: updatedUserResponse.user }));
+			modal.closeModal();
 		}
 	};
 

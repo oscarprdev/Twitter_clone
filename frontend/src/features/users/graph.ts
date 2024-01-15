@@ -5,6 +5,8 @@ import { DefaultSearchUsersUsecase } from './application/search-users/search-use
 import { UpdateUserHttpAdapter } from './adapters/update-user.http-adapter';
 import { DefaultUpdateUserUsecase } from './application/update-user/update-user.usecase';
 import { uploadImageUsecase } from '../image/graph';
+import { GetUserHttpAdapter } from './adapters/get-user.http-adapter';
+import { DefaultGetUserUsecase } from './application/get-user/get-user.usecase';
 
 const usersInfra = new DefaultUsersInfra(API_URL);
 
@@ -13,3 +15,6 @@ export const searchUsersUsecase = new DefaultSearchUsersUsecase(searchUsersHttpA
 
 const updateUserHttpAdapter = new UpdateUserHttpAdapter(usersInfra, uploadImageUsecase);
 export const updateUserUsecase = new DefaultUpdateUserUsecase(updateUserHttpAdapter);
+
+const getUserHttpAdapter = new GetUserHttpAdapter(usersInfra);
+export const getUserUsecase = new DefaultGetUserUsecase(getUserHttpAdapter);
