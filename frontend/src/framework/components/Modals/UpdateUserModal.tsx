@@ -7,7 +7,6 @@ import { updateUserUsecase } from '../../../features/users/graph';
 import { useStoreDispatch } from '../../store/hooks/useDispatch';
 import { updateUserLogged } from '../../store/slices/users-slice';
 import { useModal } from '../../hooks/useModal';
-import { USER_ID } from '../../../features/shared/domain/constants/constants';
 
 type UserInfo = {
 	name: string;
