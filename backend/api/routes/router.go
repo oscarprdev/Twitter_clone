@@ -14,6 +14,7 @@ func Router(conn *sql.DB) *chi.Mux {
 	router.Use(cors.Handler(cors.Options{
 		AllowedOrigins: []string{"http://*"},
 		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},
+		AllowedHeaders: []string{"Content-Type", "Authorization"},
 		MaxAge: 		300,
 	}))
 	
