@@ -1,13 +1,13 @@
-import { UploadImageUsecase } from '../../image/application/upload-image/upload-image.usecase';
+import { UploadImageUsecaseAdapter } from '../../shared/adapters/upload-image.usecase-adapter';
 import { mapDbUserToApplication } from '../../shared/mappers/map-db-user-to-app';
 import { UpdateUserPorts } from '../application/update-user/update-user.ports';
 import { UsersInfra } from '../infra/users.infra';
 
 export class UpdateUserHttpAdapter implements UpdateUserPorts {
-	constructor(private readonly httpClient: UsersInfra, private readonly uploadImageUsecase: UploadImageUsecase) {}
+	constructor(private readonly httpClient: UsersInfra, private readonly uploadImageUsecaseAdapter: UploadImageUsecaseAdapter) {}
 
 	async updateUser({ userId, name, surname, image }: UpdateUserPorts.updateUserInput): Promise<UpdateUserPorts.UpdateUserOutput> {
-		const dbUserResponse = await this.httpClient.updateUser({ userId, name, surname, image });
+		const dbUserResponse = await this.httpClient.updateUser({ userId, name, surname, profileImgUrl: image });
 
 		return {
 			user: mapDbUserToApplication(dbUserResponse.user),
@@ -15,14 +15,6 @@ export class UpdateUserHttpAdapter implements UpdateUserPorts {
 	}
 
 	async uploadImage({ userId, file }: UpdateUserPorts.UploadImageInput): Promise<UpdateUserPorts.UploadImageOutput> {
-		const uploadImageResponse = await this.uploadImageUsecase.uploadImage({ userId, file });
-
-		if (uploadImageResponse.state === 'success') {
-			return {
-				url: uploadImageResponse.url,
-			};
-		} else {
-			throw new Error(uploadImageResponse.error);
-		}
+		return await this.uploadImageUsecaseAdapter.uploadImage({ userId, file });
 	}
 }

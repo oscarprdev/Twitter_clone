@@ -6,7 +6,7 @@ import { DefaultPostInfra } from './infra/post.infra';
 import { DefaultAddPostUsecase } from './application/add-post/add-post.usecase';
 import { DefaultGetPostsByUserUsecase } from './application/get-posts-by-user/get-posts-by-user.usecase';
 import { DefaultGetPostsUsecase } from './application/get-posts/get-posts.usecase';
-import { uploadImageUsecase } from '../image/graph';
+import { uploadImageUsecaseAdapter } from '../shared/adapters/grapth';
 
 const postInfra = new DefaultPostInfra(API_URL);
 
@@ -16,5 +16,5 @@ export const getPostsUsecase = new DefaultGetPostsUsecase(getPostHttpAdapter);
 const getPostsByUserHttpAdapter = new GetPostsByUserHttpAdapter(postInfra);
 export const getPostsByUserUsecase = new DefaultGetPostsByUserUsecase(getPostsByUserHttpAdapter);
 
-const addPostHttpAdapter = new AddPostHttpAdapter(postInfra, uploadImageUsecase);
+const addPostHttpAdapter = new AddPostHttpAdapter(postInfra, uploadImageUsecaseAdapter);
 export const addPostUsecase = new DefaultAddPostUsecase(addPostHttpAdapter);

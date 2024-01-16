@@ -1,5 +1,8 @@
 import { HttpInfra } from '../../shared/infra/http.infra';
 import {
+	CreateUserInfraInput,
+	CreateUserInfraOutput,
+	CreateUserInfraPayload,
 	GetUserByIdPayload,
 	GetUserByIdResponse,
 	GetUsersBySearchInfraInput,
@@ -13,6 +16,7 @@ export interface UsersInfra {
 	getUsersBySearch(input: GetUsersBySearchInfraInput): Promise<GetUsersBySearchInfraResponse>;
 	getUserById(input: GetUserByIdPayload): Promise<GetUserByIdResponse>;
 	updateUser(input: UpdateUserInfraInput): Promise<UpdateUserInfraOutput>;
+	createUser(input: CreateUserInfraInput): Promise<CreateUserInfraOutput>;
 }
 
 export class DefaultUsersInfra extends HttpInfra implements UsersInfra {
@@ -32,14 +36,29 @@ export class DefaultUsersInfra extends HttpInfra implements UsersInfra {
 		return await this.GET<GetUserByIdResponse>(url);
 	}
 
-	async updateUser({ userId, name, surname, image }: UpdateUserInfraInput): Promise<UpdateUserInfraOutput> {
+	async updateUser({ userId, name, surname, profileImgUrl }: UpdateUserInfraInput): Promise<UpdateUserInfraOutput> {
 		const url = `${this.API_URL}/users/${userId}`;
 		const payload = {
 			name,
 			surname,
-			profileImgUrl: image,
+			profileImgUrl,
 		};
 
 		return await this.PUT<UpdateUserInfraOutput, UpdateUserInfraPayload>(url, payload);
+	}
+
+	async createUser({ name, surname, email, username, password, profileImgUrl }: CreateUserInfraInput): Promise<CreateUserInfraOutput> {
+		const url = `${this.API_URL}/users`;
+		const payload = {
+			name,
+			surname,
+			email,
+			password,
+			username,
+			profileImgUrl,
+			profileBgImgUrl: '',
+		};
+
+		return await this.POST<CreateUserInfraOutput, CreateUserInfraPayload>(url, payload);
 	}
 }

@@ -1,9 +1,9 @@
 import { PostInfra } from '../infra/post.infra';
 import { AddPostPorts } from '../application/add-post/add-post.ports';
-import { UploadImageUsecase } from '../../image/application/upload-image/upload-image.usecase';
+import { UploadImageUsecaseAdapter } from '../../shared/adapters/upload-image.usecase-adapter';
 
 export class AddPostHttpAdapter implements AddPostPorts {
-	constructor(private readonly httpClient: PostInfra, private readonly uploadImageUsecase: UploadImageUsecase) {}
+	constructor(private readonly httpClient: PostInfra, private readonly uploadImageUsecaseAdapter: UploadImageUsecaseAdapter) {}
 
 	async addPost({ post, userId, image }: AddPostPorts.AddPostInput): Promise<AddPostPorts.AddPostOutput> {
 		const response = await this.httpClient.addPost({ post, userId, image });
@@ -19,14 +19,6 @@ export class AddPostHttpAdapter implements AddPostPorts {
 	}
 
 	async uploadImage({ userId, file }: AddPostPorts.UploadImageInput): Promise<AddPostPorts.UploadImageOutput> {
-		const uploadImageResponse = await this.uploadImageUsecase.uploadImage({ userId, file });
-
-		if (uploadImageResponse.state === 'success') {
-			return {
-				url: uploadImageResponse.url,
-			};
-		} else {
-			throw new Error(uploadImageResponse.error);
-		}
+		return await this.uploadImageUsecaseAdapter.uploadImage({ userId, file });
 	}
 }
