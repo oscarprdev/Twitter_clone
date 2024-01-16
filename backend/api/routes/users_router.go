@@ -26,6 +26,7 @@ func handleUserRoutes(api *api.ApiConfig, router *chi.Mux) {
 	router.Put("/users/{id}", updateUserUsecase.UpdateUser)
 
 	router.Get("/users/email/{email}", getUserUsecase.GetUserByEmail)
+	router.Get("/users/auth", getUserUsecase.GetUserByAuth)
 	
 	router.Get("/users/username/{username}", getUserUsecase.GetUserByUsername)
 
