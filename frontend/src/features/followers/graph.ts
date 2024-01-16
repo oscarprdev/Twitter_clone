@@ -10,6 +10,7 @@ import { DefaultGetFollowingUsecase } from './application/get-following/get-foll
 import { DefaultGetUnfollowersUsecase } from './application/get-unfollowers/get-unfollowers.usecase';
 import { RemoveFollowHttpAdapter } from './adapters/remove-follow.http-adapter';
 import { DefaultRemoveFollowUsecase } from './application/remove-follow/remove-follow.usecase';
+import { stateUsecase } from '../shared/application/grapth';
 
 const followersInfra = new DefaultFollowersInfra(API_URL);
 
@@ -20,10 +21,10 @@ const getFollowingHttpAdapter = new GetFollowingHttpAdapter(followersInfra);
 export const getFollowingUsecase = new DefaultGetFollowingUsecase(getFollowingHttpAdapter);
 
 const getUnfollowersHttpAdapter = new GetUnfollowersHttpAdapter(followersInfra);
-export const getUnfollowersUsecase = new DefaultGetUnfollowersUsecase(getUnfollowersHttpAdapter);
+export const getUnfollowersUsecase = new DefaultGetUnfollowersUsecase(getUnfollowersHttpAdapter, stateUsecase);
 
 const addFollowHttpAdapter = new AddFollowHttpAdapter(followersInfra);
 export const addFollowUsecase = new DefaultAddFollowUsecase(addFollowHttpAdapter);
 
 const removeFollowHttpAdapter = new RemoveFollowHttpAdapter(followersInfra);
-export const removeFollowUsecase = new DefaultRemoveFollowUsecase(removeFollowHttpAdapter);
+export const removeFollowUsecase = new DefaultRemoveFollowUsecase(removeFollowHttpAdapter, stateUsecase);

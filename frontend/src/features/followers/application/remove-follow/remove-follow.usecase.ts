@@ -1,27 +1,21 @@
+import { StateUsecase } from '../../../shared/application/state.usecase';
 import { RemoveFollowPorts } from './remove-follow.ports';
-import { RemoveFollowInput, RemoveFollowOutput } from './remove-follow.types';
+import { RemoveFollowInput } from './remove-follow.types';
 
 export interface RemoveFollowUsecase {
-	removeFollow(input: RemoveFollowInput): Promise<RemoveFollowOutput>;
+	removeFollow(input: RemoveFollowInput): Promise<void>;
 }
 
 export class DefaultRemoveFollowUsecase implements RemoveFollowUsecase {
-	constructor(private readonly ports: RemoveFollowPorts) {}
+	constructor(private readonly ports: RemoveFollowPorts, private readonly stateUsecase: StateUsecase) {}
 
-	async removeFollow({ userId, unfollowTo }: RemoveFollowInput): Promise<RemoveFollowOutput> {
+	async removeFollow({ userId, unfollowTo }: RemoveFollowInput): Promise<void> {
 		try {
-			const { user, unfollowToUser } = await this.ports.removeFollow({ userId, unfollowTo });
+			const { unfollowToUser } = await this.ports.removeFollow({ userId, unfollowTo });
 
-			return {
-				state: 'success',
-				user,
-				unfollowToUser,
-			};
+			this.stateUsecase.removeFollow(unfollowToUser);
 		} catch (err: unknown) {
-			return {
-				error: `Error removing follower: ${err}`,
-				state: 'error',
-			};
+			this.stateUsecase.updateErrorState(`Error removing follower: ${err}`);
 		}
 	}
 }

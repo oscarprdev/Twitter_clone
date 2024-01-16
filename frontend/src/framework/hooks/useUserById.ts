@@ -7,11 +7,9 @@ export const useUserById = (id: string) => {
 
 	useEffect(() => {
 		const getUserById = async () => {
-			const userResponse = await getUserUsecase.getUser({ userId: id });
+			const { user } = await getUserUsecase.getUser({ userId: id });
 
-			if (userResponse.state === 'success') {
-				setUser(userResponse.user);
-			}
+			setUser(user);
 		};
 
 		getUserById();

@@ -26,7 +26,7 @@ const updateUserHttpAdapter = new UpdateUserHttpAdapter(usersInfra, uploadImageU
 export const updateUserUsecase = new DefaultUpdateUserUsecase(updateUserHttpAdapter);
 
 const getUserHttpAdapter = new GetUserHttpAdapter(usersInfra);
-export const getUserUsecase = new DefaultGetUserUsecase(getUserHttpAdapter);
+export const getUserUsecase = new DefaultGetUserUsecase(getUserHttpAdapter, stateUsecase);
 
 const createUserHttpAdapter = new CreateUserHttpAdapter(usersInfra, uploadImageUsecaseAdapter);
 export const createUserUsecase = new DefaultCreateUserUsecase(createUserHttpAdapter);

@@ -1,27 +1,21 @@
+import { StateUsecase } from '../../../shared/application/state.usecase';
 import { GetUnfollowersPorts } from './get-unfollowers.ports';
-import { GetUnfollowersInput, GetUnfollowersUsecaseOutput } from './get-unfollowers.types';
+import { GetUnfollowersInput } from './get-unfollowers.types';
 
 export interface GetUnfollowersUsecase {
-	getUnfollowers(input: GetUnfollowersInput): Promise<GetUnfollowersUsecaseOutput>;
+	getUnfollowers(input: GetUnfollowersInput): Promise<void>;
 }
 
 export class DefaultGetUnfollowersUsecase implements GetUnfollowersUsecase {
-	constructor(private readonly ports: GetUnfollowersPorts) {}
+	constructor(private readonly ports: GetUnfollowersPorts, private readonly stateUsecase: StateUsecase) {}
 
-	async getUnfollowers({ userId }: GetUnfollowersInput): Promise<GetUnfollowersUsecaseOutput> {
+	async getUnfollowers({ userId }: GetUnfollowersInput): Promise<void> {
 		try {
-			const { unfollowers, count } = await this.ports.getUnfollowers({ userId });
+			const { unfollowers } = await this.ports.getUnfollowers({ userId });
 
-			return {
-				state: 'success',
-				unfollowers,
-				count,
-			};
+			this.stateUsecase.updateUnfollowers(unfollowers);
 		} catch (err: unknown) {
-			return {
-				error: `Error listing all unfollowers: ${err}`,
-				state: 'error',
-			};
+			this.stateUsecase.updateErrorState(`Error providing unfollowers: ${err}`);
 		}
 	}
 }

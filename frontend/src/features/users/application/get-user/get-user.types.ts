@@ -4,14 +4,6 @@ export interface GetUserInput {
 	userId: string;
 }
 
-export type GetUserOutput = SuccessGetUserOutput | ErrorGetUserOutput;
-
-interface SuccessGetUserOutput {
-	user: User;
-	state: 'success';
-}
-
-interface ErrorGetUserOutput {
-	error: string;
-	state: 'error';
+export interface GetUserOutput {
+	user?: User;
 }

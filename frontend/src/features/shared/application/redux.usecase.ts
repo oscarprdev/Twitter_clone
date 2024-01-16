@@ -1,10 +1,12 @@
 import { User } from '../domain/types/user';
-import { updateUserLogged } from '../../../framework/store/slices/users-slice';
+import { removeFollow, updateUnfollowers, updateUserLogged } from '../../../framework/store/slices/users-slice';
 import { showError } from '../../../framework/store/slices/error-slice';
 import { StoreDispatch } from '../../../framework/store/hooks/useDispatch';
 
 export interface ReduxUsecase {
 	updateUserLogged(user: User): void;
+	updateUnfollowers(users: User[]): void;
+	removeFollow(user: User): void;
 	updateErrorState(error: string): void;
 }
 
@@ -13,6 +15,18 @@ export class DefaultReduxUsecase implements ReduxUsecase {
 
 	updateUserLogged(user: User): void {
 		this.dispatch(updateUserLogged({ user }));
+	}
+
+	updateUnfollowers(users: User[]) {
+		this.dispatch(
+			updateUnfollowers({
+				unfollowers: users,
+			})
+		);
+	}
+
+	removeFollow(user: User) {
+		this.dispatch(removeFollow({ follower: user }));
 	}
 
 	updateErrorState(error: string): void {
