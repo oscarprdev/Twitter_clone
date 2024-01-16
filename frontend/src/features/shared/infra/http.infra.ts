@@ -9,8 +9,6 @@ export class HttpInfra {
 
 			const jsonResponse = await response.json();
 
-			console.log(jsonResponse);
-
 			return jsonResponse;
 		} catch (error: unknown) {
 			console.log(error, 'error');
