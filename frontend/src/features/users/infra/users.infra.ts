@@ -7,6 +7,8 @@ import {
 	GetUserByIdResponse,
 	GetUsersBySearchInfraInput,
 	GetUsersBySearchInfraResponse,
+	LogInInfraInput,
+	LogInInfraOutput,
 	UpdateUserInfraInput,
 	UpdateUserInfraOutput,
 	UpdateUserInfraPayload,
@@ -17,6 +19,7 @@ export interface UsersInfra {
 	getUserById(input: GetUserByIdPayload): Promise<GetUserByIdResponse>;
 	updateUser(input: UpdateUserInfraInput): Promise<UpdateUserInfraOutput>;
 	createUser(input: CreateUserInfraInput): Promise<CreateUserInfraOutput>;
+	logIn(input: LogInInfraInput): Promise<LogInInfraOutput>;
 }
 
 export class DefaultUsersInfra extends HttpInfra implements UsersInfra {
@@ -60,5 +63,12 @@ export class DefaultUsersInfra extends HttpInfra implements UsersInfra {
 		};
 
 		return await this.POST<CreateUserInfraOutput, CreateUserInfraPayload>(url, payload);
+	}
+
+	async logIn({ email, password }: LogInInfraInput): Promise<LogInInfraOutput> {
+		const url = `${this.API_URL}/users/login`;
+		const payload = { email, password };
+
+		return await this.POST<LogInInfraOutput, LogInInfraInput>(url, payload);
 	}
 }

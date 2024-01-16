@@ -7,9 +7,10 @@ import ProfileNavContainer from './ProfileNavContainer';
 
 interface ProfileContainerProps {
 	user: User;
+	isInfo?: boolean;
 }
 
-const ProfileContainer = ({ user }: ProfileContainerProps) => {
+const ProfileContainer = ({ user, isInfo }: ProfileContainerProps) => {
 	const { followers, followersCount } = useFollowers(user.id);
 	const { followings, followingCount } = useFollowings(user.id);
 
@@ -19,6 +20,7 @@ const ProfileContainer = ({ user }: ProfileContainerProps) => {
 				name={user.name}
 				surname={user.surname}
 				id={user.id}
+				isInfo={isInfo}
 			/>
 			<ProfileInfo
 				profileImgUrl={user.profileImgUrl}
@@ -28,6 +30,7 @@ const ProfileContainer = ({ user }: ProfileContainerProps) => {
 				createdAt={user.createdAt}
 				followersCount={followersCount}
 				followingCount={followingCount}
+				isInfo={isInfo}
 			/>
 			<ProfileNavContainer
 				id={user.id}

@@ -9,13 +9,17 @@ const ProfilePosts = ({ id }: ProfilePostsProps) => {
 	const { postsByUser } = usePostsByUser(id);
 
 	return (
-		<ul className='w-full h-fit flex flex-col mt-[-1.3rem]'>
-			{postsByUser.map((post) => (
-				<Post
-					key={post.id}
-					post={post}
-				/>
-			))}
+		<ul className='w-full h-fit flex flex-col items-center mt-[-1.3rem]'>
+			{postsByUser.length > 0 ? (
+				postsByUser.map((post) => (
+					<Post
+						key={post.id}
+						post={post}
+					/>
+				))
+			) : (
+				<p className='mt-10 font-light text-zinc-200'>0 posts</p>
+			)}
 		</ul>
 	);
 };

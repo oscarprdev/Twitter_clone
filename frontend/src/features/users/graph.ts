@@ -9,6 +9,8 @@ import { DefaultGetUserUsecase } from './application/get-user/get-user.usecase';
 import { uploadImageUsecaseAdapter } from '../shared/adapters/grapth';
 import { CreateUserHttpAdapter } from './adapters/create-user.http-adapter';
 import { DefaultCreateUserUsecase } from './application/create-user/create-user.usecase';
+import { LogInHttpAdapter } from './adapters/log-in.http-dapter';
+import { DefaultLogInUsecase } from './application/log-in/log-in.usecase';
 
 const usersInfra = new DefaultUsersInfra(API_URL);
 
@@ -23,3 +25,6 @@ export const getUserUsecase = new DefaultGetUserUsecase(getUserHttpAdapter);
 
 const createUserHttpAdapter = new CreateUserHttpAdapter(usersInfra, uploadImageUsecaseAdapter);
 export const createUserUsecase = new DefaultCreateUserUsecase(createUserHttpAdapter);
+
+const logInHttpAdapter = new LogInHttpAdapter(usersInfra);
+export const loginUsecase = new DefaultLogInUsecase(logInHttpAdapter);

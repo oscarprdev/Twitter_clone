@@ -7,8 +7,7 @@ import UserInfo from './UserInfo';
 import Settings from './Settings';
 import { useEffect } from 'react';
 import { useStoreDispatch } from '../store/hooks/useDispatch';
-import { getUserUsecase } from '../../features/users/graph';
-import { USER_ID } from '../../features/shared/domain/constants/constants';
+import { loginUsecase } from '../../features/users/graph';
 import { updateUserLogged } from '../store/slices/users-slice';
 
 const Layout = () => {
@@ -16,7 +15,7 @@ const Layout = () => {
 
 	useEffect(() => {
 		const getDefaultUserLogged = async () => {
-			const userResponse = await getUserUsecase.getUser({ userId: USER_ID });
+			const userResponse = await loginUsecase.logIn({ email: 'oscarperez@email.com', password: '1234' });
 
 			if (userResponse.state === 'success') {
 				dispatch(updateUserLogged({ user: userResponse.user }));

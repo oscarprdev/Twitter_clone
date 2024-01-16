@@ -55,3 +55,13 @@ export interface CreateUserInfraPayload {
 export interface CreateUserInfraOutput {
 	userCreated: DbUser;
 }
+
+export interface LogInInfraInput {
+	email: string;
+	password: string;
+}
+
+export interface LogInInfraOutput {
+	userLogged: DbUser;
+	jwt: string;
+}

@@ -23,7 +23,9 @@ export const useUnfollowers = () => {
 			}
 		};
 
-		getUnfollowers();
+		if (userLogged && userLogged.id !== '') {
+			getUnfollowers();
+		}
 	}, [userLogged.id]);
 
 	return {

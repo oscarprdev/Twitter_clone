@@ -1,22 +1,28 @@
 import { Link } from 'wouter';
 import PageWrapper from '../components/PageWrapper';
 import ArrowLeft from '../components/icons/ArrowLeft';
+import ProfileContainer from '../components/Profile/ProfileContainer';
+import { useUserById } from '../hooks/useUserById';
 
 interface UserInfoProps {
 	id: string;
 }
 
 const UserInfo = ({ id }: UserInfoProps) => {
+	const { user } = useUserById(id);
+
 	return (
 		<PageWrapper>
-			<header className='flex gap-2 items-center w-full p-2'>
-				<Link href='/home'>
-					<span className='p-2 rounded-full hover:bg-zinc-800 cursor-pointer'>
-						<ArrowLeft />
-					</span>
-				</Link>
-				<p>User info {id}</p>
-			</header>
+			{user ? (
+				<>
+					<ProfileContainer
+						user={user}
+						isInfo
+					/>
+				</>
+			) : (
+				<p>User not found</p>
+			)}
 		</PageWrapper>
 	);
 };

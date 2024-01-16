@@ -42,7 +42,7 @@ const ImageUpload = ({ handleImageUpload, loading, file }: ImageUploadProps) => 
 				type='file'
 				name='image'
 				onChange={handleImageInputChange}
-				value={imageInput.current?.value}
+				defaultValue={imageInput.current?.value}
 			/>
 		</>
 	);

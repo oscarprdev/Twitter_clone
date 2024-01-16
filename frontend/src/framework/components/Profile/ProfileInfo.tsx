@@ -12,9 +12,10 @@ interface ProfileInfoProps {
 	createdAt: string;
 	followersCount: number;
 	followingCount: number;
+	isInfo?: boolean;
 }
 
-const ProfileInfo = ({ profileImgUrl, name, surname, username, createdAt, followersCount, followingCount }: ProfileInfoProps) => {
+const ProfileInfo = ({ profileImgUrl, name, surname, username, createdAt, followersCount, followingCount, isInfo }: ProfileInfoProps) => {
 	const modal = useModal();
 
 	const handleConfigureProfileClick = () => {
@@ -33,11 +34,13 @@ const ProfileInfo = ({ profileImgUrl, name, surname, username, createdAt, follow
 						className='w-full h-full object-cover'
 					/>
 				</figure>
-				<button
-					onClick={handleConfigureProfileClick}
-					className='absolute right-2 bottom-[-3.5rem] px-8 py-2 border font-bold border-zinc-600 rounded-full hover:bg-zinc-900 duration-300'>
-					Configure profile
-				</button>
+				{!isInfo && (
+					<button
+						onClick={handleConfigureProfileClick}
+						className='absolute right-2 bottom-[-3.5rem] px-8 py-2 border font-bold border-zinc-600 rounded-full hover:bg-zinc-900 duration-300'>
+						Configure profile
+					</button>
+				)}
 			</div>
 			<section className='flex flex-col gap-1 px-5 pt-24'>
 				<p className='capitalize text-xl font-white font-extrabold'>{`${name} ${surname}`}</p>
