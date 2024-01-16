@@ -1,26 +1,21 @@
+import { StateUsecase } from '../../../shared/application/state.usecase';
 import { GetUserAuthPorts } from './get-user-auth.ports';
-import { GetUserAuthInput, GetUserAuthOutput } from './get-user-auth.types';
+import { GetUserAuthInput } from './get-user-auth.types';
 
 export interface GetUserAuthUsecase {
-	getUserAuth(input: GetUserAuthInput): Promise<GetUserAuthOutput>;
+	getUserAuth(input: GetUserAuthInput): Promise<void>;
 }
 
 export class DefaultGetUserAuthUsecase implements GetUserAuthUsecase {
-	constructor(private readonly ports: GetUserAuthPorts) {}
+	constructor(private readonly ports: GetUserAuthPorts, private readonly stateUsecase: StateUsecase) {}
 
-	async getUserAuth({ jwt }: GetUserAuthInput): Promise<GetUserAuthOutput> {
+	async getUserAuth({ jwt }: GetUserAuthInput): Promise<void> {
 		try {
 			const { user } = await this.ports.getUserAuth({ jwt });
 
-			return {
-				state: 'success',
-				user,
-			};
+			this.stateUsecase.updateUserLogged(user);
 		} catch (err: unknown) {
-			return {
-				error: `Error authorising user: ${err}`,
-				state: 'error',
-			};
+			this.stateUsecase.updateErrorState(`Error authorising user: ${err}`);
 		}
 	}
 }

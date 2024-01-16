@@ -1,33 +1,28 @@
+import { StateUsecase } from '../../../shared/application/state.usecase';
 import { LogInPorts } from './log-in.ports';
-import { LogInInput, LogInOutput } from './log-in.types';
+import { LogInInput } from './log-in.types';
 
 export interface LogInUsecase {
-	logIn(input: LogInInput): Promise<LogInOutput>;
+	logIn(input: LogInInput): Promise<void>;
 }
 
 export class DefaultLogInUsecase implements LogInUsecase {
-	constructor(private readonly ports: LogInPorts) {}
+	constructor(private readonly ports: LogInPorts, private readonly stateUsecase: StateUsecase) {}
 
 	private updateJWT(jwt: string) {
 		localStorage.clear();
 		localStorage.setItem('jwt', jwt);
 	}
 
-	async logIn({ email, password }: LogInInput): Promise<LogInOutput> {
+	async logIn({ email, password }: LogInInput): Promise<void> {
 		try {
 			const { userLogged, jwt } = await this.ports.logIn({ email, password });
 
 			this.updateJWT(jwt);
 
-			return {
-				state: 'success',
-				user: userLogged,
-			};
+			this.stateUsecase.updateUserLogged(userLogged);
 		} catch (err: unknown) {
-			return {
-				error: `Error logging user: ${err}`,
-				state: 'error',
-			};
+			this.stateUsecase.updateErrorState(`Error authorising user: ${err}`);
 		}
 	}
 }
