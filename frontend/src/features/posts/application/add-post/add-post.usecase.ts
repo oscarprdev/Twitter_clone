@@ -1,13 +1,14 @@
+import { StateUsecase } from '../../../shared/application/redux.usecase';
 import { Post } from '../../../shared/domain/types/posts';
 import { AddPostPorts } from './add-post.ports';
-import { AddPostUsecaseInput, AddPostUsecaseResponse } from './add-post.types';
+import { AddPostUsecaseInput } from './add-post.types';
 
 export interface AddPostUsecase {
-	addPost(input: AddPostUsecaseInput): Promise<AddPostUsecaseResponse>;
+	addPost(input: AddPostUsecaseInput): Promise<void>;
 }
 
 export class DefaultAddPostUsecase implements AddPostUsecase {
-	constructor(private readonly ports: AddPostPorts) {}
+	constructor(private readonly ports: AddPostPorts, private readonly stateUsecase: StateUsecase) {}
 
 	private async addPostWithImage(userId: string, post: string, file: File) {
 		const imageUploaded = await this.ports.uploadImage({ userId, file });
@@ -15,7 +16,7 @@ export class DefaultAddPostUsecase implements AddPostUsecase {
 		return await this.ports.addPost({ post, userId, image: imageUploaded.url });
 	}
 
-	async addPost({ post, userId, file }: AddPostUsecaseInput): Promise<AddPostUsecaseResponse> {
+	async addPost({ post, userId, file }: AddPostUsecaseInput): Promise<void> {
 		try {
 			let postCreated: Post;
 
@@ -25,15 +26,9 @@ export class DefaultAddPostUsecase implements AddPostUsecase {
 				postCreated = await this.ports.addPost({ post, userId, image: '' });
 			}
 
-			return {
-				post: postCreated,
-				state: 'success',
-			};
+			this.stateUsecase.addPost(postCreated);
 		} catch (err: unknown) {
-			return {
-				error: `Error creating a post: ${err}`,
-				state: 'error',
-			};
+			this.stateUsecase.updateErrorState(`Error creating a post: ${err}`);
 		}
 	}
 }

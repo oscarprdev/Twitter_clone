@@ -1,4 +1,4 @@
-import { StateUsecase } from '../../../shared/application/state.usecase';
+import { StateUsecase } from '../../../shared/application/redux.usecase';
 import { RemoveFollowPorts } from './remove-follow.ports';
 import { RemoveFollowInput } from './remove-follow.types';
 

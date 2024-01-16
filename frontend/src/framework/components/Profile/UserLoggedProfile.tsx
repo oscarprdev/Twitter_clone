@@ -1,14 +1,10 @@
-import { useStoreSelector } from '../../store/hooks/useSelector';
+import { useUserLogged } from '../../hooks/useUserLogged';
 import ProfileContainer from './ProfileContainer';
 
 const UserLoggedProfile = () => {
-	const userLogged = useStoreSelector((state) => state.users.userLogged);
+	const { userLogged } = useUserLogged();
 
-	return (
-		<>
-			<ProfileContainer user={userLogged} />
-		</>
-	);
+	return <>{userLogged.id.length > 0 && <ProfileContainer user={userLogged} />}</>;
 };
 
 export default UserLoggedProfile;

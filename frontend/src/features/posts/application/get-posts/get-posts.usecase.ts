@@ -1,27 +1,21 @@
+import { StateUsecase } from '../../../shared/application/redux.usecase';
 import { GetPostsPorts } from './get-posts.ports';
-import { GetPostsInput, GetPostsUsecaseOutput } from './get-posts.types';
+import { GetPostsInput } from './get-posts.types';
 
 export interface GetPostsUsecase {
-	getPosts(input: GetPostsInput): Promise<GetPostsUsecaseOutput>;
+	getPosts(input: GetPostsInput): Promise<void>;
 }
 
 export class DefaultGetPostsUsecase implements GetPostsUsecase {
-	constructor(private readonly ports: GetPostsPorts) {}
+	constructor(private readonly ports: GetPostsPorts, private readonly stateUsecase: StateUsecase) {}
 
-	async getPosts({ limit, offset }: GetPostsInput): Promise<GetPostsUsecaseOutput> {
+	async getPosts({ limit, offset }: GetPostsInput): Promise<void> {
 		try {
-			const { posts, postsCount } = await this.ports.getPosts({ limit, offset });
+			const { posts } = await this.ports.getPosts({ limit, offset });
 
-			return {
-				posts,
-				postsCount,
-				state: 'success',
-			};
+			this.stateUsecase.getPosts(posts);
 		} catch (err: unknown) {
-			return {
-				error: `Error listing all posts: ${err}`,
-				state: 'error',
-			};
+			this.stateUsecase.updateErrorState(`Error listing all posts: ${err}`);
 		}
 	}
 }

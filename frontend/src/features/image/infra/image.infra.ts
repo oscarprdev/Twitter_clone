@@ -24,13 +24,13 @@ export class DefaultUploadImageInfra implements UploadImageInfra {
 
 			const jsonResponse = await response.json();
 
-			console.log(jsonResponse);
+			jsonResponse;
 
 			return {
 				url: `https://pub-43949222ba2448cbbff5d5c5019cd5e6.r2.dev/${jsonResponse.Key}`,
 			};
 		} catch (error: unknown) {
-			console.log(error);
+			error;
 			throw new Error(`${error}`);
 		}
 	}

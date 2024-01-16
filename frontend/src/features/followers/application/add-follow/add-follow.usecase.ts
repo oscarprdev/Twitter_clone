@@ -1,27 +1,21 @@
+import { StateUsecase } from '../../../shared/application/redux.usecase';
 import { AddFollowPorts } from './add-follow.ports';
-import { AddFollowInput, AddFollowOutput } from './add-follow.types';
+import { AddFollowInput } from './add-follow.types';
 
 interface AddFollowUsecase {
-	addFollow(input: AddFollowInput): Promise<AddFollowOutput>;
+	addFollow(input: AddFollowInput): Promise<void>;
 }
 
 export class DefaultAddFollowUsecase implements AddFollowUsecase {
-	constructor(private readonly ports: AddFollowPorts) {}
+	constructor(private readonly ports: AddFollowPorts, private readonly stateUsecase: StateUsecase) {}
 
-	async addFollow(input: AddFollowInput): Promise<AddFollowOutput> {
+	async addFollow(input: AddFollowInput): Promise<void> {
 		try {
-			const { user, followTo } = await this.ports.addFollow({ userId: input.userId, followTo: input.followTo });
+			const { followTo } = await this.ports.addFollow({ userId: input.userId, followTo: input.followTo });
 
-			return {
-				state: 'success',
-				user,
-				followTo,
-			};
+			this.stateUsecase.addFollow(followTo);
 		} catch (err: unknown) {
-			return {
-				error: `Error listing all unfollowers: ${err}`,
-				state: 'error',
-			};
+			this.stateUsecase.updateErrorState(`Error listing all unfollowers: ${err}`);
 		}
 	}
 }

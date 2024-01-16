@@ -4,8 +4,6 @@ import ImageUpload from '../Home/ImageUpload';
 import { strCapitalize } from '../../utils/strCapitalize';
 import LoaderIcon from '../icons/LoaderIcon';
 import { updateUserUsecase } from '../../../features/users/graph';
-import { useStoreDispatch } from '../../store/hooks/useDispatch';
-import { updateUserLogged } from '../../store/slices/users-slice';
 import { useModal } from '../../hooks/useModal';
 
 type UserInfo = {
@@ -17,7 +15,6 @@ type UserInfo = {
 
 const UpdateUserModal = () => {
 	const userLogged = useStoreSelector((state) => state.users.userLogged);
-	const dispatch = useStoreDispatch();
 	const modal = useModal();
 
 	const [loading, setLoading] = useState(false);
@@ -52,7 +49,7 @@ const UpdateUserModal = () => {
 
 		setLoading(true);
 
-		const updatedUserResponse = await updateUserUsecase.updateUser({
+		await updateUserUsecase.updateUser({
 			userId: userLogged.id,
 			name: userInfo.name,
 			surname: userInfo.surname,
@@ -60,11 +57,8 @@ const UpdateUserModal = () => {
 			prevImage: userInfo.prevImage,
 		});
 
-		if (updatedUserResponse.state === 'success') {
-			setLoading(false);
-			dispatch(updateUserLogged({ user: updatedUserResponse.user }));
-			modal.closeModal();
-		}
+		setLoading(false);
+		modal.closeModal();
 	};
 
 	return (

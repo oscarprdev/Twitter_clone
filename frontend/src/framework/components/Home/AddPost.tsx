@@ -1,15 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { strCapitalize } from '../../utils/strCapitalize';
 import { addPostUsecase } from '../../../features/posts/graph';
-import { addPost } from '../../store/slices/posts-slice';
-import { ADD_POST_TYPES } from '../../store/reducers/posts/add-post/add-post.reducer.types';
 import { USER_ID } from '../../../features/shared/domain/constants/constants';
 import { useStoreSelector } from '../../store/hooks/useSelector';
 import UserImage from '../UserImage';
 import { useModal } from '../../hooks/useModal';
 import ImageUpload from './ImageUpload';
 import LoaderIcon from '../icons/LoaderIcon';
-import { useStoreDispatch } from '../../store/hooks/useDispatch';
 
 interface PostState {
 	content: string;
@@ -21,7 +18,6 @@ const AddPost = () => {
 	const [post, setPost] = useState<PostState>({ content: '', file: null });
 
 	const userLogged = useStoreSelector((state) => state.users.userLogged);
-	const dispatch = useStoreDispatch();
 	const { closeModal } = useModal();
 
 	const handleTextareaChange = (e: ChangeEvent) => {
@@ -41,16 +37,15 @@ const AddPost = () => {
 
 		setLoading(true);
 
-		const response = await addPostUsecase.addPost({ userId: USER_ID, post: post.content, file: post.file });
+		await addPostUsecase.addPost({ userId: USER_ID, post: post.content, file: post.file });
 
-		if (response.state === 'success') {
-			dispatch(addPost({ post: response.post, type: ADD_POST_TYPES.ADD_POST }));
+		handleCleanForm();
+	};
 
-			setLoading(false);
-			setPost({ content: '', file: null });
-
-			closeModal();
-		}
+	const handleCleanForm = () => {
+		setLoading(false);
+		setPost({ content: '', file: null });
+		closeModal();
 	};
 
 	const isButtonDisabled = post.content.length === 0;

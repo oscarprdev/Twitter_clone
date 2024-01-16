@@ -1,4 +1,4 @@
-import { StateUsecase } from '../../../shared/application/state.usecase';
+import { StateUsecase } from '../../../shared/application/redux.usecase';
 import { GetUnfollowersPorts } from './get-unfollowers.ports';
 import { GetUnfollowersInput } from './get-unfollowers.types';
 

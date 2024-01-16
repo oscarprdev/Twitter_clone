@@ -6,12 +6,12 @@ interface ProfilePostsProps {
 }
 
 const ProfilePosts = ({ id }: ProfilePostsProps) => {
-	const { postsByUser } = usePostsByUser(id);
+	const { posts } = usePostsByUser(id);
 
 	return (
 		<ul className='w-full h-fit flex flex-col items-center mt-[-1.3rem]'>
-			{postsByUser.length > 0 ? (
-				postsByUser.map((post) => (
+			{posts.length > 0 ? (
+				posts.map((post) => (
 					<Post
 						key={post.id}
 						post={post}

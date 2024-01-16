@@ -10,7 +10,7 @@ import { useStoreSelector } from '../store/hooks/useSelector';
 import ToastError from '../components/ToastError';
 
 const Layout = () => {
-	useUserLogged('oscarperez@email.com');
+	useUserLogged();
 	const { errorMessage } = useStoreSelector((state) => state.errors);
 
 	return (

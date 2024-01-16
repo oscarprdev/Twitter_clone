@@ -1,21 +1,20 @@
+import { StateUsecase } from '../../../shared/application/redux.usecase';
 import { CreateUserPorts } from './create-user.ports';
-import { CreateUserInput, CreateUserOutput } from './create-user.types';
+import { CreateUserInput } from './create-user.types';
 
 export interface CreateUserUsecase {
-	createUser(input: CreateUserInput): Promise<CreateUserOutput>;
+	createUser(input: CreateUserInput): Promise<void>;
 }
 
 export class DefaultCreateUserUsecase implements CreateUserUsecase {
-	constructor(private readonly ports: CreateUserPorts) {}
+	constructor(private readonly ports: CreateUserPorts, private readonly stateUsecase: StateUsecase) {}
 
-	async createUser(input: CreateUserInput): Promise<CreateUserOutput> {
+	async createUser(input: CreateUserInput): Promise<void> {
 		try {
 			let imageUrl: string = input.prevImage;
 
 			if (input.file) {
 				const { url } = await this.ports.uploadImage({ userId: '', file: input.file });
-
-				console.log(url);
 
 				imageUrl = url;
 			}
@@ -29,17 +28,9 @@ export class DefaultCreateUserUsecase implements CreateUserUsecase {
 				imageUrl,
 			});
 
-			console.log(user);
-
-			return {
-				state: 'success',
-				user,
-			};
+			this.stateUsecase.addUser(user);
 		} catch (err: unknown) {
-			return {
-				error: `Error creating user: ${err}`,
-				state: 'error',
-			};
+			this.stateUsecase.updateErrorState(`Error creating user: ${err}`);
 		}
 	}
 }

@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { User } from '../../../features/shared/domain/types/user';
 import { loginUsecase } from '../../../features/users/graph';
 import { useAllUsers } from '../../hooks/useAllUsers';
-import { useStoreDispatch } from '../../store/hooks/useDispatch';
 import { useStoreSelector } from '../../store/hooks/useSelector';
-import { updateUserLogged } from '../../store/slices/users-slice';
 import UserImage from '../UserImage';
 import { navigate } from 'wouter/use-location';
 import LoaderIcon from '../icons/LoaderIcon';
@@ -14,7 +12,6 @@ const SelectUser = () => {
 	const { users } = useAllUsers();
 
 	const userLogged = useStoreSelector((state) => state.users.userLogged);
-	const dispatch = useStoreDispatch();
 
 	const sortUsersByUserLoggedId = (a: User, b: User) => {
 		if (a.id === userLogged.id) {
@@ -28,14 +25,10 @@ const SelectUser = () => {
 
 	const handleLoginClick = async (email: string) => {
 		setLoading(true);
-		const userLoggedResponse = await loginUsecase.logIn({ email, password: '1234' });
+		await loginUsecase.logIn({ email, password: '1234' });
 
-		if (userLoggedResponse.state === 'success') {
-			dispatch(updateUserLogged({ user: userLoggedResponse.user }));
-			setLoading(false);
-
-			navigate('/home');
-		}
+		setLoading(false);
+		navigate('/home');
 	};
 
 	return (

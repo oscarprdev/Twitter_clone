@@ -1,27 +1,21 @@
+import { StateUsecase } from '../../../shared/application/redux.usecase';
 import { GetPostsByUserPorts } from './get-posts-by-user.ports';
-import { GetPostsByUserInput, GetPostsByUserUsecaseOutput } from './get-posts-by-user.types';
+import { GetPostsByUserInput } from './get-posts-by-user.types';
 
 export interface GetPostsByUserUsecase {
-	getPostsByUser(input: GetPostsByUserInput): Promise<GetPostsByUserUsecaseOutput>;
+	getPostsByUser(input: GetPostsByUserInput): Promise<void>;
 }
 
 export class DefaultGetPostsByUserUsecase implements GetPostsByUserUsecase {
-	constructor(private readonly ports: GetPostsByUserPorts) {}
+	constructor(private readonly ports: GetPostsByUserPorts, private readonly stateUsecase: StateUsecase) {}
 
-	async getPostsByUser({ userId }: GetPostsByUserInput): Promise<GetPostsByUserUsecaseOutput> {
+	async getPostsByUser({ userId }: GetPostsByUserInput): Promise<void> {
 		try {
-			const { posts, postsCount } = await this.ports.getPostsByUser({ userId });
+			const { posts } = await this.ports.getPostsByUser({ userId });
 
-			return {
-				posts,
-				postsCount,
-				state: 'success',
-			};
+			this.stateUsecase.getProfilePosts(posts);
 		} catch (err: unknown) {
-			return {
-				error: `Error listing all posts: ${err}`,
-				state: 'error',
-			};
+			this.stateUsecase.updateErrorState(`Error listing all posts: ${err}`);
 		}
 	}
 }

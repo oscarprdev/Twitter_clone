@@ -1,4 +1,4 @@
-import { StateUsecase } from '../../../shared/application/state.usecase';
+import { StateUsecase } from '../../../shared/application/redux.usecase';
 import { GetUserAuthPorts } from './get-user-auth.ports';
 import { GetUserAuthInput } from './get-user-auth.types';
 

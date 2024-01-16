@@ -1,26 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { getPostsByUserUsecase } from '../../features/posts/graph';
-import { Post } from '../../features/shared/domain/types/posts';
+import { useStoreSelector } from '../store/hooks/useSelector';
 
 export const usePostsByUser = (id: string) => {
-	const [postsByUser, setPostsByUser] = useState<Post[]>([]);
-	const [postsCount, setPostsCount] = useState(0);
+	const posts = useStoreSelector((state) => state.posts.profilePosts);
 
 	useEffect(() => {
 		const getPostsByUser = async () => {
-			const postsByUserResponse = await getPostsByUserUsecase.getPostsByUser({ userId: id });
-
-			if (postsByUserResponse.state === 'success') {
-				setPostsByUser(postsByUserResponse.posts);
-				setPostsCount(postsByUserResponse.postsCount);
-			}
+			await getPostsByUserUsecase.getPostsByUser({ userId: id });
 		};
 
 		getPostsByUser();
 	}, [id]);
 
 	return {
-		postsByUser,
-		postsCount,
+		posts,
 	};
 };

@@ -11,7 +11,6 @@ export class HttpInfra {
 
 			return jsonResponse;
 		} catch (error: unknown) {
-			console.log(error, 'error');
 			throw new Error(`${error}`);
 		}
 	}

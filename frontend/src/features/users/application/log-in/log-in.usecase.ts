@@ -1,4 +1,4 @@
-import { StateUsecase } from '../../../shared/application/state.usecase';
+import { StateUsecase } from '../../../shared/application/redux.usecase';
 import { LogInPorts } from './log-in.ports';
 import { LogInInput } from './log-in.types';
 
@@ -22,7 +22,7 @@ export class DefaultLogInUsecase implements LogInUsecase {
 
 			this.stateUsecase.updateUserLogged(userLogged);
 		} catch (err: unknown) {
-			this.stateUsecase.updateErrorState(`Error authorising user: ${err}`);
+			this.stateUsecase.updateErrorState(`Error logging user: ${err}`);
 		}
 	}
 }

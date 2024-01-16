@@ -1,6 +1,4 @@
-import { Link } from 'wouter';
 import PageWrapper from '../components/PageWrapper';
-import ArrowLeft from '../components/icons/ArrowLeft';
 import ProfileContainer from '../components/Profile/ProfileContainer';
 import { useUserById } from '../hooks/useUserById';
 

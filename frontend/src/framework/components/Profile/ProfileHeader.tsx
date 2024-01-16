@@ -10,7 +10,7 @@ interface ProfileHeaderProps {
 }
 
 const ProfileHeader = ({ name, surname, id, isInfo }: ProfileHeaderProps) => {
-	const { postsCount } = usePostsByUser(id);
+	const { posts } = usePostsByUser(id);
 
 	return (
 		<header
@@ -25,7 +25,7 @@ const ProfileHeader = ({ name, surname, id, isInfo }: ProfileHeaderProps) => {
 			)}
 			<div className='ml-5 flex flex-col justify-start'>
 				<p className='capitalize text-xl font-white font-extrabold'>{`${name} ${surname}`}</p>
-				<p className='text-zinc-500'>{postsCount} posts</p>
+				<p className='text-zinc-500'>{posts.length} posts</p>
 			</div>
 		</header>
 	);

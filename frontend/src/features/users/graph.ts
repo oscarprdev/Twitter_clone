@@ -15,7 +15,7 @@ import { GetAllUsersHttpAdapter } from './adapters/get-all-users.http-adapter';
 import { DefaultGetAllUsersUsecase } from './application/get-all-users/get-all-users.usecase';
 import { GetUserAuthHttpAdapter } from './adapters/get-user-auth.http-adapter';
 import { DefaultGetUserAuthUsecase } from './application/get-user-auth/get-user-auth.usecase';
-import { stateUsecase } from '../shared/application/grapth';
+import { reduxUsecase } from '../shared/application/grapth';
 
 const usersInfra = new DefaultUsersInfra(API_URL);
 
@@ -23,19 +23,19 @@ const searchUsersHttpAdapter = new SearchUsersHttpAdapter(usersInfra);
 export const searchUsersUsecase = new DefaultSearchUsersUsecase(searchUsersHttpAdapter);
 
 const updateUserHttpAdapter = new UpdateUserHttpAdapter(usersInfra, uploadImageUsecaseAdapter);
-export const updateUserUsecase = new DefaultUpdateUserUsecase(updateUserHttpAdapter);
+export const updateUserUsecase = new DefaultUpdateUserUsecase(updateUserHttpAdapter, reduxUsecase);
 
 const getUserHttpAdapter = new GetUserHttpAdapter(usersInfra);
-export const getUserUsecase = new DefaultGetUserUsecase(getUserHttpAdapter, stateUsecase);
+export const getUserUsecase = new DefaultGetUserUsecase(getUserHttpAdapter, reduxUsecase);
 
 const createUserHttpAdapter = new CreateUserHttpAdapter(usersInfra, uploadImageUsecaseAdapter);
-export const createUserUsecase = new DefaultCreateUserUsecase(createUserHttpAdapter);
+export const createUserUsecase = new DefaultCreateUserUsecase(createUserHttpAdapter, reduxUsecase);
 
 const getAllUsersAdapter = new GetAllUsersHttpAdapter(usersInfra);
 export const getAllUsersUsecase = new DefaultGetAllUsersUsecase(getAllUsersAdapter);
 
 const getUserAuthHttpAdapter = new GetUserAuthHttpAdapter(usersInfra);
-export const getUserAuthUsecase = new DefaultGetUserAuthUsecase(getUserAuthHttpAdapter, stateUsecase);
+export const getUserAuthUsecase = new DefaultGetUserAuthUsecase(getUserAuthHttpAdapter, reduxUsecase);
 
 const logInHttpAdapter = new LogInHttpAdapter(usersInfra);
-export const loginUsecase = new DefaultLogInUsecase(logInHttpAdapter, stateUsecase);
+export const loginUsecase = new DefaultLogInUsecase(logInHttpAdapter, reduxUsecase);

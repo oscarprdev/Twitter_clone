@@ -1,11 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useModal } from '../../hooks/useModal';
-import { useStoreDispatch } from '../../store/hooks/useDispatch';
 import ImageUpload from '../Home/ImageUpload';
 import { strCapitalize } from '../../utils/strCapitalize';
 import LoaderIcon from '../icons/LoaderIcon';
 import { createUserUsecase } from '../../../features/users/graph';
-import { addUser } from '../../store/slices/users-slice';
 
 type UserInfo = {
 	name: string;
@@ -28,7 +26,6 @@ const initialState = {
 };
 
 const CreateUserModal = () => {
-	const dispatch = useStoreDispatch();
 	const modal = useModal();
 
 	const [loading, setLoading] = useState(false);
@@ -58,7 +55,7 @@ const CreateUserModal = () => {
 
 		setLoading(true);
 
-		const userCreatedResponse = await createUserUsecase.createUser({
+		await createUserUsecase.createUser({
 			name: userInfo.name,
 			surname: userInfo.surname,
 			username: userInfo.username,
@@ -68,11 +65,8 @@ const CreateUserModal = () => {
 			prevImage: userInfo.prevImage,
 		});
 
-		if (userCreatedResponse.state === 'success') {
-			dispatch(addUser({ user: userCreatedResponse.user }));
-			setLoading(false);
-			modal.closeModal();
-		}
+		setLoading(false);
+		modal.closeModal();
 	};
 
 	return (
