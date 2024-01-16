@@ -22,7 +22,7 @@ const initialState = {
 	surname: '',
 	username: '',
 	email: '',
-	password: '',
+	password: '1234',
 	file: null,
 	prevImage: 'https://pub-43949222ba2448cbbff5d5c5019cd5e6.r2.dev/default-avatar.png',
 };
@@ -77,7 +77,7 @@ const CreateUserModal = () => {
 
 	return (
 		<form
-			className='relative flex flex-col items-center gap-3 w-[500px]'
+			className='relative flex flex-col items-center gap-5 w-[500px]'
 			onSubmit={handleSubmit}>
 			<figure className='rounded-full overflow-hidden w-32 h-32 border-2 border-zinc-600'>
 				<img
@@ -96,7 +96,7 @@ const CreateUserModal = () => {
 			<label className='flex flex-col w-[70%] gap-1'>
 				<p className='text-zinc-500'>Username</p>
 				<input
-					className=' text-zinc-300 px-2 py-3 rounded-md bg-transparent border border-zinc-600 outline-[var(--contrast)]'
+					className=' text-zinc-300 px-2 py-4 rounded-md bg-transparent border border-zinc-600 outline-[var(--contrast)]'
 					name='username'
 					placeholder='username'
 					required
@@ -107,7 +107,7 @@ const CreateUserModal = () => {
 			<label className='flex flex-col w-[70%] gap-1'>
 				<p className='text-zinc-500'>Email</p>
 				<input
-					className=' text-zinc-300 px-2 py-3 rounded-md bg-transparent border border-zinc-600 outline-[var(--contrast)]'
+					className=' text-zinc-300 px-2 py-4 rounded-md bg-transparent border border-zinc-600 outline-[var(--contrast)]'
 					name='email'
 					placeholder='email'
 					required
@@ -117,22 +117,9 @@ const CreateUserModal = () => {
 				/>
 			</label>
 			<label className='flex flex-col w-[70%] gap-1'>
-				<p className='text-zinc-500'>Password</p>
-				<input
-					className=' text-zinc-300 px-2 py-3 rounded-md bg-transparent border border-zinc-600 outline-[var(--contrast)]'
-					name='password'
-					placeholder='password'
-					required
-					type='password'
-					minLength={4}
-					onChange={handleInputChange}
-					value={strCapitalize(userInfo.password)}
-				/>
-			</label>
-			<label className='flex flex-col w-[70%] gap-1'>
 				<p className='text-zinc-500'>Name</p>
 				<input
-					className=' text-zinc-300 px-2 py-3 rounded-md bg-transparent border border-zinc-600 outline-[var(--contrast)]'
+					className=' text-zinc-300 px-2 py-4 rounded-md bg-transparent border border-zinc-600 outline-[var(--contrast)]'
 					name='name'
 					placeholder='name'
 					required
@@ -143,7 +130,7 @@ const CreateUserModal = () => {
 			<label className='flex flex-col w-[70%] gap-1'>
 				<p className='text-zinc-500'>Surname</p>
 				<input
-					className=' text-zinc-300 px-2 py-3 rounded-md bg-transparent border border-zinc-600 outline-[var(--contrast)]'
+					className=' text-zinc-300 px-2 py-4 rounded-md bg-transparent border border-zinc-600 outline-[var(--contrast)]'
 					name='surname'
 					placeholder='surname'
 					required
@@ -153,7 +140,7 @@ const CreateUserModal = () => {
 			</label>
 			<button
 				disabled={loading}
-				className='mt-5 mb-2 py-3 px-12 font-bold bg-white hover:bg-slate-200 duration-200 text-black rounded-full'
+				className='mt-5 mb-2 py-4 px-12 font-bold bg-white hover:bg-slate-200 duration-200 text-black rounded-full'
 				type='submit'>
 				{loading ? (
 					<span className='block w-6 h-6 text-zinc-700 animate-spin'>

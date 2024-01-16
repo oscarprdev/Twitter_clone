@@ -1,14 +1,19 @@
 export class HttpInfra {
 	constructor() {}
 
-	async GET<R>(url: string): Promise<R> {
+	async GET<R>(url: string, headers?: Record<string, string>): Promise<R> {
 		try {
-			const response = await fetch(url);
+			const response = await fetch(url, {
+				headers: headers instanceof Object ? new Headers(headers) : undefined,
+			});
 
 			const jsonResponse = await response.json();
 
+			console.log(jsonResponse);
+
 			return jsonResponse;
 		} catch (error: unknown) {
+			console.log(error, 'error');
 			throw new Error(`${error}`);
 		}
 	}
@@ -48,6 +53,22 @@ export class HttpInfra {
 			const response = await fetch(url, {
 				method: 'DELETE',
 				body: JSON.stringify(body),
+			});
+
+			const jsonResponse = await response.json();
+
+			return jsonResponse;
+		} catch (error: unknown) {
+			throw new Error(`${error}`);
+		}
+	}
+
+	async GETAUTH<R>(url: string, auth: string): Promise<R> {
+		try {
+			const response = await fetch(url, {
+				headers: {
+					Authorization: auth,
+				},
 			});
 
 			const jsonResponse = await response.json();

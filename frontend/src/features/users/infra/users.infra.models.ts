@@ -65,3 +65,15 @@ export interface LogInInfraOutput {
 	userLogged: DbUser;
 	jwt: string;
 }
+
+export interface GetAllUsersInfraOutput {
+	users: DbUser[];
+}
+
+export interface GetUserByAuthInfraInput {
+	jwt: string;
+}
+
+export interface GetUserByAuthInfraOutput {
+	user: DbUser;
+}

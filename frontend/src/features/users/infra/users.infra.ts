@@ -3,6 +3,9 @@ import {
 	CreateUserInfraInput,
 	CreateUserInfraOutput,
 	CreateUserInfraPayload,
+	GetAllUsersInfraOutput,
+	GetUserByAuthInfraInput,
+	GetUserByAuthInfraOutput,
 	GetUserByIdPayload,
 	GetUserByIdResponse,
 	GetUsersBySearchInfraInput,
@@ -19,6 +22,8 @@ export interface UsersInfra {
 	getUserById(input: GetUserByIdPayload): Promise<GetUserByIdResponse>;
 	updateUser(input: UpdateUserInfraInput): Promise<UpdateUserInfraOutput>;
 	createUser(input: CreateUserInfraInput): Promise<CreateUserInfraOutput>;
+	getAllUsers(): Promise<GetAllUsersInfraOutput>;
+	getUserByAuth(input: GetUserByAuthInfraInput): Promise<GetUserByAuthInfraOutput>;
 	logIn(input: LogInInfraInput): Promise<LogInInfraOutput>;
 }
 
@@ -63,6 +68,21 @@ export class DefaultUsersInfra extends HttpInfra implements UsersInfra {
 		};
 
 		return await this.POST<CreateUserInfraOutput, CreateUserInfraPayload>(url, payload);
+	}
+
+	async getAllUsers(): Promise<GetAllUsersInfraOutput> {
+		const url = `${this.API_URL}/users`;
+
+		return await this.GET<GetAllUsersInfraOutput>(url);
+	}
+
+	async getUserByAuth({ jwt }: GetUserByAuthInfraInput): Promise<GetUserByAuthInfraOutput> {
+		const url = `${this.API_URL}/users/auth`;
+		const headers = {
+			Authorization: jwt,
+		};
+
+		return await this.GET<GetUserByAuthInfraOutput>(url, headers);
 	}
 
 	async logIn({ email, password }: LogInInfraInput): Promise<LogInInfraOutput> {

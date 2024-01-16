@@ -5,25 +5,10 @@ import Profile from './Profile';
 import Home from './Home';
 import UserInfo from './UserInfo';
 import Settings from './Settings';
-import { useEffect } from 'react';
-import { useStoreDispatch } from '../store/hooks/useDispatch';
-import { loginUsecase } from '../../features/users/graph';
-import { updateUserLogged } from '../store/slices/users-slice';
+import { useUserLogged } from '../hooks/useUserLogged';
 
 const Layout = () => {
-	const dispatch = useStoreDispatch();
-
-	useEffect(() => {
-		const getDefaultUserLogged = async () => {
-			const userResponse = await loginUsecase.logIn({ email: 'oscarperez@email.com', password: '1234' });
-
-			if (userResponse.state === 'success') {
-				dispatch(updateUserLogged({ user: userResponse.user }));
-			}
-		};
-
-		getDefaultUserLogged();
-	}, []);
+	useUserLogged('oscarperez@email.com');
 
 	return (
 		<main className='flex h-screen w-screen justify-center items-start'>

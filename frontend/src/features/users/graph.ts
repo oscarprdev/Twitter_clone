@@ -11,6 +11,10 @@ import { CreateUserHttpAdapter } from './adapters/create-user.http-adapter';
 import { DefaultCreateUserUsecase } from './application/create-user/create-user.usecase';
 import { LogInHttpAdapter } from './adapters/log-in.http-dapter';
 import { DefaultLogInUsecase } from './application/log-in/log-in.usecase';
+import { GetAllUsersHttpAdapter } from './adapters/get-all-users.http-adapter';
+import { DefaultGetAllUsersUsecase } from './application/get-all-users/get-all-users.usecase';
+import { GetUserAuthHttpAdapter } from './adapters/get-user-auth.http-adapter';
+import { DefaultGetUserAuthUsecase } from './application/get-user-auth/get-user-auth.usecase';
 
 const usersInfra = new DefaultUsersInfra(API_URL);
 
@@ -25,6 +29,12 @@ export const getUserUsecase = new DefaultGetUserUsecase(getUserHttpAdapter);
 
 const createUserHttpAdapter = new CreateUserHttpAdapter(usersInfra, uploadImageUsecaseAdapter);
 export const createUserUsecase = new DefaultCreateUserUsecase(createUserHttpAdapter);
+
+const getAllUsersAdapter = new GetAllUsersHttpAdapter(usersInfra);
+export const getAllUsersUsecase = new DefaultGetAllUsersUsecase(getAllUsersAdapter);
+
+const getUserAuthHttpAdapter = new GetUserAuthHttpAdapter(usersInfra);
+export const getUserAuthUsecase = new DefaultGetUserAuthUsecase(getUserAuthHttpAdapter);
 
 const logInHttpAdapter = new LogInHttpAdapter(usersInfra);
 export const loginUsecase = new DefaultLogInUsecase(logInHttpAdapter);
