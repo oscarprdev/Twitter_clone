@@ -6,9 +6,12 @@ import Home from './Home';
 import UserInfo from './UserInfo';
 import Settings from './Settings';
 import { useUserLogged } from '../hooks/useUserLogged';
+import { useStoreSelector } from '../store/hooks/useSelector';
+import ToastError from '../components/ToastError';
 
 const Layout = () => {
 	useUserLogged('oscarperez@email.com');
+	const { errorMessage } = useStoreSelector((state) => state.errors);
 
 	return (
 		<main className='flex h-screen w-screen justify-center items-start'>
@@ -27,6 +30,7 @@ const Layout = () => {
 			/>
 			<Route path='/user/:id'>{(params) => <UserInfo id={params.id} />}</Route>
 			<Aside />
+			{errorMessage && <ToastError errorMessage={errorMessage} />}
 		</main>
 	);
 };

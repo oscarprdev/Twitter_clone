@@ -27,3 +27,28 @@
 .searchIcon::-webkit-search-cancel-button {
 	appearance: none;
 }
+
+.animate-fade-up {
+	animation: fade-up 5s ease forwards;
+}
+
+@keyframes fade-up {
+	0% {
+		transform: translateY(500px);
+		opacity: 0;
+	}
+	15% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+	85% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateY(500px);
+		opacity: 0;
+	}
+}
