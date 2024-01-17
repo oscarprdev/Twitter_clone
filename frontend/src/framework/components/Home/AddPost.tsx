@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { strCapitalize } from '../../utils/strCapitalize';
 import { addPostUsecase } from '../../../features/posts/graph';
-import { USER_ID } from '../../../features/shared/domain/constants/constants';
 import { useStoreSelector } from '../../store/hooks/useSelector';
 import UserImage from '../UserImage';
 import { useModal } from '../../hooks/useModal';
@@ -37,7 +36,7 @@ const AddPost = () => {
 
 		setLoading(true);
 
-		await addPostUsecase.addPost({ userId: USER_ID, post: post.content, file: post.file });
+		await addPostUsecase.addPost({ userId: userLogged.id, post: post.content, file: post.file });
 
 		handleCleanForm();
 	};
