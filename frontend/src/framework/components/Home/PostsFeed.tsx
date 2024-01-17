@@ -8,7 +8,7 @@ const PostFeed = () => {
 	return (
 		<>
 			<AddPost />
-			<ul className='flex flex-col w-full overflow-y-scroll border-t border-t-zinc-700'>
+			<ul className='flex flex-col w-full border-t border-t-zinc-700'>
 				{posts.length > 0 ? (
 					posts.map((post) => (
 						<Post

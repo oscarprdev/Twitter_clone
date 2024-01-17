@@ -26,7 +26,7 @@ const Post = ({ post }: PostProps) => {
 				</header>
 				<p className='flex-grow text-white text-lg'>{post.post}</p>
 				{post.image !== '' && (
-					<figure className='w-[80%] my-5 h-full border border-zinc-400 rounded-xl overflow-hidden'>
+					<figure className='w-[80%] my-5 ml-6 h-full border border-zinc-400 rounded-xl overflow-hidden'>
 						<img
 							src={post.image}
 							alt='Post image'
