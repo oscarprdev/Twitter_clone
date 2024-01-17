@@ -12,7 +12,7 @@ import (
 func Router(conn *sql.DB) *chi.Mux {
 	router := chi.NewRouter()
 	router.Use(cors.Handler(cors.Options{
-		AllowedOrigins: []string{"https://opr-twitter-clone.vercel.app", "http://localhost:5174"},
+		AllowedOrigins: []string{"https://opr-twitter-clone.vercel.app", "http://localhost:5173"},
 		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},
 		AllowedHeaders: []string{"Content-Type", "Authorization"},
 		MaxAge: 		300,
