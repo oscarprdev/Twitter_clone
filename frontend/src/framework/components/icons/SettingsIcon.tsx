@@ -8,7 +8,8 @@ const SettingsIcon = () => {
 			stroke='currentColor'
 			fill='none'
 			strokeLinecap='round'
-			strokeLinejoin='round'>
+			strokeLinejoin='round'
+			data-testid='settings-icon'>
 			<path
 				stroke='none'
 				d='M0 0h24v24H0z'

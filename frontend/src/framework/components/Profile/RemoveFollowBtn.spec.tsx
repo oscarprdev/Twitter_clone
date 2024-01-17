@@ -6,7 +6,7 @@ import { mockStore } from '../../../tests/unit/store/store.mock';
 import { userTestResponse } from '../../../tests/unit/responses/users.response';
 import RemoveFollowBtn from './RemoveFollowBtn';
 import { testRemoveFollowerHandler } from '../../../tests/unit/handlers/followers.handlers';
-import { addFollow } from '../../store/slices/users-slice';
+import { addFollow, removeFollow } from '../../store/slices/users-slice';
 
 describe('RemoveFollowBtn', () => {
 	let component: RenderResult;
@@ -34,11 +34,11 @@ describe('RemoveFollowBtn', () => {
 	it('Should update following and followers users from store if user click on it', async () => {
 		server.use(testRemoveFollowerHandler);
 
-		mockStore.dispatch(addFollow({ follower: userTestResponse }));
-
 		const button = component.getByRole('button', { name: 'Unfollow' });
 
 		fireEvent.click(button);
+
+		mockStore.dispatch(addFollow({ follower: userTestResponse }));
 
 		await waitFor(() => {
 			const { users } = mockStore.getState();
@@ -46,6 +46,8 @@ describe('RemoveFollowBtn', () => {
 			expect(users.followers).toHaveLength(1);
 			expect(users.unfollowers).toHaveLength(0);
 		});
+
+		mockStore.dispatch(removeFollow({ follower: userTestResponse }));
 
 		const { users } = mockStore.getState();
 

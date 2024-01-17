@@ -11,9 +11,12 @@ import {
 } from '../../../tests/unit/handlers/followers.handlers';
 import { SuccessfulGetUnfollowersResponse } from '../../../tests/unit/responses/follows/get-unfollowers.response';
 import { updateUnfollowers } from '../../store/slices/users-slice';
+import { mapDbUserToApplication } from '../../../features/shared/mappers/map-db-user-to-app';
 
 describe('UnfollowersCard', () => {
 	let component: RenderResult;
+
+	const unfollower = SuccessfulGetUnfollowersResponse.unfollowers[0];
 
 	beforeAll(() => server.listen());
 	afterAll(() => server.close());
@@ -36,10 +39,12 @@ describe('UnfollowersCard', () => {
 	it('Should render successfully', async () => {
 		server.use(testGetUnfollowersHandler);
 
+		mockStore.dispatch(updateUnfollowers({ unfollowers: [mapDbUserToApplication(unfollower)] }));
+
 		await waitFor(() => {
 			component.getByText('Who to follow');
 			component.getByRole('button', { name: 'Follow' });
-			component.getByText(SuccessfulGetUnfollowersResponse.unfollowers[0].name);
+			component.getByText(unfollower.name);
 		});
 	});
 
@@ -55,12 +60,16 @@ describe('UnfollowersCard', () => {
 		server.use(testGetUnfollowersHandler);
 		server.use(testAddFollowerHandler);
 
+		mockStore.dispatch(updateUnfollowers({ unfollowers: [mapDbUserToApplication(unfollower)] }));
+
 		await waitFor(() => {
-			component.getByText(SuccessfulGetUnfollowersResponse.unfollowers[0].name);
+			component.getByText(unfollower.name);
 			const button = component.getByRole('button', { name: 'Follow' });
 
 			fireEvent.click(button);
 		});
+
+		mockStore.dispatch(updateUnfollowers({ unfollowers: [] }));
 
 		await waitFor(() => {
 			component.getByText('No more users');

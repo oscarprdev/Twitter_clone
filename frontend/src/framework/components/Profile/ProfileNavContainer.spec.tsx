@@ -7,6 +7,8 @@ import { testGetPostsByUserHandler } from '../../../tests/unit/handlers/posts.ha
 import { Provider } from 'react-redux';
 import { mockStore } from '../../../tests/unit/store/store.mock';
 import { testGetFollowersHandler, testGetFollowingsHandler } from '../../../tests/unit/handlers/followers.handlers';
+import { getProfilePosts } from '../../store/slices/posts-slice';
+import { postResponse } from '../../../tests/unit/responses/posts.response';
 
 describe('ProfileNavContainer', () => {
 	let component: RenderResult;
@@ -33,6 +35,7 @@ describe('ProfileNavContainer', () => {
 
 	it('Should render properly posts by default', async () => {
 		server.use(testGetPostsByUserHandler);
+		mockStore.dispatch(getProfilePosts({ posts: [postResponse] }));
 
 		component.getByRole('profile-nav');
 

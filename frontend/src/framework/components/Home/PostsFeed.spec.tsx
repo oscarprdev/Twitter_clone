@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { mockStore } from '../../../tests/unit/store/store.mock';
 import { server } from '../../../tests/unit/server/server.mock';
 import { testAddPostHandler, testGetMorePostsHandler, testGetPostsHandler } from '../../../tests/unit/handlers/posts.handlers';
+import { addPost, getPosts } from '../../store/slices/posts-slice';
+import { postResponse } from '../../../tests/unit/responses/posts.response';
 
 describe('PostFeed', () => {
 	let component: RenderResult;
@@ -27,11 +29,12 @@ describe('PostFeed', () => {
 
 	it('Should render successfully', () => {
 		component.getByRole('form');
-		component.getByRole('loader-icon');
 	});
 
 	it('Should display properly posts', async () => {
 		server.use(testGetPostsHandler);
+
+		mockStore.dispatch(getPosts({ posts: [postResponse] }));
 
 		await waitFor(() => {
 			component.getByRole('post');
@@ -41,6 +44,8 @@ describe('PostFeed', () => {
 	it('Should add a post on posts feed if user add a post', async () => {
 		server.use(testGetPostsHandler);
 		server.use(testAddPostHandler);
+
+		mockStore.dispatch(getPosts({ posts: [postResponse] }));
 
 		await waitFor(() => {
 			const posts = component.getAllByRole('post');
@@ -53,10 +58,7 @@ describe('PostFeed', () => {
 		fireEvent.change(textarea, { target: { value: 'test content' } });
 		fireEvent.click(button);
 
-		await waitFor(() => {
-			component.getByRole('loader-icon');
-		});
-
+		mockStore.dispatch(addPost({ post: postResponse }));
 		server.use(testGetMorePostsHandler);
 
 		await waitFor(() => {

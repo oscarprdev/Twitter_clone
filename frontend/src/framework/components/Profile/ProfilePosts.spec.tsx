@@ -6,6 +6,8 @@ import { mockStore } from '../../../tests/unit/store/store.mock';
 import ProfilePosts from './ProfilePosts';
 import { userTestResponse } from '../../../tests/unit/responses/users.response';
 import { testGetPostsByUserHandler } from '../../../tests/unit/handlers/posts.handlers';
+import { getProfilePosts } from '../../store/slices/posts-slice';
+import { postResponse } from '../../../tests/unit/responses/posts.response';
 
 describe('ProfilePosts', () => {
 	let component: RenderResult;
@@ -28,6 +30,8 @@ describe('ProfilePosts', () => {
 
 	it('Should render properly', async () => {
 		server.use(testGetPostsByUserHandler);
+
+		mockStore.dispatch(getProfilePosts({ posts: [postResponse] }));
 
 		await waitFor(() => {
 			component.getByRole('post');

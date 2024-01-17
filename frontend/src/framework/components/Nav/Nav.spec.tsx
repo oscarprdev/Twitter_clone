@@ -21,7 +21,7 @@ describe('NavItem', () => {
 		component.getByText('profile');
 		component.getByTestId('profile-icon');
 
-		component.getByText('notifications');
-		component.getByTestId('notification-icon');
+		component.getByText('settings');
+		component.getByTestId('settings-icon');
 	});
 });

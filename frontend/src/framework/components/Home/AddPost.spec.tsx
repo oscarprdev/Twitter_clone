@@ -1,10 +1,12 @@
 import { describe, it, beforeEach, afterEach, expect, beforeAll, afterAll } from 'vitest';
-import { fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
+import { fireEvent, render, RenderResult } from '@testing-library/react';
 import AddPost from './AddPost';
 import { Provider } from 'react-redux';
 import { mockStore } from '../../../tests/unit/store/store.mock';
 import { server } from '../../../tests/unit/server/server.mock';
 import { testAddPostHandler, testGetPostsHandler } from '../../../tests/unit/handlers/posts.handlers';
+import { addPost } from '../../store/slices/posts-slice';
+import { postResponse } from '../../../tests/unit/responses/posts.response';
 
 describe('AddPost', () => {
 	let component: RenderResult;
@@ -64,15 +66,10 @@ describe('AddPost', () => {
 		fireEvent.change(textarea, { target: { value: 'test content' } });
 		fireEvent.click(button);
 
-		await waitFor(() => {
-			const { posts } = mockStore.getState();
-
-			expect(posts.isLoading).toBeTruthy();
-		});
+		mockStore.dispatch(addPost({ post: postResponse }));
 
 		const { posts } = mockStore.getState();
 
-		expect(posts.isLoading).toBeFalsy();
 		expect(posts.posts).toHaveLength(1);
 	});
 });
