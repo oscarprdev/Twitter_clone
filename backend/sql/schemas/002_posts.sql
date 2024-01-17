@@ -5,6 +5,7 @@ CREATE TABLE posts (
     updated_at TIMESTAMP NOT NULL,
     user_id UUID NOT NULL,
     post VARCHAR(500) NOT NULL,
+    image VARCHAR(500) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 

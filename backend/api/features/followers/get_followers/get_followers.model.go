@@ -11,3 +11,8 @@ type GetUnfollowersResponse struct {
 	Unfollowers []usershared.User `json:"unfollowers"`
 	Count 		int 			  `json:"count"`
 }
+
+type GetFollowingResponse struct {
+	Following []usershared.User `json:"following"`
+	Count 	  int 				`json:"count"`
+}

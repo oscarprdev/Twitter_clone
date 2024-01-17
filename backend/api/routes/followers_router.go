@@ -15,6 +15,7 @@ func handleFollowersRoutes(api *api.ApiConfig, router *chi.Mux) {
 	getFollowerUsecase := getfollowers.GetFollowerProvider(api)
 
 	router.Get("/followers/{id}", getFollowerUsecase.GetFollowers)
+	router.Get("/followings/{id}", getFollowerUsecase.GetFollowings)
 	router.Get("/unfollowers/{id}", getFollowerUsecase.GetUnfollowers)
 	router.Post("/follower", createFollowerUsecase.CreateFollower)
 	router.Delete("/follower", deleteFollowerUsecase.DeleteFollower)

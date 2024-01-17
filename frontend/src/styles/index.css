@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	color-scheme: light dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #000000;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	--contrast: rgb(29, 155, 240);
+	--contrast-dark: rgb(20, 128, 200);
+
+	--backdrop: rgb(91, 112, 131, 0.4);
+
+	--like: rgb(232, 36, 127);
+}
+
+.searchIcon::-webkit-search-cancel-button {
+	appearance: none;
+}
+
+.animate-fade-up {
+	animation: fade-up 5s ease forwards;
+}
+
+@keyframes fade-up {
+	0% {
+		transform: translateY(500px);
+		opacity: 0;
+	}
+	15% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+	85% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateY(500px);
+		opacity: 0;
+	}
+}

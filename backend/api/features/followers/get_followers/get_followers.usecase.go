@@ -68,3 +68,30 @@ func (api *ApiConfig) GetUnfollowers(w http.ResponseWriter, r *http.Request) {
 		Count: len(unfollowers),
 	})
 }
+
+func (api *ApiConfig) GetFollowings(w http.ResponseWriter, r *http.Request) {
+	userIdStr := chi.URLParam(r, "id")
+	userId, err := uuid.Parse(userIdStr)
+
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error parsing post id: %v", err))
+		return
+	}
+
+	followingDB, err := api.DB.GetFollowingByUser(r.Context(), userId)
+
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error retrieving followings: %v", err))
+		return
+	}
+
+	following := []usershared.User{}
+	for _, user := range followingDB {
+		following = append(following, usershared.DatabaseUserToUser(user))
+	}
+
+	responses.RespondWithJSON(w, 200, GetFollowingResponse{
+		Following: following,
+		Count: len(following),
+	})
+}

@@ -49,3 +49,4 @@ func (api *ApiConfig) LogIn(w http.ResponseWriter, r *http.Request) {
 		JWT: token,
 	})
 }
+

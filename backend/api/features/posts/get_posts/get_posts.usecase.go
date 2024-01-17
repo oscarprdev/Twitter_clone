@@ -3,6 +3,7 @@ package getposts
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 	"twitter_clone/api"
 	postshared "twitter_clone/api/features/posts/shared"
 	"twitter_clone/api/features/utils"
@@ -18,7 +19,25 @@ type ApiConfig struct {
 }
 
 func (api *ApiConfig) GetPosts(w http.ResponseWriter, r *http.Request) {
-	dbPosts, err := api.DB.GetAllPosts(r.Context())
+	limitStr := r.URL.Query().Get("limit")
+	offsetStr := r.URL.Query().Get("offset")
+
+	limitInt, err := strconv.Atoi(limitStr)
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error converting limit to int: %v", err))
+		return
+	}
+
+	offsetInt, err := strconv.Atoi(offsetStr)
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error converting limit to int: %v", err))
+		return
+	}
+
+	dbPosts, err := api.DB.GetAllPosts(r.Context(), database.GetAllPostsParams{
+		Limit: int32(limitInt),
+		Offset: int32(offsetInt),
+	})
 
 	if err != nil {
 		responses.RespondWithError(w, 400, fmt.Sprintf("Error providing posts: %v", err))
@@ -26,13 +45,26 @@ func (api *ApiConfig) GetPosts(w http.ResponseWriter, r *http.Request) {
 	}
 
 	posts := []postshared.Post{}
-
 	for _, post := range dbPosts {
-		posts = append(posts, postshared.DatabasePostToPost(post))
+		userDB, err := api.DB.GetUserById(r.Context(), post.UserID)
+
+		if err != nil {
+			responses.RespondWithError(w, 400, fmt.Sprintf("Error Providing post owner: %v", err))
+			return
+		}
+
+		posts = append(posts, postshared.DatabasePostToPost(post, userDB))
+	}
+
+	postsCount, err := api.DB.GetTotalPostsCount(r.Context())
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error providing posts count: %v", err))
+		return
 	}
 
 	responses.RespondWithJSON(w, 200, GetPostsResponse{
 		Posts: posts,
+		Posts_Count: int(postsCount),
 	})
 }
 
@@ -55,11 +87,25 @@ func (api *ApiConfig) GetPostsByParam(w http.ResponseWriter, r *http.Request) {
 
 	posts := []postshared.Post{}
 	for _, post := range dbPosts {
-		posts = append(posts, postshared.DatabasePostToPost(post))
+		userDB, err := api.DB.GetUserById(r.Context(), post.UserID)
+
+		if err != nil {
+			responses.RespondWithError(w, 400, fmt.Sprintf("Error Providing post owner: %v", err))
+			return
+		}
+
+		posts = append(posts, postshared.DatabasePostToPost(post, userDB))
+	}
+
+	postsCount, err := api.DB.GetTotalPostsCountByUser(r.Context(), userId)
+	if err != nil {
+		responses.RespondWithError(w, 400, fmt.Sprintf("Error providing posts count: %v", err))
+		return
 	}
 
 	responses.RespondWithJSON(w, 200, GetPostsResponse{
 		Posts: posts,
+		Posts_Count: int(postsCount),
 	})
 }
 

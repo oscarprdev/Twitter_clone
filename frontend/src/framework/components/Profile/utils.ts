@@ -1,0 +1,13 @@
+enum Tabs {
+	POSTS = 'POSTS',
+	FOLLOWERS = 'FOLLOWERS',
+	FOLLOWINGS = 'FOLLOWINGS',
+}
+
+export type TAB_ACTIVE = Tabs.POSTS | Tabs.FOLLOWERS | Tabs.FOLLOWINGS;
+
+export const tabs = {
+	POSTS: 'POSTS' as Tabs.POSTS,
+	FOLLOWERS: 'FOLLOWERS' as Tabs.FOLLOWERS,
+	FOLLOWINGS: 'FOLLOWINGS' as Tabs.FOLLOWINGS,
+};

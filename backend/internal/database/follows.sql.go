@@ -109,19 +109,60 @@ func (q *Queries) GetFollowersByUser(ctx context.Context, followTo uuid.UUID) ([
 	return items, nil
 }
 
+const getFollowingByUser = `-- name: GetFollowingByUser :many
+SELECT users.id, users.created_at, users.updated_at, users.username, users.email, users.name, users.surname, users.password, users.profile_img_url, users.profile_bg_img_url
+FROM users
+JOIN followers ON users.id = followers.follow_to
+WHERE followers.user_id = $1
+`
+
+func (q *Queries) GetFollowingByUser(ctx context.Context, userID uuid.UUID) ([]User, error) {
+	rows, err := q.db.QueryContext(ctx, getFollowingByUser, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []User
+	for rows.Next() {
+		var i User
+		if err := rows.Scan(
+			&i.ID,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.Username,
+			&i.Email,
+			&i.Name,
+			&i.Surname,
+			&i.Password,
+			&i.ProfileImgUrl,
+			&i.ProfileBgImgUrl,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const getNoFollowersByUser = `-- name: GetNoFollowersByUser :many
 SELECT users.id, users.created_at, users.updated_at, users.username, users.email, users.name, users.surname, users.password, users.profile_img_url, users.profile_bg_img_url
 FROM users
 WHERE users.id NOT IN (
-    SELECT user_id
+    SELECT follow_to
     FROM followers
-    WHERE follow_to = $1
+    WHERE user_id = $1
 )
 AND users.id <> $1
 `
 
-func (q *Queries) GetNoFollowersByUser(ctx context.Context, followTo uuid.UUID) ([]User, error) {
-	rows, err := q.db.QueryContext(ctx, getNoFollowersByUser, followTo)
+func (q *Queries) GetNoFollowersByUser(ctx context.Context, userID uuid.UUID) ([]User, error) {
+	rows, err := q.db.QueryContext(ctx, getNoFollowersByUser, userID)
 	if err != nil {
 		return nil, err
 	}

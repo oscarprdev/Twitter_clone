@@ -1,6 +1,8 @@
 package deletefollower
 
-import "github.com/google/uuid"
+import (
+	usershared "twitter_clone/api/features/users/shared"
+)
 
 type DeleteFollowerPayload struct {
 	UserId     string `json:"userId"`
@@ -8,7 +10,6 @@ type DeleteFollowerPayload struct {
 }
 
 type DeleteFollowerResponse struct {
-	Message    string    `json:"message"` 
-	UserId     uuid.UUID `json:"userId"`
-	UnfollowTo uuid.UUID `json:"unfollowTo"`
+	User 	   usershared.User `json:"user"`
+	UnfollowTo usershared.User `json:"unfollowTo"`
 }

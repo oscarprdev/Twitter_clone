@@ -32,6 +32,11 @@ SELECT * FROM users WHERE email = $1;
 -- name: GetUserByUsername :one
 SELECT * FROM users WHERE username = $1;
 
+-- name: GetUsersByUsernameOrName :many
+SELECT * FROM users 
+WHERE username ILIKE '%' || $1 || '%' 
+OR name ILIKE '%' || $1 || '%';
+
 -- name: GetUsersFromLikes :many
 SELECT users.*
 FROM likes
