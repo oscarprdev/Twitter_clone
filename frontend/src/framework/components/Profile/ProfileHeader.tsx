@@ -17,7 +17,7 @@ const ProfileHeader = ({ name, surname, id, isInfo }: ProfileHeaderProps) => {
 			role='heading'
 			className='pt-5 pb-2 flex items-start w-full'>
 			{isInfo && (
-				<Link href='/home'>
+				<Link href='/'>
 					<span className='ml-2 p-2 mt-[-0.3rem] rounded-full hover:bg-zinc-800 cursor-pointer'>
 						<ArrowLeft />
 					</span>

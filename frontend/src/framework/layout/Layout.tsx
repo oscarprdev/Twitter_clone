@@ -17,7 +17,7 @@ const Layout = () => {
 		<main className='flex h-screen w-screen justify-center items-start'>
 			<Nav />
 			<Route
-				path='/home'
+				path='/'
 				component={Home}
 			/>
 			<Route

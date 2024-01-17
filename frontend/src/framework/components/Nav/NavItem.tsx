@@ -21,7 +21,7 @@ const NavItem = ({ text, defaultIcon, activeIcon }: NavItemProps) => {
 
 	return (
 		<Link
-			href={`/${text.toLowerCase()}`}
+			href={`/${text === 'home' ? '' : text.toLowerCase()}`}
 			className='flex items-center justify-start gap-2 py-2 pr-8 px-4 w-fit rounded-full hover:bg-zinc-900'>
 			<span className='block w-10'>{isActive ? activeIcon : defaultIcon}</span>
 			<p className={`capitalize text-xl ${isActive ? 'font-bold' : 'font-light'}`}>{text}</p>
