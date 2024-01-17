@@ -2,6 +2,8 @@ import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { RemoveFollowPorts } from './remove-follow.ports';
 import { DefaultRemoveFollowUsecase, RemoveFollowUsecase } from './remove-follow.usecase';
 import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { DefaultReduxUsecase } from '../../../shared/application/redux.usecase';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
 
 class MockRemoveFollowHttpAdapter implements RemoveFollowPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -15,31 +17,35 @@ class MockRemoveFollowHttpAdapter implements RemoveFollowPorts {
 
 describe('Get following usecase', () => {
 	let usecase: RemoveFollowUsecase;
+
 	let removeFollowSpy: MockInstance;
+
+	let removeFollowReduxSpy: MockInstance;
+	let errorReduxSpy: MockInstance;
 
 	beforeEach(() => {
 		const httpAdapter = new MockRemoveFollowHttpAdapter();
-		usecase = new DefaultRemoveFollowUsecase(httpAdapter);
+		const reduxState = new DefaultReduxUsecase(mockStore.dispatch);
+
+		usecase = new DefaultRemoveFollowUsecase(httpAdapter, reduxState);
 
 		removeFollowSpy = vi.spyOn(httpAdapter, 'removeFollow');
+
+		removeFollowReduxSpy = vi.spyOn(reduxState, 'removeFollow');
+		errorReduxSpy = vi.spyOn(reduxState, 'updateErrorState');
 	});
 
 	it('Should return success response', async () => {
-		const response = await usecase.removeFollow({ userId: '', unfollowTo: '' });
+		await usecase.removeFollow({ userId: '', unfollowTo: '' });
 
-		expect(response.state).toBe('success');
-
-		if (response.state === 'success') {
-			expect(response.user).toBeTruthy();
-			expect(response.unfollowToUser).toBeTruthy();
-		}
+		expect(removeFollowReduxSpy).toHaveBeenCalledOnce();
 	});
 
 	it('Should return error response if http adapter fails', async () => {
 		removeFollowSpy.mockImplementationOnce(() => Promise.reject({}));
 
-		const response = await usecase.removeFollow({ userId: '', unfollowTo: '' });
+		await usecase.removeFollow({ userId: '', unfollowTo: '' });
 
-		expect(response.state).toBe('error');
+		expect(errorReduxSpy).toHaveBeenCalledOnce();
 	});
 });

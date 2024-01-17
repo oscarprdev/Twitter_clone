@@ -2,6 +2,8 @@ import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AddFollowPorts } from './add-follow.ports';
 import { DefaultAddFollowUsecase } from './add-follow.usecase';
 import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { DefaultReduxUsecase } from '../../../shared/application/redux.usecase';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
 
 class MockAddFollowHttpAdapter implements AddFollowPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -15,26 +17,32 @@ class MockAddFollowHttpAdapter implements AddFollowPorts {
 
 describe('Search users usecase', () => {
 	let usecase: DefaultAddFollowUsecase;
-	let addFollowSpy: MockInstance;
+	let addFollowAdapterSpy: MockInstance;
+	let addFollowReduxSpy: MockInstance;
+	let errorReduxSpy: MockInstance;
 
 	beforeEach(() => {
 		const mockHttpAdapter = new MockAddFollowHttpAdapter();
-		usecase = new DefaultAddFollowUsecase(mockHttpAdapter);
+		const reduxState = new DefaultReduxUsecase(mockStore.dispatch);
 
-		addFollowSpy = vi.spyOn(mockHttpAdapter, 'addFollow');
+		usecase = new DefaultAddFollowUsecase(mockHttpAdapter, reduxState);
+
+		addFollowAdapterSpy = vi.spyOn(mockHttpAdapter, 'addFollow');
+		addFollowReduxSpy = vi.spyOn(reduxState, 'addFollow');
+		errorReduxSpy = vi.spyOn(reduxState, 'updateErrorState');
 	});
 
 	it('Should return success response', async () => {
-		const response = await usecase.addFollow({ userId: '', followTo: '' });
+		await usecase.addFollow({ userId: '', followTo: '' });
 
-		expect(response.state).toBe('success');
+		expect(addFollowReduxSpy).toHaveBeenCalledOnce();
 	});
 
 	it('Should return error response if http request fails', async () => {
-		addFollowSpy.mockImplementationOnce(() => Promise.reject({}));
+		addFollowAdapterSpy.mockImplementationOnce(() => Promise.reject({}));
 
-		const response = await usecase.addFollow({ userId: '', followTo: '' });
+		await usecase.addFollow({ userId: '', followTo: '' });
 
-		expect(response.state).toBe('error');
+		expect(errorReduxSpy).toHaveBeenCalledOnce();
 	});
 });

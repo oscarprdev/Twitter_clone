@@ -1,12 +1,13 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
-import { GetPostsPorts } from './get-posts.ports';
-import { DefaultGetPostsUsecase, GetPostsUsecase } from './get-posts.usecase';
 import { postResponse } from '../../../../tests/unit/responses/posts.response';
 import { DefaultReduxUsecase } from '../../../shared/application/redux.usecase';
 import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { GetPostsByUserPorts } from './get-posts-by-user.ports';
+import { DefaultGetPostsByUserUsecase, GetPostsByUserUsecase } from './get-posts-by-user.usecase';
 
-class TestGetPostsHttpAdapter implements GetPostsPorts {
-	async getPosts(): Promise<GetPostsPorts.GetPostsOutput> {
+class TestGetPostsHttpAdapter implements GetPostsByUserPorts {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	async getPostsByUser(_input: GetPostsByUserPorts.GetPostsByUserInput): Promise<GetPostsByUserPorts.GetPostsByUserOutput> {
 		return {
 			posts: [postResponse],
 			postsCount: 10,
@@ -14,34 +15,34 @@ class TestGetPostsHttpAdapter implements GetPostsPorts {
 	}
 }
 
-describe('Get posts usecase', () => {
-	let usecase: GetPostsUsecase;
+describe('Get posts by user usecase', () => {
+	let usecase: GetPostsByUserUsecase;
 	let getPostsSpy: MockInstance;
 
-	let getPostsReduxSpy: MockInstance;
+	let getProfilePostsReduxSpy: MockInstance;
 	let errorReduxSpy: MockInstance;
 
 	beforeEach(() => {
 		const ports = new TestGetPostsHttpAdapter();
 		const reduxState = new DefaultReduxUsecase(mockStore.dispatch);
 
-		usecase = new DefaultGetPostsUsecase(ports, reduxState);
+		usecase = new DefaultGetPostsByUserUsecase(ports, reduxState);
 
-		getPostsSpy = vi.spyOn(ports, 'getPosts');
-		getPostsReduxSpy = vi.spyOn(reduxState, 'getPosts');
+		getPostsSpy = vi.spyOn(ports, 'getPostsByUser');
+		getProfilePostsReduxSpy = vi.spyOn(reduxState, 'getProfilePosts');
 		errorReduxSpy = vi.spyOn(reduxState, 'updateErrorState');
 	});
 
 	it('Should return success response', async () => {
-		await usecase.getPosts({ limit: 10, offset: 0 });
+		await usecase.getPostsByUser({ userId: '' });
 
-		expect(getPostsReduxSpy).toHaveBeenCalledOnce();
+		expect(getProfilePostsReduxSpy).toHaveBeenCalledOnce();
 	});
 
 	it('Should return error response if getPosts method fails', async () => {
 		getPostsSpy.mockImplementationOnce(() => Promise.reject({}));
 
-		await usecase.getPosts({ limit: 10, offset: 0 });
+		await usecase.getPostsByUser({ userId: '' });
 
 		expect(errorReduxSpy).toHaveBeenCalledOnce();
 	});
