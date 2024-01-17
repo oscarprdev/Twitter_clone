@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getLikesUsecase, toggleLikeUsecase } from '../../features/likes/graph';
-import { USER_ID } from '../../features/shared/domain/constants/constants';
+import { useStoreSelector } from '../store/hooks/useSelector';
 
 export const useLikes = (postId: string) => {
 	const [likes, setLikes] = useState(0);
 	const [isLiked, setIsLiked] = useState(false);
+	const userLogged = useStoreSelector((state) => state.users.userLogged);
 
 	useEffect(() => {
 		const updateLikes = async () => {
@@ -20,14 +21,14 @@ export const useLikes = (postId: string) => {
 
 	useEffect(() => {
 		const updateIsLiked = async () => {
-			setIsLiked(await toggleLikeUsecase.isUserAlreadyLiked({ postId, userId: USER_ID }));
+			setIsLiked(await toggleLikeUsecase.isUserAlreadyLiked({ postId, userId: userLogged.id }));
 		};
 
 		updateIsLiked();
-	}, [likes, postId]);
+	}, [likes, postId, userLogged]);
 
 	const toggleLikes = async () => {
-		const response = await toggleLikeUsecase.toggleLike({ postId, userId: USER_ID });
+		const response = await toggleLikeUsecase.toggleLike({ postId, userId: userLogged.id });
 
 		if (response.state === 'success') {
 			setLikes(response.numLikes);
