@@ -14,6 +14,7 @@ export const postResponse: Post = {
 		profileImgUrl: userTestResponse.profileImgUrl,
 		email: userTestResponse.email,
 	},
+	image: 'https://pub-43949222ba2448cbbff5d5c5019cd5e6.r2.dev/default-avatar.png',
 };
 
 export const postDbResponse: DbPost = {
@@ -29,4 +30,5 @@ export const postDbResponse: DbPost = {
 		profileImgUrl: userTestResponse.profileImgUrl,
 		email: userTestResponse.email,
 	},
+	image: 'https://pub-43949222ba2448cbbff5d5c5019cd5e6.r2.dev/default-avatar.png',
 };

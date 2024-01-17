@@ -1,4 +1,3 @@
-import { USER_ID } from '../../../features/shared/domain/constants/constants';
 import { DbUser, User } from '../../../features/shared/domain/types/user';
 
 export const userTestResponse: User = {
@@ -14,7 +13,7 @@ export const userTestResponse: User = {
 };
 
 export const userLoggedTestResponse: User = {
-	id: USER_ID,
+	id: 'a53706f2-211b-4ac5-a37a-56d9e1481185',
 	createdAt: '2024-01-10T19:14:04.489431Z',
 	updatedAt: '2024-01-10T19:14:04.489431Z',
 	name: 'mocked-name',

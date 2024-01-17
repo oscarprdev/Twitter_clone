@@ -10,6 +10,8 @@ import {
 	testGetUsersLikesHandler,
 	testRemoveLikeLikeHandler,
 } from '../../../tests/unit/handlers/likes.handlers';
+import { Provider } from 'react-redux';
+import { mockStore } from '../../../tests/unit/store/store.mock';
 
 describe('PostsLikes', () => {
 	let component: RenderResult;
@@ -18,7 +20,11 @@ describe('PostsLikes', () => {
 	afterAll(() => server.close());
 
 	beforeEach(() => {
-		component = render(<PostLikes postId={postResponse.id} />);
+		component = render(
+			<Provider store={mockStore}>
+				<PostLikes postId={postResponse.id} />
+			</Provider>
+		);
 	});
 
 	afterEach(() => {

@@ -3,12 +3,18 @@ import Post from './Post';
 import { afterEach, beforeEach, describe, it } from 'vitest';
 import { strDateToTime } from '../../utils/strDateToTime';
 import { postResponse } from '../../../tests/unit/responses/posts.response';
+import { Provider } from 'react-redux';
+import { mockStore } from '../../../tests/unit/store/store.mock';
 
 describe('Post', () => {
 	let component: RenderResult;
 
 	beforeEach(() => {
-		component = render(<Post post={postResponse} />);
+		component = render(
+			<Provider store={mockStore}>
+				<Post post={postResponse} />
+			</Provider>
+		);
 	});
 
 	afterEach(() => component.unmount());
