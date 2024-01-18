@@ -54,6 +54,7 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+          cache-dependency-path: package-lock.json
 
       - name: Lint
         run: npm run lint
@@ -75,6 +76,7 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+          cache-dependency-path: package-lock.json
 
       - name: Build
         run: npm run build
