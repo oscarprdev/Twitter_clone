@@ -1,0 +1,23 @@
+name: Frontend unit tests
+description: 'Run frontend unit tests'
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install NPM
+      shell: bash
+      run: cd frontend && npm ci
+
+    - name: Run lint
+      shell: bash
+      run: cd frontend && npm run lint
+
+    - name: Run unit tests
+      shell: bash
+      run: cd frontend && npm run test:unit

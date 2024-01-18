@@ -8,8 +8,7 @@
 		"build": "tsc && vite build",
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",
-		"test:unit-features": "vitest features",
-		"test:unit-framework": "vitest framework",
+		"test:unit": "vitest",
 		"test:e2e": "npx playwright test"
 	},
 	"dependencies": {
