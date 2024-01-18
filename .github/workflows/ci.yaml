@@ -37,6 +37,12 @@ jobs:
         run: npm ci
         working-directory: ./frontend
 
+      - name: Debug
+        run: |
+          ls -l /home/runner/work/Twitter_clone/Twitter_clone
+          ls -l /home/runner/work/Twitter_clone/Twitter_clone/frontend
+        working-directory: ./frontend
+
   lint:
     needs: [npm_install]
     runs-on: ubuntu-22.04
@@ -44,11 +50,6 @@ jobs:
       run:
         working-directory: ./frontend
     steps:
-      - name: Debug
-        run: |
-          ls -l /home/runner/work/Twitter_clone/Twitter_clone
-          ls -l /home/runner/work/Twitter_clone/Twitter_clone/frontend
-        working-directory: ./frontend
       - name: Lint
         run: npm run lint
 
