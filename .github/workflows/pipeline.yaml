@@ -7,11 +7,4 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Run Frontend Workflow
-        uses: ./frontend/.github/workflows
+    uses: ./frontend/.github/workflows/action.yml
