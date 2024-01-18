@@ -28,6 +28,9 @@ jobs:
           fetch-depth: 0
       - id: Backend_Railway
         uses: ./.github/actions/backend/railway
+        with:
+          token: ${{ secrets.RAILWAY_TOKEN }}
+          service: ${{ secrets.RAILWAY_SERVICE }}
 
   frontend_build:
     runs-on: ubuntu-22.04

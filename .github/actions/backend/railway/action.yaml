@@ -1,5 +1,14 @@
 name: Backend Railway DB
 description: 'Deploy Railway database'
+inputs:
+  token:
+    description: 'Railway token env'
+    required: true
+    default: ''
+  service:
+    description: 'Railway service env'
+    required: true
+    default: ''
 runs:
   using: composite
   steps:
@@ -14,6 +23,6 @@ runs:
 
     - name: Deploy
       shell: bash
-      run: railway up --service=${{ secrets.RAILWAY_SERVICE }} -d
+      run: railway up --service=${{ inputs.service }} -d
       env:
-        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        RAILWAY_TOKEN: ${{ inputs.token }}
