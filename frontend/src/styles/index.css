@@ -32,6 +32,10 @@
 	animation: fade-up 5s ease forwards;
 }
 
+.animate-appearing {
+	animation: appearing-list 0.2s ease forwards;
+}
+
 @keyframes fade-up {
 	0% {
 		transform: translateY(500px);
@@ -50,5 +54,16 @@
 	100% {
 		transform: translateY(500px);
 		opacity: 0;
+	}
+}
+
+@keyframes appearing-list {
+	from {
+		transform: scale(0);
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
 	}
 }
