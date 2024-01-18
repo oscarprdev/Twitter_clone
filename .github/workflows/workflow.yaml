@@ -26,7 +26,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: ./actions/backend/railway
+      - id: Bakcned_Railway
+        uses: ./actions/backend/railway
 
   frontend_build:
     runs-on: ubuntu-22.04
@@ -34,7 +35,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: ./actions/frontend/build
+      - id: Frontend_build
+        uses: ./actions/frontend/build
 
   frontend_e2e_tests:
     needs: [frontend_build]
@@ -43,7 +45,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: ./actions/frontend/e2e-tests
+      - id: Frontend_e2e_tests
+        uses: ./actions/frontend/e2e-tests
 
   frontend_unit_tests:
     needs: [frontend_build]
@@ -52,4 +55,5 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: ./actions/frontend/unit-tests
+      - id: Frontend_unit_tests
+        uses: ./actions/frontend/unit-tests
