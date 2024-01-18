@@ -3,7 +3,7 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - '*'
+      - 'feat/frontend/add-github-actions'
 
 jobs:
   deploy:
