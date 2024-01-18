@@ -8,6 +8,7 @@ export interface User {
 	email: string;
 	profileImgUrl: string;
 	profileBgImgUrl: string;
+	isNew?: boolean;
 }
 
 export interface DbUser {

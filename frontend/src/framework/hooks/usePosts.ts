@@ -3,6 +3,7 @@ import { getPostsUsecase } from '../../features/posts/graph';
 import { useStoreSelector } from '../store/hooks/useSelector';
 
 const usePosts = () => {
+	const [loading, setLoading] = useState(false);
 	const [offset, setOffset] = useState(10);
 	const [morePostsAvailable, setMorePostsAvailable] = useState(false);
 
@@ -10,7 +11,9 @@ const usePosts = () => {
 
 	useEffect(() => {
 		const getInitialPosts = async () => {
+			setLoading(true);
 			await getPostsUsecase.getPosts({ limit: offset, offset: 0 });
+			setLoading(false);
 		};
 
 		getInitialPosts();
@@ -28,7 +31,7 @@ const usePosts = () => {
 		setOffset(offset + 10);
 	};
 
-	return { posts, getMorePosts, morePostsAvailable };
+	return { posts, getMorePosts, morePostsAvailable, loading };
 };
 
 export default usePosts;

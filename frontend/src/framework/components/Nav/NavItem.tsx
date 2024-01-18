@@ -12,7 +12,7 @@ const NavItem = ({ text, defaultIcon, activeIcon }: NavItemProps) => {
 	const [location] = useLocation();
 
 	useEffect(() => {
-		if (location.match(text.toLowerCase().slice(1, text.length))) {
+		if ((location === '/' && text === 'home') || location.match(text.toLowerCase().slice(1, text.length))) {
 			setIsActive(true);
 		} else {
 			setIsActive(false);

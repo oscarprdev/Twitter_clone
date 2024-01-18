@@ -8,7 +8,7 @@ interface UnfollowerProps {
 
 const Unfollower = ({ unfollower }: UnfollowerProps) => {
 	return (
-		<article className='flex justify-between w-full p-3 hover:bg-zinc-800 duration-300'>
+		<li className={`${unfollower.isNew && 'animate-appearing'} flex justify-between w-full p-3 hover:bg-zinc-800 duration-300`}>
 			<div className='flex gap-2'>
 				<UserImage userImage={unfollower.profileImgUrl} />
 				<div className='flex flex-col'>
@@ -17,7 +17,7 @@ const Unfollower = ({ unfollower }: UnfollowerProps) => {
 				</div>
 			</div>
 			<AddFollowBtn id={unfollower.id} />
-		</article>
+		</li>
 	);
 };
 

@@ -1,15 +1,18 @@
 import AddPost from './AddPost';
 import usePosts from '../../hooks/usePosts';
 import Post from './Post';
+import PostsFeedSkeleton from '../Skeletons/PostsFeedSkeleton';
 
 const PostFeed = () => {
-	const { posts, getMorePosts, morePostsAvailable } = usePosts();
+	const { posts, getMorePosts, morePostsAvailable, loading } = usePosts();
 
 	return (
 		<>
 			<AddPost />
 			<ul className='flex flex-col w-full border-t border-t-zinc-700'>
-				{posts.length > 0 ? (
+				{loading ? (
+					<PostsFeedSkeleton />
+				) : posts.length > 0 ? (
 					posts.map((post) => (
 						<Post
 							key={post.id}

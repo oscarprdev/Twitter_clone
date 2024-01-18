@@ -5,6 +5,7 @@ export interface Post {
 	image: string;
 	updatedAt: string;
 	owner: PostOwner;
+	isNew?: boolean;
 }
 
 export interface PostOwner {
