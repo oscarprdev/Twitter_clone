@@ -1,5 +1,5 @@
 name: Backend Railway DB
-description: 'Deploy Railway database'
+description: 'Deploy Railway DB'
 inputs:
   token:
     description: 'Railway token env'
