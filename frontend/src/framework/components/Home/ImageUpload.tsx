@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import ImageSearch from '../icons/ImageSearch';
 import ImageCheck from '../icons/ImageCheck';
 
@@ -10,6 +10,7 @@ interface ImageUploadProps {
 
 const ImageUpload = ({ handleImageUpload, loading, file }: ImageUploadProps) => {
 	const imageInput = useRef<HTMLInputElement>(null);
+	const [fileName, setFileName] = useState<string>();
 
 	const handleUploadImage = () => {
 		if (!loading) {
@@ -22,7 +23,7 @@ const ImageUpload = ({ handleImageUpload, loading, file }: ImageUploadProps) => 
 
 		if (target instanceof HTMLInputElement && target.files && imageInput.current) {
 			const file = target.files[0];
-
+			setFileName(file.name);
 			handleImageUpload(file);
 		}
 	};
@@ -31,10 +32,17 @@ const ImageUpload = ({ handleImageUpload, loading, file }: ImageUploadProps) => 
 		<>
 			<span
 				onClick={handleUploadImage}
-				className={`block w-fit cursor-pointer  ${
+				className={`flex items-center gap-2 w-fit cursor-pointer  ${
 					loading ? 'text-zinc-500' : file && !!file ? 'text-green-700 hover:text-green-500' : 'text-[var(--contrast)] hover:text-white'
 				}`}>
-				{file && !!file ? <ImageCheck /> : <ImageSearch />}
+				{file && !!file && fileName ? (
+					<>
+						<ImageCheck />
+						<p>{fileName}</p>
+					</>
+				) : (
+					<ImageSearch />
+				)}
 			</span>
 			<input
 				ref={imageInput}
