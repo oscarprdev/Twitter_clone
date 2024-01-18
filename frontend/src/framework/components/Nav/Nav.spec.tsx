@@ -16,7 +16,7 @@ describe('NavItem', () => {
 		component.getByTestId('brand-icon');
 
 		component.getByText('home');
-		component.getByTestId('home-icon');
+		component.getByTestId('home-active-icon');
 
 		component.getByText('profile');
 		component.getByTestId('profile-icon');
