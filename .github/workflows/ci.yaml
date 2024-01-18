@@ -18,27 +18,7 @@ jobs:
           all_but_latest: true
           access_token: ${{ github.token }}
 
-  npm_install:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
-        working-directory: frontend
-
   lint:
-    needs: [npm_install]
     runs-on: ubuntu-22.04
     defaults:
       run:
@@ -60,10 +40,9 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: cd frontend && npm run lint
+        run: npm run lint
 
   build:
-    needs: [npm_install]
     runs-on: ubuntu-22.04
     defaults:
       run:
@@ -93,7 +72,7 @@ jobs:
           path: dist
 
   unit_tests:
-    needs: [npm_install, lint, build]
+    needs: [lint, build]
     runs-on: ubuntu-22.04
     defaults:
       run:
@@ -107,7 +86,7 @@ jobs:
         run: npm run test:unit
 
   e2e_tests:
-    needs: [npm_install, lint, build]
+    needs: [lint, build]
     runs-on: ubuntu-22.04
     defaults:
       run:
