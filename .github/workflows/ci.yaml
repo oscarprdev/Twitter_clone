@@ -20,6 +20,27 @@ jobs:
           all_but_latest: true
           access_token: ${{ github.token }}
 
+  deploy_railway:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install Railway
+        run: npm i -g @railway/cli
+
+      - name: Deploy
+        run: railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
   lint:
     runs-on: ubuntu-22.04
     defaults:
@@ -61,7 +82,7 @@ jobs:
 
       - run: npm run build
 
-  unit_tests_features:
+  unit_tests_usecases:
     needs: [lint, build]
     runs-on: ubuntu-22.04
     defaults:
@@ -81,9 +102,9 @@ jobs:
       - run: npm ci
 
       - name: Run unit tests
-        run: npm run test:unit-features
+        run: npm run test:unit-usecases
 
-  unit_tests_frameworks:
+  unit_tests_componentss:
     needs: [lint, build]
     runs-on: ubuntu-22.04
     defaults:
@@ -103,7 +124,7 @@ jobs:
       - run: npm ci
 
       - name: Run unit tests
-        run: npm run test:unit-framework
+        run: npm run test:unit-components
 
   e2e_tests:
     needs: [lint, build]
