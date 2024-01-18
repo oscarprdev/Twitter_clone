@@ -71,7 +71,7 @@ jobs:
           key: ${{ runner.os }}-npm-${{ hashFiles('frontend/package-lock.json') }}
         id: npm-cache
 
-      # - run: npm ci
+      - run: npm ci
       - name: Lint
         run: npm run lint
 
