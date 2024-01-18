@@ -31,6 +31,9 @@ jobs:
 
   frontend_build:
     runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,6 +44,9 @@ jobs:
   frontend_e2e_tests:
     needs: [frontend_build]
     runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - uses: actions/checkout@v4
         with:
@@ -51,6 +57,9 @@ jobs:
   frontend_unit_tests:
     needs: [frontend_build]
     runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - uses: actions/checkout@v4
         with:
