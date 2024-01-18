@@ -8,15 +8,21 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  # avoid_redundancy:
-  #   runs-on: ubuntu-22.04
-  #   timeout-minutes: 2
-  #   steps:
-  #     - name: Cancel Previous Runs
-  #       uses: styfle/cancel-workflow-action@0.9.1
-  #       with:
-  #         all_but_latest: true
-  #         access_token: ${{ github.token }}
+  cache-npm:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            frontend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/package-lock.json') }}
+        id: npm-cache
 
   lint:
     runs-on: ubuntu-22.04
@@ -28,11 +34,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 18
+      #     cache: 'npm'
+      #     cache-dependency-path: frontend/package-lock.json
+
+      - name: Restore npm cache
+        uses: actions/cache@v2
         with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          path: |
+            frontend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/package-lock.json') }}
+        id: npm-cache
 
       - name: Install dependencies
         run: npm ci
@@ -50,11 +64,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 18
+      #     cache: 'npm'
+      #     cache-dependency-path: frontend/package-lock.json
+
+      - name: Restore npm cache
+        uses: actions/cache@v2
         with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          path: |
+            frontend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/package-lock.json') }}
+        id: npm-cache
 
       - name: Install dependencies
         run: npm ci
@@ -68,7 +90,7 @@ jobs:
           path: dist
 
   unit_tests:
-    needs: [lint, build]
+    needs: [cache-npm, lint, build]
     runs-on: ubuntu-22.04
     defaults:
       run:
@@ -78,11 +100,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 18
+      #     cache: 'npm'
+      #     cache-dependency-path: frontend/package-lock.json
+      - name: Download npm cache artifact
+        uses: actions/download-artifact@v2
         with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          name: npm-cache
+          path: frontend/node_modules
 
       - name: Install dependencies
         run: npm ci
@@ -91,7 +118,7 @@ jobs:
         run: npm run test:unit
 
   e2e_tests:
-    needs: [lint, build]
+    needs: [cache-npm, lint, build]
     runs-on: ubuntu-22.04
     defaults:
       run:
@@ -101,11 +128,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 18
+      #     cache: 'npm'
+      #     cache-dependency-path: frontend/package-lock.json
+      - name: Download npm cache artifact
+        uses: actions/download-artifact@v2
         with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          name: npm-cache
+          path: frontend/node_modules
 
       - name: Install dependencies
         run: npm ci
@@ -115,4 +147,4 @@ jobs:
           path: dist
 
       - name: Run e2e tests
-        run: npm run test:e2e
+        run: npx playwright install --with-deps && npm run test:e2e
