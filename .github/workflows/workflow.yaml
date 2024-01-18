@@ -23,21 +23,21 @@ jobs:
   deploy_railway:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/backend/railway
+      - uses: ./actions/backend/railway
 
   frontend_build:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/frontend/build
+      - uses: ./actions/frontend/build
 
   frontend_e2e_tests:
     needs: [frontend_build]
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/frontend/e2e-tests
+      - uses: ./actions/frontend/e2e-tests
 
   frontend_unit_tests:
     needs: [frontend_build]
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/frontend/unit-tests
+      - uses: ./actions/frontend/unit-tests
