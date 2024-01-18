@@ -5,14 +5,14 @@ runs:
   steps:
     - uses: actions/setup-go@v5
       with:
-        go-version-file: go.mod
+        go-version-file: backend/go.mod
         check-latest: true
 
     - uses: actions/cache@v3
       if: ${{ !env.ACT }}
       with:
-        path: ~/go/pkg/mod
-        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        path: backend/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('backend/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-
 
