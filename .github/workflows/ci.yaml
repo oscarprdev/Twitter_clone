@@ -115,4 +115,4 @@ jobs:
           path: dist
 
       - name: Run e2e tests
-        run: npx playwright install --with-deps && npm run test:e2e
+        run: npm run test:e2e
