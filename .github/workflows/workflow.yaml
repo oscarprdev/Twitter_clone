@@ -20,14 +20,14 @@ jobs:
           all_but_latest: true
           access_token: ${{ github.token }}
 
-  deploy_railway:
+  backend_deploy_railway:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - id: Bakcned_Railway
-        uses: ./actions/backend/railway
+      - id: Backend_Railway
+        uses: ./.github/actions/backend/railway
 
   frontend_build:
     runs-on: ubuntu-22.04
@@ -36,7 +36,7 @@ jobs:
         with:
           fetch-depth: 0
       - id: Frontend_build
-        uses: ./actions/frontend/build
+        uses: ./.github/actions/frontend/build
 
   frontend_e2e_tests:
     needs: [frontend_build]
@@ -46,7 +46,7 @@ jobs:
         with:
           fetch-depth: 0
       - id: Frontend_e2e_tests
-        uses: ./actions/frontend/e2e-tests
+        uses: ./.github/actions/frontend/e2e-tests
 
   frontend_unit_tests:
     needs: [frontend_build]
@@ -56,4 +56,4 @@ jobs:
         with:
           fetch-depth: 0
       - id: Frontend_unit_tests
-        uses: ./actions/frontend/unit-tests
+        uses: ./.github/actions/frontend/unit-tests
