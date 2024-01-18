@@ -12,12 +12,12 @@ runs:
 
     - name: Install NPM
       shell: bash
-      run: npm ci
+      run: cd frontend && npm ci
 
     - name: Run lint
       shell: bash
-      run: npm run lint
+      run: cd frontend && npm run lint
 
     - name: Run unit tests
       shell: bash
-      run: npm run test:unit
+      run: cd frontend && npm run test:unit

@@ -12,16 +12,16 @@ runs:
 
     - name: Install NPM
       shell: bash
-      run: npm ci
+      run: cd frontend && npm ci
 
     - name: Run lint
       shell: bash
-      run: npm run lint
+      run: cd frontend && npm run lint
 
     - name: Install playwright
       shell: bash
-      run: npx playwright install --with-deps
+      run: cd frontend && npx playwright install --with-deps
 
     - name: Run e2e tests
       shell: bash
-      run: npm run test:e2e
+      run: cd frontend && npm run test:e2e
