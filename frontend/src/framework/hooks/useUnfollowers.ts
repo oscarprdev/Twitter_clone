@@ -17,7 +17,7 @@ export const useUnfollowers = () => {
 		if (userLogged && userLogged.id !== '') {
 			getUnfollowers();
 		}
-	}, [userLogged.id]);
+	}, [userLogged]);
 
 	return {
 		unfollowers,
