@@ -6,7 +6,7 @@ on:
       - 'feat/frontend/add-github-actions'
 
 jobs:
-  lightweiight_checks:
+  lightweight_checks:
     runs-on: ubuntu-22.04
     defaults:
       run:
