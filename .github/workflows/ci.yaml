@@ -2,8 +2,10 @@ name: Deployment pipeline
 
 on:
   push:
-    branches:
-      - 'feat/frontend/add-github-actions'
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
   lightweight_checks:
@@ -12,6 +14,10 @@ jobs:
       run:
         working-directory: frontend
     steps:
+      - name: Cancel previous redundant builds
+        uses: styfle/cancel-workflow-action
+        with:
+          access_token: ${{ github.token }}
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
@@ -28,11 +34,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Build
-        run: npm run build
-
       - name: Unit tests
         run: npm run test:unit
 
       - name: E2E tests
         run: npx playwright install --with-deps && npm run test:e2e
+
+      - name: Build
+        run: npm run build
