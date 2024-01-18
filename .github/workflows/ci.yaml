@@ -8,15 +8,15 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  avoid_redundancy:
-    runs-on: ubuntu-22.04
-    timeout-minutes: 2
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.1
-        with:
-          all_but_latest: true
-          access_token: ${{ github.token }}
+  # avoid_redundancy:
+  #   runs-on: ubuntu-22.04
+  #   timeout-minutes: 2
+  #   steps:
+  #     - name: Cancel Previous Runs
+  #       uses: styfle/cancel-workflow-action@0.9.1
+  #       with:
+  #         all_but_latest: true
+  #         access_token: ${{ github.token }}
 
   lint:
     runs-on: ubuntu-22.04
@@ -68,6 +68,7 @@ jobs:
           path: dist
 
   unit_tests:
+    needs: [lint, build]
     runs-on: ubuntu-22.04
     defaults:
       run:
@@ -90,7 +91,7 @@ jobs:
         run: npm run test:unit
 
   e2e_tests:
-    needs: [build]
+    needs: [lint, build]
     runs-on: ubuntu-22.04
     defaults:
       run:
