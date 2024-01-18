@@ -19,7 +19,7 @@ jobs:
         run: |
           rm -rf node_modules
           rm -f package-lock.json
-          npm install --no-audit --no-fun --no-optional
+          npm install --no-audit --no-fun
         working-directory: frontend
       - name: Lint
         run: npm run lint
