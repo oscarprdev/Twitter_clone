@@ -8,24 +8,25 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  # avoid_redundancy:
-  #   runs-on: ubuntu-22.04
-  #   timeout-minutes: 2
-  #   steps:
-  #     - name: Cancel Previous Runs
-  #       uses: styfle/cancel-workflow-action@0.9.1
-  #       with:
-  #         all_but_latest: true
-  #         access_token: ${{ github.token }}
+  avoid_redundancy:
+    runs-on: ubuntu-22.04
+    permissions:
+      actions: write
+    timeout-minutes: 2
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          all_but_latest: true
+          access_token: ${{ github.token }}
 
-  cache_npm:
+  lint:
     runs-on: ubuntu-22.04
     defaults:
       run:
         working-directory: frontend
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -37,41 +38,6 @@ jobs:
 
       - run: npm ci
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        with:
-          path: |
-            frontend/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-  lint:
-    needs: [cache_npm]
-    runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: frontend
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      # - uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 18
-      #     cache: 'npm'
-      #     cache-dependency-path: frontend/package-lock.json
-
-      - name: Restore npm cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            frontend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/package-lock.json') }}
-        id: npm-cache
-
-      - run: npm ci
       - name: Lint
         run: npm run lint
 
@@ -140,7 +106,7 @@ jobs:
         run: npm run test:unit-framework
 
   e2e_tests:
-    needs: [lint]
+    needs: [lint, build]
     runs-on: ubuntu-22.04
     defaults:
       run:
