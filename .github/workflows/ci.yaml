@@ -67,7 +67,7 @@ jobs:
           name: dist
           path: dist
 
-  unit_tests:
+  unit_tests_features:
     needs: [lint, build]
     runs-on: ubuntu-22.04
     defaults:
@@ -88,7 +88,30 @@ jobs:
         run: npm ci
 
       - name: Run unit tests
-        run: npm run test:unit
+        run: npm run test:unit-features
+
+  unit_tests_frameworks:
+    needs: [lint, build]
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm run test:unit-framework
 
   e2e_tests:
     needs: [lint, build]
