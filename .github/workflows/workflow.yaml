@@ -23,21 +23,33 @@ jobs:
   deploy_railway:
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: ./actions/backend/railway
 
   frontend_build:
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: ./actions/frontend/build
 
   frontend_e2e_tests:
     needs: [frontend_build]
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: ./actions/frontend/e2e-tests
 
   frontend_unit_tests:
     needs: [frontend_build]
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: ./actions/frontend/unit-tests
