@@ -1,5 +1,5 @@
 import { HttpResponse, http } from 'msw';
-import { API_URL } from '../../../features/shared/domain/constants/constants';
+import { API_URL } from '../../../src/features/shared/domain/constants/constants';
 import { userLoggedTestResponse } from '../responses/users.response';
 import { SuccessfulGetUnfollowersEmptyResponse, SuccessfulGetUnfollowersResponse } from '../responses/follows/get-unfollowers.response';
 import { SuccessfulAddFollowResponse } from '../responses/follows/add-follower.response';

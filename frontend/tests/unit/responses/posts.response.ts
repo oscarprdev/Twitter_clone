@@ -1,5 +1,5 @@
-import { DbPost } from '../../../features/posts/infra/post.infra.models';
-import { Post } from '../../../features/shared/domain/types/posts';
+import { DbPost } from '../../../src/features/posts/infra/post.infra.models';
+import { Post } from '../../../src/features/shared/domain/types/posts';
 import { userTestResponse } from './users.response';
 
 export const postResponse: Post = {

@@ -1,4 +1,4 @@
-import { GetPostsResponse } from '../../../../features/posts/infra/post.infra.models';
+import { GetPostsResponse } from '../../../../src/features/posts/infra/post.infra.models';
 import { postDbResponse, postResponse } from '../posts.response';
 
 export const SuccessfulGetPostsResponse: GetPostsResponse = {

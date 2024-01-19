@@ -1,5 +1,5 @@
 import { HttpResponse, http } from 'msw';
-import { API_URL } from '../../../features/shared/domain/constants/constants';
+import { API_URL } from '../../../src/features/shared/domain/constants/constants';
 import { SuccessfulAddLikeResponse, SuccessfulRemoveLikeResponse } from '../responses/likes/add-like.response';
 import { postResponse } from '../responses/posts.response';
 import { SuccessfulGetLikesResponse, SuccessfulGetLowerLikesResponse } from '../responses/likes/get-likes.response';

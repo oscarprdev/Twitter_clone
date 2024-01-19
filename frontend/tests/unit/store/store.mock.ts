@@ -1,19 +1,19 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { PostSliceState } from '../../../framework/store/slices/posts-slice';
-import { getUserLoggedReducer } from '../../../framework/store/reducers/users/get-user-logged/get-user-logged.reducer';
-import { updateUnfollowersReducer } from '../../../framework/store/reducers/users/update-unfollowers/update-unfollowers.reducer';
-import { addFollowersReducer } from '../../../framework/store/reducers/users/add-follow/add-follow.reducer';
-import { UsersSliceState } from '../../../framework/store/slices/users-slice';
+import { PostSliceState } from '../../../src/framework/store/slices/posts-slice';
+import { getUserLoggedReducer } from '../../../src/framework/store/reducers/users/get-user-logged/get-user-logged.reducer';
+import { updateUnfollowersReducer } from '../../../src/framework/store/reducers/users/update-unfollowers/update-unfollowers.reducer';
+import { addFollowersReducer } from '../../../src/framework/store/reducers/users/add-follow/add-follow.reducer';
+import { UsersSliceState } from '../../../src/framework/store/slices/users-slice';
 import { userLoggedTestResponse } from '../responses/users.response';
-import { getPostsReducer } from '../../../framework/store/reducers/posts/get-post/get-posts.reducer';
-import { addPostReducer } from '../../../framework/store/reducers/posts/add-post/add-post.reducer';
-import { removeFollowersReducer } from '../../../framework/store/reducers/users/remove-follow/remove-follow.reducer';
-import { getProfilePostsReducer } from '../../../framework/store/reducers/posts/get-profile-posts/get-profile-posts.reducer';
-import { updateUserLoggedReducer } from '../../../framework/store/reducers/users/udpate-user-logged/update-user-logged.reducer';
-import { AddUserReducer } from '../../../framework/store/reducers/users/add-user/add-user.reducer';
-import { showErrorReducer } from '../../../framework/store/reducers/errors/show-error.reducer';
-import { removeErrorReducer } from '../../../framework/store/reducers/errors/remove-error.reducer';
-import { ErrorSliceState } from '../../../framework/store/slices/error-slice';
+import { getPostsReducer } from '../../../src/framework/store/reducers/posts/get-post/get-posts.reducer';
+import { addPostReducer } from '../../../src/framework/store/reducers/posts/add-post/add-post.reducer';
+import { removeFollowersReducer } from '../../../src/framework/store/reducers/users/remove-follow/remove-follow.reducer';
+import { getProfilePostsReducer } from '../../../src/framework/store/reducers/posts/get-profile-posts/get-profile-posts.reducer';
+import { updateUserLoggedReducer } from '../../../src/framework/store/reducers/users/udpate-user-logged/update-user-logged.reducer';
+import { AddUserReducer } from '../../../src/framework/store/reducers/users/add-user/add-user.reducer';
+import { showErrorReducer } from '../../../src/framework/store/reducers/errors/show-error.reducer';
+import { removeErrorReducer } from '../../../src/framework/store/reducers/errors/remove-error.reducer';
+import { ErrorSliceState } from '../../../src/framework/store/slices/error-slice';
 
 export const testUsersInitialState: UsersSliceState = {
 	userLogged: userLoggedTestResponse,

@@ -1,5 +1,5 @@
 import { HttpResponse, http } from 'msw';
-import { API_URL } from '../../../features/shared/domain/constants/constants';
+import { API_URL } from '../../../src/features/shared/domain/constants/constants';
 import { SuccessfulSearchUsersEmptyResponse, SuccessfulSearchUsersResponse } from '../responses/users/search-users.response';
 import { SuccessfulUserLoggedResponse } from '../responses/users/user-logged-response';
 

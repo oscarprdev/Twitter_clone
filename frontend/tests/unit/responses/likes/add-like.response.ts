@@ -1,4 +1,4 @@
-import { ToggleLikeInfraResponse } from '../../../../features/likes/infra/likes.models';
+import { ToggleLikeInfraResponse } from '../../../../src/features/likes/infra/likes.models';
 
 export const SuccessfulAddLikeResponse: ToggleLikeInfraResponse = {
 	isLikeDeleted: false,

@@ -1,4 +1,4 @@
-import { API_URL } from '../../../features/shared/domain/constants/constants';
+import { API_URL } from '../../../src/features/shared/domain/constants/constants';
 import { SuccessfulAddPostResponse } from '../responses/posts/add-post.responses';
 import {
 	SuccessfulGetMorePostsResponse,

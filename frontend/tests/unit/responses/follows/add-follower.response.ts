@@ -1,4 +1,4 @@
-import { AddFollowInfraResponse } from '../../../../features/followers/infra/followers.infra.models';
+import { AddFollowInfraResponse } from '../../../../src/features/followers/infra/followers.infra.models';
 import { userDbTestResponse, userTestResponse } from '../users.response';
 
 export const SuccessfulAddFollowResponse: AddFollowInfraResponse = {

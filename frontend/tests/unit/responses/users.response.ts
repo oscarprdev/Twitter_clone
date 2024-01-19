@@ -1,4 +1,4 @@
-import { DbUser, User } from '../../../features/shared/domain/types/user';
+import { DbUser, User } from '../../../src/features/shared/domain/types/user';
 
 export const userTestResponse: User = {
 	id: 'a53706f2-211b-4ac5-a37a-56d9e1481185',

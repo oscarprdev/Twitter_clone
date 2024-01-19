@@ -1,4 +1,4 @@
-import { GetLikesInfraResponse } from '../../../../features/likes/infra/likes.models';
+import { GetLikesInfraResponse } from '../../../../src/features/likes/infra/likes.models';
 import { postResponse } from '../posts.response';
 import { userTestResponse } from '../users.response';
 
