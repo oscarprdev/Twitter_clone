@@ -1,0 +1,25 @@
+get:
+  tags:
+    - Users
+  description: Get a list of users
+  responses:
+    '200':
+      $ref: ../../components/_index.yaml#/responses/Get_users__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response
+post:
+  tags:
+    - Users
+  description: Create new user
+  requestBody:
+    required: true
+    description: Request parameters to create a new user
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/_index.yaml#/schemas/Post_user__request_body
+  responses:
+    '201':
+      $ref: ../../components/_index.yaml#/responses/Post_user__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response

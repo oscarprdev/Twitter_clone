@@ -1,0 +1,10 @@
+description: Returns the user and the user followed
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        user:
+          $ref: ../../_index.yaml#/schemas/User
+        followTo:
+          $ref: ../../_index.yaml#/schemas/User

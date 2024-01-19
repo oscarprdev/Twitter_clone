@@ -1,0 +1,6 @@
+name: Username
+required: true
+in: path
+description: Username
+schema:
+  type: string

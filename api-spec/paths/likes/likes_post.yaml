@@ -1,0 +1,11 @@
+get:
+  tags:
+    - Likes
+  description: Get likes from a post
+  parameters:
+    - $ref: ../../components/_index.yaml#/parameters/Id
+  responses:
+    '200':
+      $ref: ../../components/_index.yaml#/responses/Get_Likes__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response

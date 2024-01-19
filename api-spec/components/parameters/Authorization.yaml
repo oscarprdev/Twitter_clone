@@ -1,0 +1,6 @@
+name: Authorization
+in: header
+description: JWT token for user authorization
+required: true
+schema:
+  type: string

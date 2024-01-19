@@ -1,0 +1,11 @@
+get:
+  tags:
+    - Users
+  description: Get user by username
+  parameters:
+    - $ref: ../../components/_index.yaml#/parameters/Username
+  responses:
+    '200':
+      $ref: ../../components/_index.yaml#/responses/Get_users__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response

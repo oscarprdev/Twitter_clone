@@ -1,0 +1,11 @@
+get:
+  tags:
+    - Follows
+  description: Get users following to an user
+  parameters:
+    - $ref: ../../components/_index.yaml#/parameters/Id
+  responses:
+    '200':
+      $ref: ../../components/_index.yaml#/responses/Get_followings__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response

@@ -1,0 +1,18 @@
+type: object
+properties:
+  userId:
+    type: string
+    format: uuid
+    description: 'The unique identifier of the user who unfollows.'
+    nullable: false
+    example: '10cf35c4-adab-4057-b41b-6f55d0d0af7d'
+  unfollowTo:
+    type: string
+    format: uuid
+    description: 'The unique identifier of the user who is unfollowed.'
+    nullable: false
+    example: '10cf35c4-adab-4057-b41b-6f55d0d0af7d'
+
+required:
+  - userId
+  - unfollowTo

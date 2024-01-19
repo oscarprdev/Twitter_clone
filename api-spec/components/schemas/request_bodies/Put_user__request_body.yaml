@@ -1,0 +1,22 @@
+type: object
+properties:
+  name:
+    type: string
+    description: "The user's first name."
+    nullable: false
+    example: 'Tomm'
+  surname:
+    type: string
+    description: "The user's last name."
+    nullable: false
+    example: 'Sunday'
+  profileImgUrl:
+    type: string
+    format: uri
+    description: "URL to the user's profile image."
+    nullable: false
+    example: 'https://0.0.0.0:4321/random_image_1.jpeg'
+required:
+  - name
+  - surname
+  - profileImgUrl

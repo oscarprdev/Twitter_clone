@@ -1,0 +1,30 @@
+# Users
+'/users':
+  $ref: ./users/users.yaml
+'/users/{id}':
+  $ref: ./users/users_id.yaml
+'/users/auth':
+  $ref: ./users/users_auth.yaml
+'/users/login':
+  $ref: ./users/users_login.yaml
+'/users/search/{username}':
+  $ref: ./users/users_search.yaml
+# Posts
+'/posts':
+  $ref: ./posts/posts.yaml
+'/posts/user/{id}':
+  $ref: ./posts/posts_user.yaml
+# Followers
+'/follower':
+  $ref: ./followers/follower.yaml
+'/followers/{id}':
+  $ref: ./followers/followers_id.yaml
+'/followings/{id}':
+  $ref: ./followers/followings_id.yaml
+'/unfollowers/{id}':
+  $ref: ./followers/unfollowers_id.yaml
+# Likes
+'/likes':
+  $ref: ./likes/likes.yaml
+'/likes/post/{id}':
+  $ref: ./likes/likes_post.yaml

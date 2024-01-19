@@ -1,0 +1,47 @@
+type: object
+properties:
+  name:
+    type: string
+    description: "The user's first name."
+    nullable: false
+    example: 'Tomm'
+  surname:
+    type: string
+    description: "The user's last name."
+    nullable: false
+    example: 'Sunday'
+  email:
+    type: string
+    format: email
+    description: "The user's email address."
+    nullable: false
+    example: 'tommsun@email.com'
+  password:
+    type: string
+    description: "The user's password."
+    nullable: false
+    example: '1234'
+  username:
+    type: string
+    description: "The user's username."
+    nullable: false
+    example: 'tommsun'
+  profileImgUrl:
+    type: string
+    format: uri
+    description: "URL to the user's profile image."
+    nullable: false
+    example: 'https://0.0.0.0:4321/random_image_1.jpeg'
+  profileBgImgUrl:
+    type: string
+    format: uri
+    description: "URL to the user's profile background image."
+    nullable: false
+    example: 'https://0.0.0.0:4321/random_image_2.jpeg'
+required:
+  - name
+  - surname
+  - email
+  - password
+  - username
+  - profileImgUrl

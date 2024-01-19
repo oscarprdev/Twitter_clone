@@ -1,0 +1,77 @@
+parameters:
+  Id:
+    $ref: ./parameters/Id.yaml
+  Username:
+    $ref: ./parameters/Username.yaml
+  Limit:
+    $ref: ./parameters/Limit.yaml
+  Offset:
+    $ref: ./parameters/Offset.yaml
+  Authorization:
+    $ref: ./parameters/Authorization.yaml
+
+responses:
+  # Common
+  Bad_request__response:
+    $ref: ./responses/common/Bad_request__response.yaml
+
+  # Users
+  Get_users__response:
+    $ref: ./responses/users/Get_users__response.yaml
+  Get_user__response:
+    $ref: ./responses/users/Get_user__response.yaml
+  Post_user__response:
+    $ref: ./responses/users/Post_user__response.yaml
+
+  # Posts
+  Get_posts__response:
+    $ref: ./responses/posts/Get_posts__response.yaml
+  Post_posts__response:
+    $ref: ./responses/posts/Post_post__response.yaml
+
+  # Followers
+  Post_follower__response:
+    $ref: ./responses/followers/Post_follower__response.yaml
+  Delete_follower__response:
+    $ref: ./responses/followers/Delete_follower__response.yaml
+  Get_followers__response:
+    $ref: ./responses/followers/Get_followers__response.yaml
+  Get_followings__response:
+    $ref: ./responses/followers/Get_followings__response.yaml
+  Get_unfollowers__response:
+    $ref: ./responses/followers/Get_unfollowers__response.yaml
+
+  # Likes
+  Toggle_like__response:
+    $ref: ./responses/likes/Toggle_like__response.yaml
+  Get_likes__response:
+    $ref: ./responses/likes/Get_likes__response.yaml
+
+schemas:
+  # Common
+  Error:
+    $ref: ./schemas/Error.yaml
+  # User
+  User:
+    $ref: ./schemas/User.yaml
+  # Post
+  Post:
+    $ref: ./schemas/Post.yaml
+  # Request_bodies
+  Post_user__request_body:
+    $ref: ./schemas/request_bodies/Post_user__request_body.yaml
+  Put_user__request_body:
+    $ref: ./schemas/request_bodies/Put_user__request_body.yaml
+  Login_user__request_body:
+    $ref: ./schemas/request_bodies/Login_user__request_body.yaml
+
+  Post_post__request_body:
+    $ref: ./schemas/request_bodies/Post_post__request_body.yaml
+
+  Post_follower__request_body:
+    $ref: ./schemas/request_bodies/Post_follower__request_body.yaml
+  Delete_follower__request_body:
+    $ref: ./schemas/request_bodies/Delete_follower__request_body.yaml
+
+  Toggle_like__request_body:
+    $ref: ./schemas/request_bodies/Toggle_like__request_body.yaml

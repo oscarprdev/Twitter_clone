@@ -1,0 +1,10 @@
+description: Returns a list of Users
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: ../../_index.yaml#/schemas/User

@@ -1,0 +1,67 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: 'The unique identifier for the post.'
+    nullable: false
+    example: 'ef9d86ca-6fc2-40d3-be64-df51a7aa8888'
+  created_at:
+    type: string
+    format: date-time
+    description: 'The timestamp when the post was created.'
+    nullable: false
+    example: '2024-01-15T06:03:52.546382Z'
+  updated_at:
+    type: string
+    format: date-time
+    description: 'The timestamp when the post was last updated.'
+    nullable: false
+    example: '2024-01-15T06:03:52.546382Z'
+  userId:
+    type: string
+    format: uuid
+    description: 'The unique identifier of the user who created the post.'
+    nullable: false
+    example: '10cf35c4-adab-4057-b41b-6f55d0d0af7d'
+  post:
+    type: string
+    description: 'The content of the post.'
+    nullable: false
+    example: 'Some randome post content'
+  image:
+    type: string
+    format: uri
+    description: 'URL to the image associated with the post.'
+    nullable: true
+    example: 'https://0.0.0.0:4321/random_image_1.jpeg'
+  owner:
+    type: object
+    properties:
+      name:
+        type: string
+        description: "The owner's first name."
+        nullable: false
+        example: 'Tomm'
+      surname:
+        type: string
+        description: "The owner's last name."
+        nullable: false
+        example: 'Sunday'
+      username:
+        type: string
+        description: "The owner's username."
+        nullable: false
+        example: 'tommsun'
+      profileImgUrl:
+        type: string
+        format: uri
+        description: "URL to the owner's profile image."
+        nullable: true
+        example: 'https://0.0.0.0:4321/random_image_1.jpeg'
+      email:
+        type: string
+        format: email
+        description: "The owner's email address."
+        nullable: false
+        example: 'tommsun@email.com'

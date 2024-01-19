@@ -1,0 +1,16 @@
+post:
+  tags:
+    - Users
+  description: Login user
+  requestBody:
+    required: true
+    description: Request parameters to login user
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/_index.yaml#/schemas/Login_user__request_body
+  responses:
+    '201':
+      $ref: ../../components/_index.yaml#/responses/Get_user__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response

@@ -1,0 +1,11 @@
+get:
+  tags:
+    - Users
+  description: Authorize user with JWT
+  parameters:
+    - $ref: ../../components/_index.yaml#/parameters/Authorizations
+  responses:
+    '200':
+      $ref: ../../components/_index.yaml#/responses/Get_user__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response

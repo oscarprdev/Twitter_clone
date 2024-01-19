@@ -1,0 +1,28 @@
+get:
+  tags:
+    - Posts
+  description: Get all posts
+  parameters:
+    - $ref: ../../components/_index.yaml#/parameters/Limit
+    - $ref: ../../components/_index.yaml#/parameters/Offset
+  responses:
+    '200':
+      $ref: ../../components/_index.yaml#/responses/Get_posts__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response
+post:
+  tags:
+    - Posts
+  description: Create new post
+  requestBody:
+    required: true
+    description: Request parameters to create a new post
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/_index.yaml#/schemas/Post_post__request_body
+  responses:
+    '201':
+      $ref: ../../components/_index.yaml#/responses/Post_post__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response

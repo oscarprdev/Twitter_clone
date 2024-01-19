@@ -1,0 +1,8 @@
+description: Returns the post created
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        post:
+          $ref: ../../_index.yaml#/schemas/Post

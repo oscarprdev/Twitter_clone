@@ -1,0 +1,53 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: 'The unique identifier for the user.'
+    nullable: false
+    example: 'f05a78f6-66e3-4a31-b718-6e94873b01f0'
+  created_at:
+    type: string
+    format: date-time
+    description: 'The timestamp when the user was created.'
+    nullable: false
+    example: '2024-01-10T19:14:04.489431Z'
+  updated_at:
+    type: string
+    format: date-time
+    description: 'The timestamp when the user was last updated.'
+    nullable: false
+    example: '2024-01-10T19:14:04.489431Z'
+  name:
+    type: string
+    description: "The user's first name."
+    nullable: false
+    example: 'Tomm'
+  surname:
+    type: string
+    description: "The user's last name."
+    nullable: false
+    example: 'Sunday'
+  username:
+    type: string
+    description: "The user's username."
+    nullable: false
+    example: 'tommsun'
+  email:
+    type: string
+    format: email
+    description: "The user's email address."
+    nullable: false
+    example: 'tommsun@email.com'
+  profileImgUrl:
+    type: string
+    format: uri
+    description: "URL to the user's profile image."
+    nullable: false
+    example: 'https://0.0.0.0:4321/random_image_1.jpeg'
+  profileBgImgUrl:
+    type: string
+    format: uri
+    description: "URL to the user's profile background image."
+    nullable: false
+    example: 'https://0.0.0.0:4321/random_image_2.jpeg'

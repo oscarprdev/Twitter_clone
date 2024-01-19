@@ -1,0 +1,26 @@
+description: Returns number of likes of a post
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        postId:
+          type: string
+          description: 'The unique identifier for the post.'
+          nullable: false
+          example: 'ef9d86ca-6fc2-40d3-be64-df51a7aa8888'
+        post:
+          type: string
+          description: 'The content of the post.'
+          nullable: false
+          example: 'Some randome post content'
+        userId:
+          type: string
+          format: uuid
+          description: 'The unique identifier for the user.'
+          nullable: false
+          example: 'f05a78f6-66e3-4a31-b718-6e94873b01f0'
+        numLikes:
+          type: integer
+          description: 'the number of likes of the post after the action.'
+          example: 5

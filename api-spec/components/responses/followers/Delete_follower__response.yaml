@@ -1,0 +1,10 @@
+description: Returns the user and the user unfollowed
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        user:
+          $ref: ../../_index.yaml#/schemas/User
+        unfollowTo:
+          $ref: ../../_index.yaml#/schemas/User
