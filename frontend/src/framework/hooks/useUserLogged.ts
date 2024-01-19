@@ -24,7 +24,7 @@ export const useUserLogged = () => {
 				getDefaultUserLogged();
 			}
 		}
-	}, []);
+	}, [userLogged.id]);
 
 	return { userLogged };
 };
