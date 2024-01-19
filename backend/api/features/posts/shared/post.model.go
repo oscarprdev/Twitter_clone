@@ -17,6 +17,7 @@ type Post struct {
 }
 
 type Owner struct {
+	Id uuid.UUID `json:"id"`
 	Name string `json:"name"`
 	Surname string `json:"surname"`
 	Username string `json:"username"`

@@ -1,3 +1,4 @@
+import { Link } from 'wouter';
 import { Post } from '../../../features/shared/domain/types/posts';
 import { strDateToTime } from '../../utils/strDateToTime';
 import UserImage from '../UserImage';
@@ -17,9 +18,11 @@ const Post = ({ post }: PostProps) => {
 				<header
 					className='flex items-center gap-2 text-zinc-500'
 					role='post-header'>
-					<p className='text-white font-extrabold'>
+					<Link
+						href={`/user/${post.owner.id}`}
+						className='text-white font-extrabold'>
 						{post.owner.name} {post.owner.surname}
-					</p>
+					</Link>
 					<p>@{post.owner.username}</p>
 					<span className='w-[2px] h-[2px] bg-zinc-500 rounded-full' />
 					<p>{strDateToTime(post.updatedAt)}</p>

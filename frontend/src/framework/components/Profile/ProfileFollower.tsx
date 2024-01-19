@@ -13,9 +13,10 @@ interface ProfileFollowerProps {
 	followings: User[];
 	userId: string;
 	isFollower?: boolean;
+	isInfo?: boolean;
 }
 
-const ProfileFollower = ({ profileImgUrl, name, surname, username, followings, userId, isFollower }: ProfileFollowerProps) => {
+const ProfileFollower = ({ profileImgUrl, name, surname, username, followings, userId, isFollower, isInfo }: ProfileFollowerProps) => {
 	const { handleRemoveFollowClick, loading, done } = useRemoveFollow(userId);
 	const { handleAddFollowClick, loading: loadingFollow } = useAddFollow(userId);
 
@@ -32,17 +33,18 @@ const ProfileFollower = ({ profileImgUrl, name, surname, username, followings, u
 				</p>
 				<p className='text-zinc-400 text-md'>@{username}</p>
 			</div>
-			{followings?.some((following) => following.id === userId) ? (
-				<RemoveFollowBtn
-					handleRemoveFollowClick={handleRemoveFollowClick}
-					loading={loading}
-				/>
-			) : (
-				<AddFollowBtn
-					handleAddFollowClick={handleAddFollowClick}
-					loading={loadingFollow}
-				/>
-			)}
+			{!isInfo &&
+				(followings?.some((following) => following.id === userId) ? (
+					<RemoveFollowBtn
+						handleRemoveFollowClick={handleRemoveFollowClick}
+						loading={loading}
+					/>
+				) : (
+					<AddFollowBtn
+						handleAddFollowClick={handleAddFollowClick}
+						loading={loadingFollow}
+					/>
+				))}
 		</li>
 	);
 };

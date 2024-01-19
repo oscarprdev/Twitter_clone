@@ -9,9 +9,10 @@ interface ProfileNavContainerProps {
 	id: string;
 	followers: User[];
 	followings: User[];
+	isInfo?: boolean;
 }
 
-const ProfileNavContainer = ({ id, followers, followings }: ProfileNavContainerProps) => {
+const ProfileNavContainer = ({ id, followers, followings, isInfo }: ProfileNavContainerProps) => {
 	const [navState, setNavState] = useState<TAB_ACTIVE>(tabs.POSTS);
 
 	const handleTabActive = (navItem: TAB_ACTIVE) => {
@@ -30,6 +31,7 @@ const ProfileNavContainer = ({ id, followers, followings }: ProfileNavContainerP
 					kind={'followers'}
 					users={followers}
 					followings={followings}
+					isInfo={isInfo}
 				/>
 			)}
 			{navState === tabs.FOLLOWINGS && (
@@ -37,6 +39,7 @@ const ProfileNavContainer = ({ id, followers, followings }: ProfileNavContainerP
 					kind={'following'}
 					users={followings}
 					followings={followings}
+					isInfo={isInfo}
 				/>
 			)}
 		</>

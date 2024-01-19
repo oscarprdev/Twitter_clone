@@ -36,6 +36,7 @@ const ProfileContainer = ({ user, isInfo }: ProfileContainerProps) => {
 				id={user.id}
 				followers={followers}
 				followings={followings}
+				isInfo={isInfo}
 			/>
 		</section>
 	);

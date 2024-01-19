@@ -8,6 +8,7 @@ export const postResponse: Post = {
 	userId: userTestResponse.id,
 	post: 'First post',
 	owner: {
+		id: userTestResponse.id,
 		name: userTestResponse.name,
 		surname: userTestResponse.surname,
 		username: userTestResponse.username,
@@ -24,6 +25,7 @@ export const postDbResponse: DbPost = {
 	userId: '10cf35c4-adab-4057-b41b-6f55d0d0af7d',
 	post: 'post content',
 	owner: {
+		id: userTestResponse.id,
 		name: userTestResponse.name,
 		surname: userTestResponse.surname,
 		username: userTestResponse.username,

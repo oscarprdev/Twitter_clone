@@ -11,6 +11,7 @@ func DatabasePostToPost(dbPost database.Post, dbUser database.User) Post{
 		Post:			 dbPost.Post,
 		Image:           dbPost.Image,
 		Owner: 			 Owner{
+			Id:			   dbUser.ID,
 			Username: 	   dbUser.Username,
 			Name: 		   dbUser.Name,
 			Surname: 	   dbUser.Surname,
