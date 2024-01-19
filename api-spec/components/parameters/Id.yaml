@@ -1,0 +1,7 @@
+name: id
+required: true
+in: query
+description: User identifier
+schema:
+  type: string
+  format: uuid

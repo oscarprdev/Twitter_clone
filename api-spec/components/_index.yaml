@@ -1,0 +1,25 @@
+parameters:
+  Id:
+    $ref: ./parameters/Id.yaml
+
+responses:
+  # Common
+  Bad_request__response:
+    $ref: ./responses/common/Bad_request__response.yaml
+
+  # Users
+  Get_users__response:
+    $ref: ./responses/users/Get_users__response.yaml
+  Post_user__response:
+    $ref: ./responses/users/Post_user__response.yaml
+
+schemas:
+  # Common
+  Error:
+    $ref: ./schemas/Error.yaml
+  # User
+  User:
+    $ref: ./schemas/User.yaml
+  # Request_bodies
+  Post_user__request_body:
+    $ref: ./schemas/Post_user__request_body.yaml

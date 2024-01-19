@@ -1,0 +1,16 @@
+type: object
+required:
+  - error:
+properties:
+  error:
+    type: object
+    required:
+      - status
+      - details
+    properties:
+      code:
+        type: integer
+        description: Response code
+      details:
+        type: string
+        description: Error details

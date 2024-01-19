@@ -1,0 +1,8 @@
+description: Returns the user created
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        userCreated:
+          $ref: ../../_index.yaml#/schemas/User
