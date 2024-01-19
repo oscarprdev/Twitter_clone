@@ -52,9 +52,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Frontend_install
-        uses: ./.github/actions/frontend/install
-
       - name: Frontend_build
         uses: ./.github/actions/frontend/build
 
@@ -69,9 +66,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Frontend_install
-        uses: ./.github/actions/frontend/install
-
       - name: Frontend_e2e_tests
         uses: ./.github/actions/frontend/e2e-tests
 
@@ -85,9 +79,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Frontend_install
-        uses: ./.github/actions/frontend/install
 
       - name: Frontend_unit_tests
         uses: ./.github/actions/frontend/unit-tests
