@@ -3,6 +3,10 @@ parameters:
     $ref: ./parameters/Id.yaml
   Username:
     $ref: ./parameters/Username.yaml
+  Limit:
+    $ref: ./parameters/Limit.yaml
+  Offset:
+    $ref: ./parameters/Offset.yaml
   Authorization:
     $ref: ./parameters/Authorization.yaml
 
@@ -19,6 +23,12 @@ responses:
   Post_user__response:
     $ref: ./responses/users/Post_user__response.yaml
 
+  # Posts
+  Get_posts__response:
+    $ref: ./responses/posts/Get_posts__response.yaml
+  Post_posts__response:
+    $ref: ./responses/posts/Post_post__response.yaml
+
 schemas:
   # Common
   Error:
@@ -26,10 +36,16 @@ schemas:
   # User
   User:
     $ref: ./schemas/User.yaml
+  # Post
+  Post:
+    $ref: ./schemas/Post.yaml
   # Request_bodies
   Post_user__request_body:
-    $ref: ./schemas/Post_user__request_body.yaml
+    $ref: ./schemas/request_bodies/Post_user__request_body.yaml
   Put_user__request_body:
-    $ref: ./schemas/Put_user__request_body.yaml
+    $ref: ./schemas/request_bodies/Put_user__request_body.yaml
   Login_user__request_body:
-    $ref: ./schemas/Login_user__request_body.yaml
+    $ref: ./schemas/request_bodies/Login_user__request_body.yaml
+
+  Post_post__request_body:
+    $ref: ./schemas/request_bodies/Post_post__request_body.yaml

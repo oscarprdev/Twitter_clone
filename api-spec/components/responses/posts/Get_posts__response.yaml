@@ -1,0 +1,10 @@
+description: Returns a list of Posts
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        posts:
+          type: array
+          items:
+            $ref: ../../_index.yaml#/schemas/Post

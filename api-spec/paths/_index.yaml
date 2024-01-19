@@ -7,11 +7,8 @@
   $ref: ./users/users_auth.yaml
 '/users/login':
   $ref: ./users/users_login.yaml
-# '/users/likes/{id}':
-#   $ref: ./users/users_likes_id.yaml
-# '/users/email/{id}':
-#   $ref: ./users/users_email.yaml
-# '/users/username/{username}':
-#   $ref: ./users/users_username.yaml
-# '/users/search/{username}':
-#   $ref: ./users/users_search.yaml
+'/users/search/{username}':
+  $ref: ./users/users_search.yaml
+# Posts
+'/posts':
+  $ref: ./posts/posts.yaml

@@ -1,0 +1,6 @@
+name: Limit
+required: false
+in: query
+description: Limit
+schema:
+  type: integer

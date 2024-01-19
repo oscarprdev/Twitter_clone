@@ -1,0 +1,24 @@
+type: object
+properties:
+  userId:
+    type: string
+    format: uuid
+    description: 'The unique identifier of the user who created the post.'
+    nullable: false
+    example: '10cf35c4-adab-4057-b41b-6f55d0d0af7d'
+  post:
+    type: string
+    description: 'The content of the post.'
+    nullable: false
+    example: 'Some randome post content'
+  image:
+    type: string
+    format: uri
+    description: 'URL to the image associated with the post.'
+    nullable: true
+    example: 'https://0.0.0.0:4321/random_image_1.jpeg'
+
+required:
+  - userId
+  - post
+  - image

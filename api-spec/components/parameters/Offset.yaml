@@ -1,0 +1,6 @@
+name: Offset
+required: false
+in: query
+description: Offset
+schema:
+  type: integer
