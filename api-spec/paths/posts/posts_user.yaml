@@ -1,0 +1,11 @@
+get:
+  tags:
+    - Posts
+  description: Get posts by user id
+  parameters:
+    - $ref: ../../components/_index.yaml#/parameters/Id
+  responses:
+    '200':
+      $ref: ../../components/_index.yaml#/responses/Get_posts__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response

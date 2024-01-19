@@ -12,3 +12,5 @@
 # Posts
 '/posts':
   $ref: ./posts/posts.yaml
+'/posts/user/{id}':
+  $ref: ./posts/posts_user.yaml
