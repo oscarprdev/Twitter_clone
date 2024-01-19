@@ -9,7 +9,7 @@ import {
 	testGetUnfollowersEmptyHandler,
 	testGetUnfollowersHandler,
 } from '../../../../tests/unit/handlers/followers.handlers';
-import { SuccessfulGetUnfollowersResponse } from '../../../../tests/unit/responses/follows/get-unfollowers.response';
+import { SuccessfulGetUnfollowersResponse } from '../../../../tests/shared/responses/follows/get-unfollowers.response';
 import { updateUnfollowers } from '../../store/slices/users-slice';
 import { mapDbUserToApplication } from '../../../features/shared/mappers/map-db-user-to-app';
 

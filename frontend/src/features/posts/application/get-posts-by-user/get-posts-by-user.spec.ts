@@ -1,5 +1,5 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
-import { postResponse } from '../../../../../tests/unit/responses/posts.response';
+import { postResponse } from '../../../../../tests/shared/responses/posts.response';
 import { DefaultReduxUsecase } from '../../../shared/application/redux.usecase';
 import { mockStore } from '../../../../../tests/unit/store/store.mock';
 import { GetPostsByUserPorts } from './get-posts-by-user.ports';

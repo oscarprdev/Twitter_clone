@@ -6,7 +6,7 @@ import { mockStore } from '../../../../tests/unit/store/store.mock';
 import { server } from '../../../../tests/unit/server/server.mock';
 import { testAddPostHandler, testGetPostsHandler } from '../../../../tests/unit/handlers/posts.handlers';
 import { addPost } from '../../store/slices/posts-slice';
-import { postResponse } from '../../../../tests/unit/responses/posts.response';
+import { postResponse } from '../../../../tests/shared/responses/posts.response';
 
 describe('AddPost', () => {
 	let component: RenderResult;

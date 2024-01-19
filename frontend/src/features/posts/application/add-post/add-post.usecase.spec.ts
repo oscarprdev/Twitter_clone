@@ -1,7 +1,7 @@
 import { beforeEach, describe, it, expect, vi, MockInstance } from 'vitest';
 import { AddPostUsecase, DefaultAddPostUsecase } from './add-post.usecase';
 import { AddPostPorts } from './add-post.ports';
-import { postResponse } from '../../../../../tests/unit/responses/posts.response';
+import { postResponse } from '../../../../../tests/shared/responses/posts.response';
 import { DefaultReduxUsecase } from '../../../shared/application/redux.usecase';
 import { mockStore } from '../../../../../tests/unit/store/store.mock';
 

@@ -10,7 +10,7 @@ interface PostProps {
 const Post = ({ post }: PostProps) => {
 	return (
 		<li
-			role='post'
+			data-testid='post'
 			className={`${post.isNew && 'animate-appearing'} flex items-start gap-4 w-full p-4 border-y-[1px] border-y-zinc-700`}>
 			<UserImage userImage={post.owner.profileImgUrl} />
 			<div className='flex flex-col min-h-[100px] w-[90%]'>

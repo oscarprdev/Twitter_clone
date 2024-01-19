@@ -1,7 +1,7 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { RemoveFollowPorts } from './remove-follow.ports';
 import { DefaultRemoveFollowUsecase, RemoveFollowUsecase } from './remove-follow.usecase';
-import { userTestResponse } from '../../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../../tests/shared/responses/users.response';
 import { DefaultReduxUsecase } from '../../../shared/application/redux.usecase';
 import { mockStore } from '../../../../../tests/unit/store/store.mock';
 

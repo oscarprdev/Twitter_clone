@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, it } from 'vitest';
 import ProfileContainer from './ProfileContainer';
 import { Provider } from 'react-redux';
 import { mockStore } from '../../../../tests/unit/store/store.mock';
-import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../tests/shared/responses/users.response';
 
 describe('ProfileContainer', () => {
 	let component: RenderResult;

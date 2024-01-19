@@ -3,7 +3,7 @@ import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } 
 import { server } from '../../../../tests/unit/server/server.mock';
 import { Provider } from 'react-redux';
 import { mockStore } from '../../../../tests/unit/store/store.mock';
-import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../tests/shared/responses/users.response';
 import RemoveFollowBtn from './RemoveFollowBtn';
 import { testRemoveFollowerHandler } from '../../../../tests/unit/handlers/followers.handlers';
 import { addFollow, removeFollow } from '../../store/slices/users-slice';

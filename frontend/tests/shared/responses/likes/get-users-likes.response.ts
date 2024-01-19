@@ -4,3 +4,7 @@ import { userTestResponse } from '../users.response';
 export const SuccessfulGetUsersLikesResponse: GetUsersLikesFromPostResponse = {
 	users: [userTestResponse],
 };
+
+export const SuccessfulGetUsersLikesEmptyResponse: GetUsersLikesFromPostResponse = {
+	users: [],
+};

@@ -1,7 +1,7 @@
 import { RenderResult, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import ProfileFollower from './ProfileFollower';
-import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../tests/shared/responses/users.response';
 import { Provider } from 'react-redux';
 import { mockStore } from '../../../../tests/unit/store/store.mock';
 

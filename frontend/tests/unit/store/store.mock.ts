@@ -4,7 +4,7 @@ import { getUserLoggedReducer } from '../../../src/framework/store/reducers/user
 import { updateUnfollowersReducer } from '../../../src/framework/store/reducers/users/update-unfollowers/update-unfollowers.reducer';
 import { addFollowersReducer } from '../../../src/framework/store/reducers/users/add-follow/add-follow.reducer';
 import { UsersSliceState } from '../../../src/framework/store/slices/users-slice';
-import { userLoggedTestResponse } from '../responses/users.response';
+import { userLoggedTestResponse } from '../../shared/responses/users.response';
 import { getPostsReducer } from '../../../src/framework/store/reducers/posts/get-post/get-posts.reducer';
 import { addPostReducer } from '../../../src/framework/store/reducers/posts/add-post/add-post.reducer';
 import { removeFollowersReducer } from '../../../src/framework/store/reducers/users/remove-follow/remove-follow.reducer';

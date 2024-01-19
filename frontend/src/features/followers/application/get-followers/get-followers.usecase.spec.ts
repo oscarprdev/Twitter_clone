@@ -1,7 +1,7 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DefaultGetFollowersUsecase, GetFollowersUsecase } from './get-followers.usecase';
 import { GetFollowersPorts, GetFollowersPortsInput, GetFollowersPortsOutput } from './get-followers.ports';
-import { userTestResponse } from '../../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../../tests/shared/responses/users.response';
 
 class MockGetFollowersHttpAdapter implements GetFollowersPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,11 +1,14 @@
 import { HttpResponse, http } from 'msw';
 import { API_URL } from '../../../src/features/shared/domain/constants/constants';
-import { userLoggedTestResponse } from '../responses/users.response';
-import { SuccessfulGetUnfollowersEmptyResponse, SuccessfulGetUnfollowersResponse } from '../responses/follows/get-unfollowers.response';
-import { SuccessfulAddFollowResponse } from '../responses/follows/add-follower.response';
-import { SuccessfulGetFollowersResponse } from '../responses/follows/get-followers.response';
-import { SuccessfulGetFollowingsResponse } from '../responses/follows/get-followings.response';
-import { SuccessfulRemoveFollowerResponse } from '../responses/follows/remove-follower.response';
+import { userLoggedTestResponse } from '../../shared/responses/users.response';
+import {
+	SuccessfulGetUnfollowersEmptyResponse,
+	SuccessfulGetUnfollowersResponse,
+} from '../../shared/responses/follows/get-unfollowers.response';
+import { SuccessfulAddFollowResponse } from '../../shared/responses/follows/add-follower.response';
+import { SuccessfulGetFollowersResponse } from '../../shared/responses/follows/get-followers.response';
+import { SuccessfulGetFollowingsResponse } from '../../shared/responses/follows/get-followings.response';
+import { SuccessfulRemoveFollowerResponse } from '../../shared/responses/follows/remove-follower.response';
 
 export const testGetFollowersHandler = http.get(`${API_URL}/followers/${userLoggedTestResponse.id}`, () =>
 	HttpResponse.json(SuccessfulGetFollowersResponse)

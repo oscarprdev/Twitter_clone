@@ -1,7 +1,7 @@
 import { HttpResponse, http } from 'msw';
 import { API_URL } from '../../../src/features/shared/domain/constants/constants';
-import { SuccessfulSearchUsersEmptyResponse, SuccessfulSearchUsersResponse } from '../responses/users/search-users.response';
-import { SuccessfulUserLoggedResponse } from '../responses/users/user-logged-response';
+import { SuccessfulSearchUsersEmptyResponse, SuccessfulSearchUsersResponse } from '../../shared/responses/users/search-users.response';
+import { SuccessfulUserLoggedResponse } from '../../shared/responses/users/user-logged-response';
 
 export const testSearchMockUserHandler = http.get(`${API_URL}/users/search/mock`, () => HttpResponse.json(SuccessfulSearchUsersResponse));
 

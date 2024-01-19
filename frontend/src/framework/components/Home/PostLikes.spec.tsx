@@ -2,7 +2,7 @@ import { RenderResult, fireEvent, render, waitFor } from '@testing-library/react
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import PostLikes from './PostLikes';
 import { server } from '../../../../tests/unit/server/server.mock';
-import { postResponse } from '../../../../tests/unit/responses/posts.response';
+import { postResponse } from '../../../../tests/shared/responses/posts.response';
 import {
 	testAddLikeLikeHandler,
 	testGetLikesHandler,

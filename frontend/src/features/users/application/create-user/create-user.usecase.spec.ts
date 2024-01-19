@@ -4,7 +4,7 @@ import { mockStore } from '../../../../../tests/unit/store/store.mock';
 import { CreateUserUsecase, DefaultCreateUserUsecase } from './create-user.usecase';
 import { CreateUserPorts } from './create-user.ports';
 import { CreateUserInput } from './create-user.types';
-import { userTestResponse } from '../../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../../tests/shared/responses/users.response';
 
 class MockCreateUserHttpAdapter implements CreateUserPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

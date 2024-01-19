@@ -8,7 +8,7 @@ export const userTestResponse: User = {
 	surname: 'mocked-surname',
 	username: 'mocked-username',
 	email: 'mocked-email',
-	profileImgUrl: '',
+	profileImgUrl: 'https://pub-43949222ba2448cbbff5d5c5019cd5e6.r2.dev/default-avatar.png',
 	profileBgImgUrl: '',
 };
 
@@ -20,7 +20,7 @@ export const userLoggedTestResponse: User = {
 	surname: 'mocked-surname',
 	username: 'mocked-username',
 	email: 'mocked-email',
-	profileImgUrl: '',
+	profileImgUrl: 'https://pub-43949222ba2448cbbff5d5c5019cd5e6.r2.dev/default-avatar.png',
 	profileBgImgUrl: '',
 };
 
@@ -32,6 +32,6 @@ export const userDbTestResponse: DbUser = {
 	surname: 'mocked-surname',
 	username: 'mocked-username',
 	email: 'mocked-email',
-	profileImgUrl: '',
+	profileImgUrl: 'https://pub-43949222ba2448cbbff5d5c5019cd5e6.r2.dev/default-avatar.png',
 	profileBgImgUrl: '',
 };

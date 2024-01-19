@@ -1,14 +1,14 @@
 import { RenderResult, fireEvent, render, waitFor } from '@testing-library/react';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from 'vitest';
 import ProfileNavContainer from './ProfileNavContainer';
-import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../tests/shared/responses/users.response';
 import { server } from '../../../../tests/unit/server/server.mock';
 import { testGetPostsByUserHandler } from '../../../../tests/unit/handlers/posts.handlers';
 import { Provider } from 'react-redux';
 import { mockStore } from '../../../../tests/unit/store/store.mock';
 import { testGetFollowersHandler, testGetFollowingsHandler } from '../../../../tests/unit/handlers/followers.handlers';
 import { getProfilePosts } from '../../store/slices/posts-slice';
-import { postResponse } from '../../../../tests/unit/responses/posts.response';
+import { postResponse } from '../../../../tests/shared/responses/posts.response';
 
 describe('ProfileNavContainer', () => {
 	let component: RenderResult;
@@ -40,7 +40,7 @@ describe('ProfileNavContainer', () => {
 		component.getByRole('profile-nav');
 
 		await waitFor(() => {
-			component.getByRole('post');
+			component.getByTestId('post');
 		});
 	});
 

@@ -15,3 +15,10 @@ export const SuccessfulGetLowerLikesResponse: GetLikesInfraResponse = {
 	userId: userTestResponse.id,
 	numLikes: 4,
 };
+
+export const SuccessfulGetEmptyLikesResponse: GetLikesInfraResponse = {
+	postId: postResponse.id,
+	post: 'Mocked post content',
+	userId: userTestResponse.id,
+	numLikes: 0,
+};

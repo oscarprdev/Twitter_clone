@@ -1,13 +1,13 @@
 import { API_URL } from '../../../src/features/shared/domain/constants/constants';
-import { SuccessfulAddPostResponse } from '../responses/posts/add-post.responses';
+import { SuccessfulAddPostResponse } from '../../shared/responses/posts/add-post.responses';
 import {
 	SuccessfulGetMorePostsResponse,
 	SuccessfulGetPostsEmptyResponse,
 	SuccessfulGetPostsResponse,
-} from '../responses/posts/get-posts.responses';
+} from '../../shared/responses/posts/get-posts.responses';
 import { HttpResponse, http } from 'msw';
-import { userTestResponse } from '../responses/users.response';
-import { SuccessfulGetPostsByUserResponse } from '../responses/posts/get-posts-by-user.responses';
+import { userTestResponse } from '../../shared/responses/users.response';
+import { SuccessfulGetPostsByUserResponse } from '../../shared/responses/posts/get-posts-by-user.responses';
 
 export const testGetPostsHandler = http.get(`${API_URL}/posts`, () => HttpResponse.json(SuccessfulGetPostsResponse));
 
