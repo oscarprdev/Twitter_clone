@@ -1,0 +1,16 @@
+post:
+  tags:
+    - Likes
+  description: Add or remove a like from post
+  requestBody:
+    required: true
+    description: Request parameters to add or remove a like from a post
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/_index.yaml#/schemas/Toggle_like__request_body
+  responses:
+    '201':
+      $ref: ../../components/_index.yaml#/responses/Toggle_like__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response

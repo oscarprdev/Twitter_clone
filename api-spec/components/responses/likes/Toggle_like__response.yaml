@@ -1,0 +1,14 @@
+description: Returns a boolean flag and the number of likes
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        isLikeDeleted:
+          type: boolean
+          description: 'Boolean flag to check if the like has been deleted.'
+          example: true
+        numLikes:
+          type: integer
+          description: 'the number of likes of the post after the action.'
+          example: 2

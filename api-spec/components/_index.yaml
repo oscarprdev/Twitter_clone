@@ -41,6 +41,12 @@ responses:
   Get_unfollowers__response:
     $ref: ./responses/followers/Get_unfollowers__response.yaml
 
+  # Likes
+  Toggle_like__response:
+    $ref: ./responses/likes/Toggle_like__response.yaml
+  Get_likes__response:
+    $ref: ./responses/likes/Get_likes__response.yaml
+
 schemas:
   # Common
   Error:
@@ -66,3 +72,6 @@ schemas:
     $ref: ./schemas/request_bodies/Post_follower__request_body.yaml
   Delete_follower__request_body:
     $ref: ./schemas/request_bodies/Delete_follower__request_body.yaml
+
+  Toggle_like__request_body:
+    $ref: ./schemas/request_bodies/Toggle_like__request_body.yaml
