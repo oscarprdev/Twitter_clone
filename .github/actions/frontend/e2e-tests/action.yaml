@@ -20,7 +20,24 @@ runs:
 
     - name: Run app
       shell: bash
-      run: cd frontend && npm run dev
+      run: cd frontend && npm run dev &
+
+    - name: Wait for app to be ready
+      shell: bash
+      run: |
+        timeout=0
+        until [ $timeout -ge 30 ]
+        do
+          response=$(curl --write-out %{http_code} --silent --output /dev/null http://localhost:3000)
+          if [ $response -eq 200 ]; then
+            echo "App is ready!"
+            break
+          else
+            echo "App not ready yet. Retrying..."
+            sleep 2
+            ((timeout++))
+          fi
+        done
 
     - name: Run e2e tests
       shell: bash
