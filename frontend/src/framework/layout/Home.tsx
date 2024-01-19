@@ -3,7 +3,9 @@ import PostFeed from '../components/Home/PostsFeed';
 
 const Home = () => {
 	return (
-		<PageWrapper title='Home'>
+		<PageWrapper
+			title='Home'
+			dataTestid='home'>
 			<PostFeed />
 		</PageWrapper>
 	);
