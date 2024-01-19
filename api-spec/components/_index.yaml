@@ -29,6 +29,12 @@ responses:
   Post_posts__response:
     $ref: ./responses/posts/Post_post__response.yaml
 
+  # Followers
+  Post_follower__response:
+    $ref: ./responses/followers/Post_follower__response.yaml
+  Delete_follower__response:
+    $ref: ./responses/followers/Delete_follower__response.yaml
+
 schemas:
   # Common
   Error:
@@ -49,3 +55,8 @@ schemas:
 
   Post_post__request_body:
     $ref: ./schemas/request_bodies/Post_post__request_body.yaml
+
+  Post_follower__request_body:
+    $ref: ./schemas/request_bodies/Post_follower__request_body.yaml
+  Delete_follower__request_body:
+    $ref: ./schemas/request_bodies/Delete_follower__request_body.yaml

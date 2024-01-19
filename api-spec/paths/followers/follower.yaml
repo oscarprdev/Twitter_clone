@@ -1,0 +1,32 @@
+post:
+  tags:
+    - Follows
+  description: Add a follower
+  requestBody:
+    required: true
+    description: Request parameters to add a follower
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/_index.yaml#/schemas/Post_follower__request_body
+  responses:
+    '201':
+      $ref: ../../components/_index.yaml#/responses/Post_follower__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response
+delete:
+  tags:
+    - Follows
+  description: Delete a follower
+  requestBody:
+    required: true
+    description: Request parameters to delete a follower
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/_index.yaml#/schemas/Delete_follower__request_body
+  responses:
+    '201':
+      $ref: ../../components/_index.yaml#/responses/Delete_follower__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response
