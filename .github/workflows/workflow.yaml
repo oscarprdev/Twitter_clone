@@ -20,7 +20,17 @@ jobs:
           all_but_latest: true
           access_token: ${{ github.token }}
 
+  backend_build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: Backend_Build
+        uses: ./.github/actions/backend/build
+
   backend_deploy_railway:
+    needs: [backend_build]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
