@@ -2,10 +2,10 @@ import { RenderResult, fireEvent, render } from '@testing-library/react';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from 'vitest';
 import Unfollower from './Unfollower';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../../tests/unit/store/store.mock';
-import { userTestResponse } from '../../../tests/unit/responses/users.response';
-import { server } from '../../../tests/unit/server/server.mock';
-import { testAddFollowerHandler } from '../../../tests/unit/handlers/followers.handlers';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { server } from '../../../../tests/unit/server/server.mock';
+import { testAddFollowerHandler } from '../../../../tests/unit/handlers/followers.handlers';
 
 describe('Unfollower', () => {
 	let component: RenderResult;

@@ -1,11 +1,11 @@
 import { RenderResult, fireEvent, render, waitFor } from '@testing-library/react';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { server } from '../../../tests/unit/server/server.mock';
+import { server } from '../../../../tests/unit/server/server.mock';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../../tests/unit/store/store.mock';
-import { userTestResponse } from '../../../tests/unit/responses/users.response';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { userTestResponse } from '../../../../tests/unit/responses/users.response';
 import RemoveFollowBtn from './RemoveFollowBtn';
-import { testRemoveFollowerHandler } from '../../../tests/unit/handlers/followers.handlers';
+import { testRemoveFollowerHandler } from '../../../../tests/unit/handlers/followers.handlers';
 import { addFollow, removeFollow } from '../../store/slices/users-slice';
 
 describe('RemoveFollowBtn', () => {

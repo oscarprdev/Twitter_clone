@@ -2,8 +2,8 @@ import { RenderResult, render } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import ProfileFollowers from './ProfileFollowers';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../../tests/unit/store/store.mock';
-import { userTestResponse } from '../../../tests/unit/responses/users.response';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { userTestResponse } from '../../../../tests/unit/responses/users.response';
 
 describe('ProfileFollowers', () => {
 	let component: RenderResult;

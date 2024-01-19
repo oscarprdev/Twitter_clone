@@ -1,9 +1,9 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AddFollowPorts } from './add-follow.ports';
 import { DefaultAddFollowUsecase } from './add-follow.usecase';
-import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../../tests/unit/responses/users.response';
 import { DefaultReduxUsecase } from '../../../shared/application/redux.usecase';
-import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { mockStore } from '../../../../../tests/unit/store/store.mock';
 
 class MockAddFollowHttpAdapter implements AddFollowPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

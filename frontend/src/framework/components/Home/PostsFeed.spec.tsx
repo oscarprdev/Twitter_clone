@@ -2,11 +2,11 @@ import { RenderResult, fireEvent, render, waitFor } from '@testing-library/react
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import PostFeed from './PostsFeed';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../../tests/unit/store/store.mock';
-import { server } from '../../../tests/unit/server/server.mock';
-import { testAddPostHandler, testGetMorePostsHandler, testGetPostsHandler } from '../../../tests/unit/handlers/posts.handlers';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { server } from '../../../../tests/unit/server/server.mock';
+import { testAddPostHandler, testGetMorePostsHandler, testGetPostsHandler } from '../../../../tests/unit/handlers/posts.handlers';
 import { addPost, getPosts } from '../../store/slices/posts-slice';
-import { postResponse } from '../../../tests/unit/responses/posts.response';
+import { postResponse } from '../../../../tests/unit/responses/posts.response';
 
 describe('PostFeed', () => {
 	let component: RenderResult;

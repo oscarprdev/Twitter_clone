@@ -1,7 +1,7 @@
 import { RenderResult, render } from '@testing-library/react';
 import { describe, it } from 'vitest';
 import SearchedUsersList from './SearchedUsersList';
-import { userTestResponse } from '../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../tests/unit/responses/users.response';
 
 describe('SearchedUsersList', () => {
 	let component: RenderResult;

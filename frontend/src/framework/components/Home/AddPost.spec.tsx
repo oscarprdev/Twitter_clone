@@ -2,11 +2,11 @@ import { describe, it, beforeEach, afterEach, expect, beforeAll, afterAll } from
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import AddPost from './AddPost';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../../tests/unit/store/store.mock';
-import { server } from '../../../tests/unit/server/server.mock';
-import { testAddPostHandler, testGetPostsHandler } from '../../../tests/unit/handlers/posts.handlers';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { server } from '../../../../tests/unit/server/server.mock';
+import { testAddPostHandler, testGetPostsHandler } from '../../../../tests/unit/handlers/posts.handlers';
 import { addPost } from '../../store/slices/posts-slice';
-import { postResponse } from '../../../tests/unit/responses/posts.response';
+import { postResponse } from '../../../../tests/unit/responses/posts.response';
 
 describe('AddPost', () => {
 	let component: RenderResult;
