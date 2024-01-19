@@ -1,5 +1,5 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
-import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../../tests/shared/responses/users.response';
 import { DefaultGetAllUsersUsecase, GetAllUsersUsecase } from './get-all-users.usecase';
 import { GetAllUsersPorts } from './get-all-users.port';
 

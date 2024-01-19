@@ -2,9 +2,9 @@ import { RenderResult, fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import AddFollowBtn from './AddFollowBtn';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { mockStore } from '../../../tests/unit/store/store.mock';
-import { server } from '../../../tests/unit/server/server.mock';
-import { testAddFollowerHandler } from '../../../tests/unit/handlers/followers.handlers';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { server } from '../../../../tests/unit/server/server.mock';
+import { testAddFollowerHandler } from '../../../../tests/unit/handlers/followers.handlers';
 
 describe('AddFollowBtn', () => {
 	let component: RenderResult;

@@ -1,17 +1,17 @@
 import { RenderResult, fireEvent, render, waitFor } from '@testing-library/react';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import PostLikes from './PostLikes';
-import { server } from '../../../tests/unit/server/server.mock';
-import { postResponse } from '../../../tests/unit/responses/posts.response';
+import { server } from '../../../../tests/unit/server/server.mock';
+import { postResponse } from '../../../../tests/shared/responses/posts.response';
 import {
 	testAddLikeLikeHandler,
 	testGetLikesHandler,
 	testGetLowerLikesHandler,
 	testGetUsersLikesHandler,
 	testRemoveLikeLikeHandler,
-} from '../../../tests/unit/handlers/likes.handlers';
+} from '../../../../tests/unit/handlers/likes.handlers';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../../tests/unit/store/store.mock';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
 
 describe('PostsLikes', () => {
 	let component: RenderResult;

@@ -1,9 +1,9 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
-import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../../tests/shared/responses/users.response';
 import { GetUserPorts } from './get-user.ports';
 import { DefaultGetUserUsecase, GetUserUsecase } from './get-user.usecase';
 import { DefaultReduxUsecase } from '../../../shared/application/redux.usecase';
-import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { mockStore } from '../../../../../tests/unit/store/store.mock';
 
 class MockGetUserHttpAdapter implements GetUserPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

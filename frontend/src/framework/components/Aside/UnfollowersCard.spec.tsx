@@ -2,14 +2,14 @@ import { RenderResult, fireEvent, render, waitFor } from '@testing-library/react
 import UnfollowersCard from './UnfollowersCard';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from 'vitest';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../../tests/unit/store/store.mock';
-import { server } from '../../../tests/unit/server/server.mock';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { server } from '../../../../tests/unit/server/server.mock';
 import {
 	testAddFollowerHandler,
 	testGetUnfollowersEmptyHandler,
 	testGetUnfollowersHandler,
-} from '../../../tests/unit/handlers/followers.handlers';
-import { SuccessfulGetUnfollowersResponse } from '../../../tests/unit/responses/follows/get-unfollowers.response';
+} from '../../../../tests/unit/handlers/followers.handlers';
+import { SuccessfulGetUnfollowersResponse } from '../../../../tests/shared/responses/follows/get-unfollowers.response';
 import { updateUnfollowers } from '../../store/slices/users-slice';
 import { mapDbUserToApplication } from '../../../features/shared/mappers/map-db-user-to-app';
 

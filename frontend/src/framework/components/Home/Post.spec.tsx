@@ -2,11 +2,11 @@ import { RenderResult, render } from '@testing-library/react';
 import Post from './Post';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from 'vitest';
 import { strDateToTime } from '../../utils/strDateToTime';
-import { postResponse } from '../../../tests/unit/responses/posts.response';
+import { postResponse } from '../../../../tests/shared/responses/posts.response';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../../tests/unit/store/store.mock';
-import { server } from '../../../tests/unit/server/server.mock';
-import { testUserLoggedHandler } from '../../../tests/unit/handlers/users.handlers';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { server } from '../../../../tests/unit/server/server.mock';
+import { testUserLoggedHandler } from '../../../../tests/unit/handlers/users.handlers';
 
 describe('Post', () => {
 	let component: RenderResult;
@@ -36,6 +36,6 @@ describe('Post', () => {
 		component.getByText(postResponse.post);
 		component.getByRole('post-header');
 		component.getByRole('post-footer');
-		component.getByRole('post');
+		component.getByTestId('post');
 	});
 });

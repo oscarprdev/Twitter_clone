@@ -2,10 +2,10 @@ import { RenderResult, fireEvent, render, waitFor } from '@testing-library/react
 import { Provider } from 'react-redux';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from 'vitest';
 import SearchContainer from './SearchContainer';
-import { mockStore } from '../../../tests/unit/store/store.mock';
-import { server } from '../../../tests/unit/server/server.mock';
-import { userTestResponse } from '../../../tests/unit/responses/users.response';
-import { testSearchMockUserEmptyHandler, testSearchMockUserHandler } from '../../../tests/unit/handlers/users.handlers';
+import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { server } from '../../../../tests/unit/server/server.mock';
+import { userTestResponse } from '../../../../tests/shared/responses/users.response';
+import { testSearchMockUserEmptyHandler, testSearchMockUserHandler } from '../../../../tests/unit/handlers/users.handlers';
 
 describe('SearchContainer', () => {
 	let component: RenderResult;

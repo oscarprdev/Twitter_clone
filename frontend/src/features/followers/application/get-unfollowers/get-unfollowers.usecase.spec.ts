@@ -1,9 +1,9 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GetUnfollowersPorts } from './get-unfollowers.ports';
 import { DefaultGetUnfollowersUsecase, GetUnfollowersUsecase } from './get-unfollowers.usecase';
-import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../../tests/shared/responses/users.response';
 import { DefaultReduxUsecase } from '../../../shared/application/redux.usecase';
-import { mockStore } from '../../../../tests/unit/store/store.mock';
+import { mockStore } from '../../../../../tests/unit/store/store.mock';
 
 class MockSearchUsersHttpAdapter implements GetUnfollowersPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

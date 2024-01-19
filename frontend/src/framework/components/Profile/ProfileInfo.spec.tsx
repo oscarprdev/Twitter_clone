@@ -1,7 +1,7 @@
 import { RenderResult, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, it } from 'vitest';
 import ProfileInfo from './ProfileInfo';
-import { userTestResponse } from '../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../tests/shared/responses/users.response';
 import { strDateToTime } from '../../utils/strDateToTime';
 
 describe('ProfileInfo', () => {

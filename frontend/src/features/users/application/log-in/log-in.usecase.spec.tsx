@@ -1,7 +1,7 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DefaultReduxUsecase } from '../../../shared/application/redux.usecase';
-import { mockStore } from '../../../../tests/unit/store/store.mock';
-import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { mockStore } from '../../../../../tests/unit/store/store.mock';
+import { userTestResponse } from '../../../../../tests/shared/responses/users.response';
 import { LogInPorts } from './log-in.ports';
 import { DefaultLogInUsecase, LogInUsecase } from './log-in.usecase';
 

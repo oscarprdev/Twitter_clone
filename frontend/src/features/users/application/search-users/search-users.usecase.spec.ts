@@ -1,7 +1,7 @@
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DefaultSearchUsersUsecase, SearchUsersUsecase } from './search-users.usecase';
 import { SearchUsersPorts } from './search-users.ports';
-import { userTestResponse } from '../../../../tests/unit/responses/users.response';
+import { userTestResponse } from '../../../../../tests/shared/responses/users.response';
 
 class MockSearchUsersHttpAdapter implements SearchUsersPorts {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

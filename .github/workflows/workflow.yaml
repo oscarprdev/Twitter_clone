@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - id: Backend_Build
+      - name: Backend_Build
         uses: ./.github/actions/backend/build
 
   backend_deploy_railway:
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - id: Backend_Railway
+      - name: Backend_Railway
         uses: ./.github/actions/backend/railway
         with:
           token: ${{ secrets.RAILWAY_TOKEN }}
@@ -51,7 +51,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - id: Frontend_build
+
+      - name: Frontend_build
         uses: ./.github/actions/frontend/build
 
   frontend_e2e_tests:
@@ -64,7 +65,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - id: Frontend_e2e_tests
+
+      - name: Frontend_e2e_tests
         uses: ./.github/actions/frontend/e2e-tests
 
   frontend_unit_tests:
@@ -77,5 +79,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - id: Frontend_unit_tests
+
+      - name: Frontend_unit_tests
         uses: ./.github/actions/frontend/unit-tests

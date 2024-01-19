@@ -14,10 +14,6 @@ runs:
       shell: bash
       run: cd frontend && npm ci
 
-    - name: Run lint
-      shell: bash
-      run: cd frontend && npm run lint
-
     - name: Install playwright
       shell: bash
       run: cd frontend && npx playwright install --with-deps
