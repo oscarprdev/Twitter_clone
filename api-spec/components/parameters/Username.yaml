@@ -1,0 +1,6 @@
+name: Username
+required: true
+in: query
+description: Username
+schema:
+  type: string

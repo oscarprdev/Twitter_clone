@@ -1,6 +1,8 @@
 parameters:
   Id:
     $ref: ./parameters/Id.yaml
+  Username:
+    $ref: ./parameters/Username.yaml
   Authorization:
     $ref: ./parameters/Authorization.yaml
 
