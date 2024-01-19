@@ -9,9 +9,8 @@ import LoaderIcon from '../icons/LoaderIcon';
 import SettingsUsersList from '../Skeletons/SettingsUsersList';
 
 const SelectUser = () => {
-	const [loading, setLoading] = useState(false);
 	const [userSelected, setUserSelected] = useState<User>();
-	const { users } = useAllUsers();
+	const { users, loading } = useAllUsers();
 
 	const userLogged = useStoreSelector((state) => state.users.userLogged);
 
@@ -26,11 +25,8 @@ const SelectUser = () => {
 	};
 
 	const handleLoginClick = async (email: string) => {
-		setLoading(true);
 		setUserSelected(users.find((user) => user.email === email));
 		await loginUsecase.logIn({ email, password: '1234' });
-
-		setLoading(false);
 		navigate('/');
 	};
 
