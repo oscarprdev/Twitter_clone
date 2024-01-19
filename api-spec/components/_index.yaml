@@ -10,6 +10,8 @@ responses:
   # Users
   Get_users__response:
     $ref: ./responses/users/Get_users__response.yaml
+  Get_user_id__response:
+    $ref: ./responses/users/Get_user_id__response.yaml
   Post_user__response:
     $ref: ./responses/users/Post_user__response.yaml
 
@@ -23,3 +25,5 @@ schemas:
   # Request_bodies
   Post_user__request_body:
     $ref: ./schemas/Post_user__request_body.yaml
+  Put_user__request_body:
+    $ref: ./schemas/Put_user__request_body.yaml

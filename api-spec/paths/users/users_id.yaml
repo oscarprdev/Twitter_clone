@@ -1,4 +1,4 @@
-put:
+get:
   tags:
     - Users
   description: Get an user by its id
@@ -6,6 +6,24 @@ put:
     - $ref: ../../components/_index.yaml#/parameters/Id
   responses:
     '200':
-      $ref: ../../components/_index.yaml#/responses/Get_users__response
+      $ref: ../../components/_index.yaml#/responses/Get_user_id__response
+    '400':
+      $ref: ../../components/_index.yaml#/responses/Bad_request__response
+put:
+  tags:
+    - Users
+  description: Modify an user info
+  parameters:
+    - $ref: ../../components/_index.yaml#/parameters/Id
+  requestBody:
+    required: true
+    description: Request parameters to modify user info
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/_index.yaml#/schemas/Put_user__request_body
+  responses:
+    '200':
+      $ref: ../../components/_index.yaml#/responses/Get_user_id__response
     '400':
       $ref: ../../components/_index.yaml#/responses/Bad_request__response
