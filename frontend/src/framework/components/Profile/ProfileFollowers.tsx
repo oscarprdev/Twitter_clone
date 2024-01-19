@@ -1,7 +1,5 @@
 import { User } from '../../../features/shared/domain/types/user';
-import AddFollowBtn from '../Aside/AddFollowBtn';
 import ProfileFollower from './ProfileFollower';
-import RemoveFollowBtn from './RemoveFollowBtn';
 
 interface ProfileFollowersProps {
 	users: User[];
@@ -19,9 +17,10 @@ const ProfileFollowers = ({ users, kind, followings }: ProfileFollowersProps) =>
 						name={user.name}
 						surname={user.surname}
 						username={user.username}
-						profileImgUrl={user.profileImgUrl}>
-						{followings?.some((following) => following.id === user.id) ? <RemoveFollowBtn id={user.id} /> : <AddFollowBtn id={user.id} />}
-					</ProfileFollower>
+						profileImgUrl={user.profileImgUrl}
+						followings={followings}
+						userId={user.id}
+						isFollower={kind === 'followers'}></ProfileFollower>
 				))
 			) : (
 				<p className='mt-10 font-light text-zinc-200'>0 {kind}</p>

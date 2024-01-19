@@ -1,4 +1,5 @@
 import { User } from '../../../features/shared/domain/types/user';
+import { useAddFollow } from '../../hooks/useAddFollow';
 import UserImage from '../UserImage';
 import AddFollowBtn from './AddFollowBtn';
 
@@ -7,6 +8,8 @@ interface UnfollowerProps {
 }
 
 const Unfollower = ({ unfollower }: UnfollowerProps) => {
+	const { handleAddFollowClick, loading } = useAddFollow(unfollower.id);
+
 	return (
 		<li className={`${unfollower.isNew && 'animate-appearing'} flex justify-between w-full p-3 hover:bg-zinc-800 duration-300`}>
 			<div className='flex gap-2'>
@@ -16,7 +19,10 @@ const Unfollower = ({ unfollower }: UnfollowerProps) => {
 					<p className='text-zinc-400'>@{unfollower.username}</p>
 				</div>
 			</div>
-			<AddFollowBtn id={unfollower.id} />
+			<AddFollowBtn
+				handleAddFollowClick={handleAddFollowClick}
+				loading={loading}
+			/>
 		</li>
 	);
 };

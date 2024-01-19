@@ -9,6 +9,7 @@ import LoaderIcon from '../icons/LoaderIcon';
 import SettingsUsersList from '../Skeletons/SettingsUsersList';
 
 const SelectUser = () => {
+	const [loginLoading, setLoginLoading] = useState(false);
 	const [userSelected, setUserSelected] = useState<User>();
 	const { users, loading } = useAllUsers();
 
@@ -25,9 +26,11 @@ const SelectUser = () => {
 	};
 
 	const handleLoginClick = async (email: string) => {
+		setLoginLoading(true);
 		setUserSelected(users.find((user) => user.email === email));
 		await loginUsecase.logIn({ email, password: '1234' });
 		navigate('/');
+		setLoginLoading(false);
 	};
 
 	return (
@@ -49,10 +52,10 @@ const SelectUser = () => {
 							</div>
 							{user.id !== userLogged.id && (
 								<button
-									disabled={loading}
+									disabled={loginLoading}
 									onClick={() => handleLoginClick(user.email)}
 									className='ml-auto px-8 font-bold bg-white hover:bg-slate-200 duration-200 text-black rounded-full'>
-									{loading && userSelected?.email === user.email ? (
+									{loginLoading && userSelected?.email === user.email ? (
 										<span className='block w-6 h-6 text-zinc-700 animate-spin'>
 											<LoaderIcon />
 										</span>

@@ -33,7 +33,11 @@
 }
 
 .animate-appearing {
-	animation: appearing-list 0.2s ease forwards;
+	animation: appearing 0.2s ease forwards;
+}
+
+.animate-dissapear {
+	animation: dissapear 0.3s ease forwards;
 }
 
 @keyframes fade-up {
@@ -57,7 +61,7 @@
 	}
 }
 
-@keyframes appearing-list {
+@keyframes appearing {
 	from {
 		transform: scale(0);
 		opacity: 0;
@@ -65,5 +69,16 @@
 	to {
 		opacity: 1;
 		transform: scale(1);
+	}
+}
+
+@keyframes dissapear {
+	from {
+		transform: scale(1);
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+		transform: scale(0);
 	}
 }
