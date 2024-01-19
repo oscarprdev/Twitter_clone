@@ -1,5 +1,5 @@
 import { RenderResult, fireEvent, render, waitFor } from '@testing-library/react';
-import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { server } from '../../../tests/unit/server/server.mock';
 import { Provider } from 'react-redux';
 import { mockStore } from '../../../tests/unit/store/store.mock';
@@ -14,10 +14,15 @@ describe('RemoveFollowBtn', () => {
 	beforeAll(() => server.listen());
 	afterAll(() => server.close());
 
+	const mockHandleRemoveFollowBtn = vi.fn();
+
 	beforeEach(() => {
 		component = render(
 			<Provider store={mockStore}>
-				<RemoveFollowBtn id={userTestResponse.id} />
+				<RemoveFollowBtn
+					handleRemoveFollowClick={mockHandleRemoveFollowBtn}
+					loading={false}
+				/>
 			</Provider>
 		);
 	});
@@ -37,6 +42,8 @@ describe('RemoveFollowBtn', () => {
 		const button = component.getByRole('button', { name: 'Unfollow' });
 
 		fireEvent.click(button);
+
+		expect(mockHandleRemoveFollowBtn).toHaveBeenCalledOnce();
 
 		mockStore.dispatch(addFollow({ follower: userTestResponse }));
 
