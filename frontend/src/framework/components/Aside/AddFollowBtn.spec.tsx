@@ -1,9 +1,8 @@
 import { RenderResult, fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import AddFollowBtn from './AddFollowBtn';
-import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockStore } from '../../../tests/unit/store/store.mock';
-import { userTestResponse } from '../../../tests/unit/responses/users.response';
 import { server } from '../../../tests/unit/server/server.mock';
 import { testAddFollowerHandler } from '../../../tests/unit/handlers/followers.handlers';
 
@@ -13,10 +12,15 @@ describe('AddFollowBtn', () => {
 	beforeAll(() => server.listen());
 	afterAll(() => server.close());
 
+	const mockHandleAddFollowBtn = vi.fn();
+
 	beforeEach(() => {
 		component = render(
 			<Provider store={mockStore}>
-				<AddFollowBtn id={userTestResponse.id} />
+				<AddFollowBtn
+					handleAddFollowClick={mockHandleAddFollowBtn}
+					loading={false}
+				/>
 			</Provider>
 		);
 	});
@@ -36,5 +40,7 @@ describe('AddFollowBtn', () => {
 		const button = component.getByRole('button', { name: 'Follow' });
 
 		fireEvent.click(button);
+
+		expect(mockHandleAddFollowBtn).toHaveBeenCalledOnce();
 	});
 });

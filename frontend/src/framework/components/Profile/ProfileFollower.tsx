@@ -1,19 +1,28 @@
-import { ReactNode } from 'react';
 import UserImage from '../UserImage';
+import { User } from '../../../features/shared/domain/types/user';
+import RemoveFollowBtn from './RemoveFollowBtn';
+import AddFollowBtn from '../Aside/AddFollowBtn';
+import { useRemoveFollow } from '../../hooks/useRemoveFollow';
+import { useAddFollow } from '../../hooks/useAddFollow';
 
 interface ProfileFollowerProps {
 	profileImgUrl: string;
 	name: string;
 	surname: string;
 	username: string;
-	children: ReactNode;
+	followings: User[];
+	userId: string;
+	isFollower?: boolean;
 }
 
-const ProfileFollower = ({ profileImgUrl, name, surname, username, children }: ProfileFollowerProps) => {
+const ProfileFollower = ({ profileImgUrl, name, surname, username, followings, userId, isFollower }: ProfileFollowerProps) => {
+	const { handleRemoveFollowClick, loading, done } = useRemoveFollow(userId);
+	const { handleAddFollowClick, loading: loadingFollow } = useAddFollow(userId);
+
 	return (
 		<li
 			role='profile-user-item'
-			className='flex gap-5 w-full p-8 hover:bg-zinc-900'>
+			className={`${done && !isFollower ? 'animate-dissapear' : 'animate-appearing'} flex gap-5 w-full p-8 hover:bg-zinc-900`}>
 			<UserImage userImage={profileImgUrl} />
 			<div
 				aria-roledescription='follower-personal-info'
@@ -23,7 +32,17 @@ const ProfileFollower = ({ profileImgUrl, name, surname, username, children }: P
 				</p>
 				<p className='text-zinc-400 text-md'>@{username}</p>
 			</div>
-			{children}
+			{followings?.some((following) => following.id === userId) ? (
+				<RemoveFollowBtn
+					handleRemoveFollowClick={handleRemoveFollowClick}
+					loading={loading}
+				/>
+			) : (
+				<AddFollowBtn
+					handleAddFollowClick={handleAddFollowClick}
+					loading={loadingFollow}
+				/>
+			)}
 		</li>
 	);
 };

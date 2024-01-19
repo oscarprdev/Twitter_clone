@@ -1,17 +1,22 @@
-import { useAddFollow } from '../../hooks/useAddFollow';
+import LoaderIcon from '../icons/LoaderIcon';
 
 interface AddFollowBtnProps {
-	id: string;
+	handleAddFollowClick: () => Promise<void>;
+	loading: boolean;
 }
 
-const AddFollowBtn = ({ id }: AddFollowBtnProps) => {
-	const { handleAddFollowClick } = useAddFollow(id);
-
+const AddFollowBtn = ({ handleAddFollowClick, loading }: AddFollowBtnProps) => {
 	return (
 		<button
 			onClick={handleAddFollowClick}
 			className='ml-auto px-5 font-bold bg-white hover:bg-slate-200 duration-200 text-black rounded-full'>
-			<p>Follow</p>
+			{loading ? (
+				<span className='block w-6 h-6 text-zinc-700 animate-spin'>
+					<LoaderIcon />
+				</span>
+			) : (
+				<p>Follow</p>
+			)}
 		</button>
 	);
 };
