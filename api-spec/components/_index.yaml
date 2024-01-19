@@ -1,6 +1,8 @@
 parameters:
   Id:
     $ref: ./parameters/Id.yaml
+  Authorization:
+    $ref: ./parameters/Authorization.yaml
 
 responses:
   # Common
@@ -10,8 +12,8 @@ responses:
   # Users
   Get_users__response:
     $ref: ./responses/users/Get_users__response.yaml
-  Get_user_id__response:
-    $ref: ./responses/users/Get_user_id__response.yaml
+  Get_user__response:
+    $ref: ./responses/users/Get_user__response.yaml
   Post_user__response:
     $ref: ./responses/users/Post_user__response.yaml
 
@@ -27,3 +29,5 @@ schemas:
     $ref: ./schemas/Post_user__request_body.yaml
   Put_user__request_body:
     $ref: ./schemas/Put_user__request_body.yaml
+  Login_user__request_body:
+    $ref: ./schemas/Login_user__request_body.yaml

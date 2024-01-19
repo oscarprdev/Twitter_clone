@@ -6,7 +6,7 @@ get:
     - $ref: ../../components/_index.yaml#/parameters/Id
   responses:
     '200':
-      $ref: ../../components/_index.yaml#/responses/Get_user_id__response
+      $ref: ../../components/_index.yaml#/responses/Get_user__response
     '400':
       $ref: ../../components/_index.yaml#/responses/Bad_request__response
 put:
@@ -24,6 +24,6 @@ put:
           $ref: ../../components/_index.yaml#/schemas/Put_user__request_body
   responses:
     '200':
-      $ref: ../../components/_index.yaml#/responses/Get_user_id__response
+      $ref: ../../components/_index.yaml#/responses/Get_user__response
     '400':
       $ref: ../../components/_index.yaml#/responses/Bad_request__response
