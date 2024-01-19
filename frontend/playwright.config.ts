@@ -30,7 +30,7 @@ export default defineConfig({
 		trace: 'on-first-retry',
 	},
 	webServer: {
-		command: 'npm run test:e2e',
+		command: 'npm run dev',
 		url: 'http://localhost:5173',
 		timeout: 120 * 1000 * 5,
 		reuseExistingServer: false,
