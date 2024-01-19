@@ -1,6 +1,6 @@
 name: Username
 required: true
-in: query
+in: path
 description: Username
 schema:
   type: string

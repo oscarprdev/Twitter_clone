@@ -1,6 +1,6 @@
 name: id
 required: true
-in: query
+in: path
 description: User identifier
 schema:
   type: string

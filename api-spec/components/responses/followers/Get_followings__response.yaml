@@ -1,0 +1,13 @@
+description: Returns a list of users following an user and a counter of followers
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        following:
+          type: array
+          items:
+            $ref: ../../_index.yaml#/schemas/User
+        count:
+          type: integer
+          example: 1

@@ -17,3 +17,9 @@
 # Followers
 '/follower':
   $ref: ./followers/follower.yaml
+'/followers/{id}':
+  $ref: ./followers/followers_id.yaml
+'/followings/{id}':
+  $ref: ./followers/followings_id.yaml
+'/unfollowers/{id}':
+  $ref: ./followers/unfollowers_id.yaml

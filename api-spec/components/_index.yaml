@@ -34,6 +34,12 @@ responses:
     $ref: ./responses/followers/Post_follower__response.yaml
   Delete_follower__response:
     $ref: ./responses/followers/Delete_follower__response.yaml
+  Get_followers__response:
+    $ref: ./responses/followers/Get_followers__response.yaml
+  Get_followings__response:
+    $ref: ./responses/followers/Get_followings__response.yaml
+  Get_unfollowers__response:
+    $ref: ./responses/followers/Get_unfollowers__response.yaml
 
 schemas:
   # Common

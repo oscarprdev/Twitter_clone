@@ -1,0 +1,13 @@
+description: Returns a list of unfollowers and a counter of unfollowers
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        unfollowers:
+          type: array
+          items:
+            $ref: ../../_index.yaml#/schemas/User
+        count:
+          type: integer
+          example: 1
