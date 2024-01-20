@@ -1,6 +1,6 @@
 # Fullstack clean architecture Twitter clone 
 
-[![Deployment pipeline](https://github.com/oscarprdev/Twitter_clone/actions/workflows/workflow.yaml/badge.svg?branch=main)](https://github.com/oscarprdev/Twitter_clone/actions/workflows/workflow.yaml)
+[![Deployment pipeline](https://github.com/oscarprdev/Twitter_clone/actions/workflows/workflow.yaml/badge.svg?event=pull_request)](https://github.com/oscarprdev/Twitter_clone/actions/workflows/workflow.yaml)
 
 ![image](https://github.com/oscarprdev/Twitter_clone/assets/94851836/1bad685e-b549-4be0-8663-0127e30ef258)
 
