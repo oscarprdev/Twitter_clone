@@ -44,7 +44,7 @@ describe('UnfollowersCard', () => {
 		await waitFor(() => {
 			component.getByText('Who to follow');
 			component.getByRole('button', { name: 'Follow' });
-			component.getByText(unfollower.name);
+			component.getByText(`${unfollower.name} ${unfollower.surname}`);
 		});
 	});
 
@@ -63,7 +63,7 @@ describe('UnfollowersCard', () => {
 		mockStore.dispatch(updateUnfollowers({ unfollowers: [mapDbUserToApplication(unfollower)] }));
 
 		await waitFor(() => {
-			component.getByText(unfollower.name);
+			component.getByText(`${unfollower.name} ${unfollower.surname}`);
 			const button = component.getByRole('button', { name: 'Follow' });
 
 			fireEvent.click(button);
