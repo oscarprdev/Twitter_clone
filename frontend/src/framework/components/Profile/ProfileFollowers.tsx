@@ -15,10 +15,7 @@ const ProfileFollowers = ({ users, kind, followings, isInfo }: ProfileFollowersP
 				users.map((user) => (
 					<ProfileFollower
 						key={user.id}
-						name={user.name}
-						surname={user.surname}
-						username={user.username}
-						profileImgUrl={user.profileImgUrl}
+						user={user}
 						followings={followings}
 						userId={user.id}
 						isFollower={kind === 'followers'}

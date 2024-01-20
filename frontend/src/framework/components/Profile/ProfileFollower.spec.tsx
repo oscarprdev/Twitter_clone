@@ -12,10 +12,7 @@ describe('ProfileFollower', () => {
 		component = render(
 			<Provider store={mockStore}>
 				<ProfileFollower
-					profileImgUrl={userTestResponse.profileImgUrl}
-					name={userTestResponse.name}
-					surname={userTestResponse.surname}
-					username={userTestResponse.username}
+					user={userTestResponse}
 					followings={[userTestResponse]}
 					userId={userTestResponse.id}
 				/>
@@ -43,10 +40,7 @@ describe('ProfileFollower', () => {
 		component = render(
 			<Provider store={mockStore}>
 				<ProfileFollower
-					profileImgUrl={userTestResponse.profileImgUrl}
-					name={userTestResponse.name}
-					surname={userTestResponse.surname}
-					username={userTestResponse.username}
+					user={userTestResponse}
 					followings={[]} // Empty array of followings users
 					userId={userTestResponse.id}
 				/>

@@ -8,6 +8,8 @@ import { useModal } from '../../hooks/useModal';
 import AddPostModal from '../Modals/AddPostModal';
 import SettingsIcon from '../icons/SettingsIcon';
 import SettingsFilledIcon from '../icons/SettingsFilledIcon';
+import UserItem from '../UserItem';
+import { useStoreSelector } from '../../store/hooks/useSelector';
 
 const Nav = () => {
 	const { openModal } = useModal();
@@ -16,12 +18,14 @@ const Nav = () => {
 		openModal(<AddPostModal />);
 	};
 
+	const userLogged = useStoreSelector((state) => state.users.userLogged);
+
 	return (
-		<nav className='flex flex-col items-start w-[15%] py-3 pl-25'>
-			<span className='block w-12'>
+		<nav className='flex flex-col items-start w-[16%] h-full py-3 pl-25'>
+			<span className='block w-7'>
 				<BrandIcon color='white' />
 			</span>
-			<ul className='mt-10 ml-[-16px] flex flex-col gap-3 w-full'>
+			<ul className='mt-5 ml-[-16px] flex flex-col gap-3 w-full'>
 				<NavItem
 					text='home'
 					defaultIcon={<HomeIcon />}
@@ -39,10 +43,13 @@ const Nav = () => {
 				/>
 				<button
 					onClick={handlePostButtonClick}
-					className='font-bold mt-5 text-xl px-5 py-4 rounded-full bg-[var(--contrast)] hover:bg-[var(--contrast-dark)] duration-300'>
+					className='font-bold mt-5 text-xl px-4 py-3 rounded-full bg-[var(--contrast)] hover:bg-[var(--contrast-dark)] duration-300'>
 					Post
 				</button>
 			</ul>
+			<div className='mt-auto mb-5'>
+				<UserItem user={userLogged} />
+			</div>
 		</nav>
 	);
 };

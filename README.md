@@ -1,20 +1,20 @@
 # Fullstack clean architecture Twitter clone 
 
-[![Deployment pipeline](https://github.com/oscarprdev/Twitter_clone/actions/workflows/workflow.yaml/badge.svg?branch=main)](https://github.com/oscarprdev/Twitter_clone/actions/workflows/workflow.yaml)
+[![Deployment pipeline](https://github.com/oscarprdev/Twitter_clone/actions/workflows/workflow.yaml/badge.svg?event=pull_request)](https://github.com/oscarprdev/Twitter_clone/actions/workflows/workflow.yaml)
 
 ![image](https://github.com/oscarprdev/Twitter_clone/assets/94851836/1bad685e-b549-4be0-8663-0127e30ef258)
 
 ## Description
 
-Frontend clean architecture application done with React, Redux, Typescript and Tailwind running with Golang api using PostgreSQL database as well as Cloudflare to store images on R2. Of course, there are unit and e2e tests working with Vitest, React testing library and Playwright.
+Frontend clean architecture application done with React, Redux, Typescript and Tailwind running with Golang api using PostgreSQL database as well as Cloudflare to store images on R2. 
+
+In testing, it's working for unit tests with Vitest, React Testing Library, and Mock Service Worker enabling HTTP request interception. For end-to-end tests, I've opted for Playwright.
 
 ## Design system
 
 Following clean architecture principles by Robert C. Martin, the application's core, represented by use cases, remains isolated from infrastructure (APIs) and the framework (e.g., React). 
 
 This separation allows changes in one area without affecting others, enhancing flexibility and maintainability. 
-
-The infrastructure handles technical details like APIs, while the framework, such as React, focuses on the user interface. 
 
 The result is a frontend app with clear entry points (ports), organized functionalities (use cases), and distinct technical support (infrastructure and framework), promoting a clean and adaptable architecture.
 

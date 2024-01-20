@@ -28,7 +28,7 @@ describe('Unfollower', () => {
 
 	it('should render successfully', () => {
 		component.getByRole('img');
-		component.getByText(userTestResponse.name);
+		component.getByText(`${userTestResponse.name} ${userTestResponse.surname}`);
 		component.getByText(`@${userTestResponse.username}`);
 		component.getByRole('button', { name: 'Follow' });
 	});

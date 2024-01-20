@@ -3,10 +3,10 @@ import { User } from '../../../features/shared/domain/types/user';
 import { loginUsecase } from '../../../features/users/graph';
 import { useAllUsers } from '../../hooks/useAllUsers';
 import { useStoreSelector } from '../../store/hooks/useSelector';
-import UserImage from '../UserImage';
 import { navigate } from 'wouter/use-location';
 import LoaderIcon from '../icons/LoaderIcon';
 import SettingsUsersList from '../Skeletons/SettingsUsersList';
+import UserItem from '../UserItem';
 
 const SelectUser = () => {
 	const [loginLoading, setLoginLoading] = useState(false);
@@ -43,13 +43,7 @@ const SelectUser = () => {
 						<li
 							key={user.id}
 							className='flex gap-2 hover:bg-zinc-900 p-2 cursor-pointer pl-4'>
-							<UserImage userImage={user.profileImgUrl} />
-							<div className='flex flex-col'>
-								<p className='font-extrabold text-white'>
-									{user.name} {user.surname}
-								</p>
-								<p className='text-zinc-500'>@{user.username}</p>
-							</div>
+							<UserItem user={user} />
 							{user.id !== userLogged.id && (
 								<button
 									disabled={loginLoading}
