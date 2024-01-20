@@ -6,7 +6,9 @@
 
 ## Description
 
-Frontend clean architecture application done with React, Redux, Typescript and Tailwind running with Golang api using PostgreSQL database as well as Cloudflare to store images on R2. Of course, there are unit and e2e tests working with Vitest, React testing library and Playwright.
+Frontend clean architecture application done with React, Redux, Typescript and Tailwind running with Golang api using PostgreSQL database as well as Cloudflare to store images on R2. 
+
+In testing, it's working for unit tests with Vitest, React Testing Library, and Mock Service Worker enabling HTTP request interception. For end-to-end tests, I've opted for Playwright.
 
 ## Design system
 
