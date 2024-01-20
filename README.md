@@ -16,8 +16,6 @@ Following clean architecture principles by Robert C. Martin, the application's c
 
 This separation allows changes in one area without affecting others, enhancing flexibility and maintainability. 
 
-The infrastructure handles technical details like APIs, while the framework, such as React, focuses on the user interface. 
-
 The result is a frontend app with clear entry points (ports), organized functionalities (use cases), and distinct technical support (infrastructure and framework), promoting a clean and adaptable architecture.
 
 Here it is an overview about how the clean architecture is working on this project: 
