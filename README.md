@@ -10,7 +10,7 @@ Frontend clean architecture application done with React, Redux, Typescript and T
 
 In testing, it's working for unit tests with Vitest, React Testing Library, and Mock Service Worker enabling HTTP request interception. For end-to-end tests, I've opted for Playwright.
 
-## Design system
+## System design
 
 Following clean architecture principles by Robert C. Martin, the application's core, represented by use cases, remains isolated from infrastructure (APIs) and the framework (e.g., React). 
 
