@@ -17,12 +17,10 @@ export const useUserLogged = () => {
 			await getUserAuthUsecase.getUserAuth({ jwt });
 		};
 
-		if (userLogged.id === '') {
-			if (jwt) {
-				getUserByJWT(jwt);
-			} else {
-				getDefaultUserLogged();
-			}
+		if (userLogged.id && userLogged.id === '' && jwt) {
+			getUserByJWT(jwt);
+		} else {
+			getDefaultUserLogged();
 		}
 	}, [userLogged.id]);
 
